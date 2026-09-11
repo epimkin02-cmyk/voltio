@@ -17,7 +17,7 @@ export interface BenefitProps {
 export const Benefit = ({ content, index, mediaSide }: BenefitProps) => {
   const headingId = `benefit-${index}-heading`;
   return (
-    <section aria-labelledby={headingId} className="py-12 sm:py-14 lg:py-16">
+    <section id={index === 1 ? "vorteile" : undefined} aria-labelledby={headingId} className="scroll-mt-16 py-12 sm:py-14 lg:py-16">
       <div className="mx-auto grid w-full max-w-[75rem] items-center gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-[5.75rem]">
         <Reveal
           delay={100}

@@ -35,6 +35,13 @@ const SOCIAL_PROOF = {
 export const homeContent: HomeContent = {
   header: {
     brand: "VOLTIO",
+    // TODO(voltio): section links are not in the wireframe; labels are ours.
+    nav: [
+      { label: "Vorteile", href: "#vorteile" },
+      { label: "Vergleich", href: "#vergleich" },
+      { label: "Ablauf", href: "#ablauf" },
+      { label: "FAQ", href: "#faq" },
+    ],
     phone: { label: "333-333-3333", href: "tel:3333333333" },
     cta: { label: "CTA-Button", href: CTA_HREF },
   },
@@ -51,27 +58,16 @@ export const homeContent: HomeContent = {
     note: "REIBUNG und FUDs REDUZIEREN (ANGST, UNSICHERHEIT, ZWEIFEL)",
     car: {
       src: "/assets/images/hero-car.png",
-      alt: "3D-Rendering eines modernen Elektroautos in dunklem Grün",
-      width: 1640,
-      height: 740,
+      alt: "3D-Rendering eines modernen Elektro-Crossovers in Petrol",
+      width: 1680,
+      height: 900,
     },
-    form: {
-      heading: "Lead-Formular, um den Bereich „Above the Fold“ optimal zu nutzen.",
-      // TODO(voltio): field labels and messages are not in the wireframe.
-      fields: {
-        vehicle: "Marke & Modell",
-        year: "Erstzulassung",
-        mileage: "Kilometerstand",
-        name: "Name",
-        email: "E-Mail",
-        phone: "Telefon",
-      },
-      submit: "Jetzt verkauf anfragen",
-      sending: "Wird gesendet …",
-      success: "Anfrage gesendet. Wir melden uns bei dir.",
-      error: "Das hat nicht geklappt. Bitte versuche es noch einmal.",
-      privacy: "Mit dem Absenden stimmst du der Verarbeitung deiner Daten zu.",
-    },
+    // The floating cards repeat the hero's own promises in short form.
+    trust: [
+      { figure: "5,0", label: "776 Bewertungen" },
+      { figure: "Ø 5", label: "Tage bis zum Geld auf dem Wunschkonto" },
+      { label: "Bestpreis im gesamten DACH-Raum garantiert" },
+    ],
   },
 
   proofStrip: "SOCIAL PROOF #2",
@@ -159,7 +155,20 @@ export const homeContent: HomeContent = {
   steps: {
     heading:
       "Wie funktioniert es? {Lass den Erfolg als sehr wahrscheinlich und mühelos erreichbar erscheinen}",
-    items: ["Schritt #1", "Schritt #2", "Schritt #3"],
+    items: [
+      {
+        title: "Schritt #1",
+        image: { src: "/assets/images/step-1.jpg", alt: "", width: 1200, height: 797 },
+      },
+      {
+        title: "Schritt #2",
+        image: { src: "/assets/images/step-2.jpg", alt: "", width: 1200, height: 797 },
+      },
+      {
+        title: "Schritt #3",
+        image: { src: "/assets/images/step-3.jpg", alt: "", width: 1200, height: 797 },
+      },
+    ],
     cta: MAIN_ACTION,
   },
 
@@ -174,12 +183,31 @@ export const homeContent: HomeContent = {
       { question: "Frage #5", answer: "Antwort #5" },
       { question: "Frage #6", answer: "Antwort #6" },
     ],
+    image: { src: "/assets/images/faq.jpg", alt: "", width: 1200, height: 797 },
   },
 
   urgency: {
     heading: "Warum sollten Menschen heute handeln? (Dringlichkeit erzeugen)",
     body: "Formuliere den einen letzten Grund, warum Menschen dein Unternehmen für deine Leistung oder dein Produkt kontaktieren sollten. Das ist deine letzte Chance, ihre Aufmerksamkeit zu gewinnen.",
     cta: MAIN_ACTION,
+    // The lead form lives here now, at the client's request (it left the hero).
+    form: {
+      heading: "Lead-Formular, um den Bereich „Above the Fold“ optimal zu nutzen.",
+      // TODO(voltio): field labels and messages are not in the wireframe.
+      fields: {
+        vehicle: "Marke & Modell",
+        year: "Erstzulassung",
+        mileage: "Kilometerstand",
+        name: "Name",
+        email: "E-Mail",
+        phone: "Telefon",
+      },
+      submit: "Jetzt verkauf anfragen",
+      sending: "Wird gesendet …",
+      success: "Anfrage gesendet. Wir melden uns bei dir.",
+      error: "Das hat nicht geklappt. Bitte versuche es noch einmal.",
+      privacy: "Mit dem Absenden stimmst du der Verarbeitung deiner Daten zu.",
+    },
   },
 
   // TODO(voltio): the frame's footer is a single word, "Footer". These lines are

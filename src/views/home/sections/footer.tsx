@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { ButtonLink } from "@/components/ui/button";
 import { PhoneIcon } from "@/components/ui/icons";
+import { Logo } from "@/components/ui/logo";
 
 import type { FooterContent } from "../home.types";
 
@@ -13,9 +14,9 @@ export const SiteFooter = ({ content }: { content: FooterContent }) => (
         <Link
           href="/"
           aria-label={`${content.brand} – Startseite`}
-          className="font-display text-title font-bold tracking-[0.18em] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-content-inverse"
+          className="focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-content-inverse"
         >
-          {content.brand}
+          <Logo tone="light" />
         </Link>
         <div className="flex flex-wrap items-center gap-6">
           <a

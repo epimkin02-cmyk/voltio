@@ -27,7 +27,7 @@ const Mark = ({ yes }: { yes: boolean }) =>
  * onto a phone.
  */
 export const Comparison = ({ content }: { content: ComparisonContent }) => (
-  <section aria-labelledby={HEADING_ID} className="py-16 sm:py-20 lg:py-24">
+  <section id="vergleich" aria-labelledby={HEADING_ID} className="scroll-mt-16 py-16 sm:py-20 lg:py-24">
     <div className="mx-auto flex w-full max-w-[75rem] flex-col items-center gap-10 px-5 sm:px-8">
       <Reveal>
         <SectionHeading id={HEADING_ID} align="center">

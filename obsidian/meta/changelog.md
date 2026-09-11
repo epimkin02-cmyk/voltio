@@ -43,6 +43,13 @@ partner. See [[decisions-log]] ADR-0048.
 - `.claude/launch.json` runs `npm run dev` (yarn is not installed on the
   client's machine).
 
+**Later the same day** — a second pass on the client's feedback: the header
+is a 64px bar with an inline SVG logo (a V whose right stroke is a lightning
+bolt) and four section links; the lead form left the hero for the closing
+band (`#anfrage`); the hero's right half is a cut-out 3D crossover render on
+a glowing floor with three floating trust cards; the steps and the FAQ carry
+flat illustrations in Transiett's style (`multiply`-blended, not cut out).
+
 **Removed**
 - `three`, `@types/three`, `spring-text-engine`, `resize-observer-polyfill`,
   `@fontsource-variable/onest`, the IBM 3270 font and the Draco decoder; the

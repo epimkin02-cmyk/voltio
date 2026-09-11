@@ -12,8 +12,15 @@ export interface ImageAsset {
 
 export interface HeaderContent {
   brand: string;
+  nav: Link[];
   phone: Link;
   cta: Link;
+}
+
+export interface TrustCard {
+  label: string;
+  /** Optional big figure shown before the label, e.g. the rating. */
+  figure?: string;
 }
 
 export interface LeadFormContent {
@@ -39,9 +46,10 @@ export interface HeroContent {
   bullets: string[];
   cta: Link;
   note: string;
-  /** The 3D-rendered car that stands on the hero's floor, cut out on transparency. */
+  /** The 3D-rendered car on the right, cut out on transparency. */
   car?: ImageAsset;
-  form: LeadFormContent;
+  /** Floating cards around the car — the page's trust signals. */
+  trust: TrustCard[];
 }
 
 export interface PainContent {
@@ -75,21 +83,28 @@ export interface ComparisonContent {
   rows: { label: string; values: boolean[] }[];
 }
 
+export interface StepItem {
+  title: string;
+  image?: ImageAsset;
+}
+
 export interface StepsContent {
   heading: string;
-  items: string[];
+  items: StepItem[];
   cta: Link;
 }
 
 export interface FaqContent {
   heading: string;
   items: { question: string; answer: string }[];
+  image?: ImageAsset;
 }
 
 export interface UrgencyContent {
   heading: string;
   body: string;
   cta: Link;
+  form: LeadFormContent;
 }
 
 export interface FooterContent {
