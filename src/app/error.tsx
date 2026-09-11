@@ -2,10 +2,7 @@
 
 import { useEffect } from "react";
 
-/**
- * Route-segment error boundary. Must be a Client Component. Catches render and
- * data errors in this segment and offers a recovery action via `reset()`.
- */
+/** Route-segment error boundary. Must be a Client Component. */
 export default function Error({
   error,
   reset,
@@ -14,19 +11,18 @@ export default function Error({
   reset: () => void;
 }) {
   useEffect(() => {
-    // Surface the error for logging/monitoring (kept by removeConsole's exclude).
     console.error(error);
   }, [error]);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-4 text-center">
-      <h1 className="text-3xl font-bold">Something went wrong</h1>
+    <div className="flex min-h-svh flex-col items-center justify-center gap-4 px-5 text-center">
+      <h1 className="text-heading font-semibold text-content">Da ist etwas schiefgelaufen</h1>
       <button
         type="button"
         onClick={reset}
-        className="underline underline-offset-4"
+        className="font-display font-semibold text-primary underline underline-offset-4"
       >
-        Try again
+        Noch einmal versuchen
       </button>
     </div>
   );

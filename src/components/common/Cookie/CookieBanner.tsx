@@ -31,41 +31,37 @@ export const CookieBanner = () => {
   return transitions((style, show) =>
     show ? (
       <animated.section
-        aria-label="Cookie consent"
+        aria-label="Cookie-Hinweis"
         style={{
           opacity: style.opacity,
           transform: style.y.to((v) => `translateY(${v}px)`),
         }}
-        className="fixed bottom-4 left-4 right-4 z-50 flex flex-col gap-3 rounded-xl border border-foreground/10 bg-background/95 p-5 font-sans text-foreground shadow-2xl backdrop-blur-xl sm:bottom-12 sm:left-auto sm:right-12 sm:w-[420px] sm:p-6"
+        className="fixed bottom-4 left-4 right-4 z-50 flex flex-col gap-3 rounded-xl border border-foreground/10 bg-background/95 p-5 font-body text-foreground shadow-2xl backdrop-blur-xl sm:bottom-12 sm:left-auto sm:right-12 sm:w-[420px] sm:p-6"
       >
         <h2 className="text-base font-medium leading-snug sm:text-lg">
-          This website uses cookies
+          Diese Website verwendet Cookies
         </h2>
         <p className="text-sm leading-relaxed text-foreground/70">
-          We use cookies to keep the site working, learn how&nbsp;it&apos;s&nbsp;used, and
-          improve what we ship next. Accept everything, reject the non-essential,
-          or&nbsp;pick category by&nbsp;category. See our{" "}
+          Wir nutzen Cookies, damit die Seite funktioniert und wir verstehen, wie sie genutzt wird. Alle akzeptieren, nur notwendige zulassen oder einzeln auswählen. Mehr in der{" "}
           <Link
-            href="/privacy-policy"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#"
             className="underline underline-offset-2 hover:text-foreground/70"
           >
-            privacy policy
+            Datenschutzerklärung
           </Link>
           .
         </p>
         <div className="mt-1 flex flex-wrap items-center gap-2">
-          <CookieButton onClick={acceptAll}>Accept all</CookieButton>
+          <CookieButton onClick={acceptAll}>Alle akzeptieren</CookieButton>
           <CookieButton variant="secondary" onClick={rejectAll}>
-            Reject all
+            Nur notwendige
           </CookieButton>
           <button
             type="button"
             onClick={openModal}
             className="px-2 py-2 text-sm font-medium leading-none text-foreground underline underline-offset-2 hover:text-foreground/70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
           >
-            Manage preferences
+            Einstellungen
           </button>
         </div>
       </animated.section>

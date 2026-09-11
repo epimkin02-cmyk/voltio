@@ -1,3 +1,23 @@
+# Voltio — Landingpage
+
+Ankauf von Elektrofahrzeugen im DACH-Raum. Gebaut auf dem Textura
+`next16-claude-starter`; die Seite folgt dem Wireframe in Figma
+(`yylm21nc34q4XvccygO6K8`) und dem Branding von [transiett.com](https://transiett.com/).
+
+- Inhalte: `src/data/mocks/home.ts` (Copy 1:1 aus dem Wireframe, Platzhalter
+  mit `TODO(voltio)` markiert)
+- Sektionen: `src/views/home/`
+- Lead-Formular: `src/app/api/contact/route.ts`, leitet an `CONTACT_ENDPOINT` weiter
+- Design-Zuordnung: `DESIGN-MAP.md`
+
+```bash
+npm install
+cp .env.example .env
+npm run dev
+```
+
+---
+
 # next16-claude-starter
 
 A **Next.js 16 starter** for animation-heavy marketing & landing sites — built

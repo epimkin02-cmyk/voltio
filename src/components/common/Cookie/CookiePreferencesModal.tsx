@@ -22,19 +22,19 @@ interface Category {
 const CATEGORIES: Category[] = [
   {
     key: "necessary",
-    title: "Strictly necessary",
-    body: "Required for the site to work — sign-in, security, page navigation. These can't be turned off.",
+    title: "Notwendig",
+    body: "Damit die Seite funktioniert: Sicherheit, Navigation, Formulare. Lässt sich nicht abschalten.",
     required: true,
   },
   {
     key: "analytics",
-    title: "Analytics",
-    body: "Anonymised usage stats so we know which pages help and which fall flat. No personal profile is built.",
+    title: "Statistik",
+    body: "Anonyme Nutzungsstatistiken, damit wir sehen, welche Seiten helfen. Es wird kein persönliches Profil erstellt.",
   },
   {
     key: "marketing",
     title: "Marketing",
-    body: "Lets us measure ad performance and re-show content you didn't get to finish reading. Opt out anytime.",
+    body: "Erlaubt uns, Werbung zu messen und passende Inhalte erneut zu zeigen. Jederzeit widerrufbar.",
   },
 ];
 
@@ -121,7 +121,7 @@ export const CookiePreferencesModal = () => {
             <button
               type="button"
               onClick={closeModal}
-              aria-label="Close cookie preferences"
+              aria-label="Cookie-Einstellungen schließen"
               className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-foreground/10 text-foreground hover:bg-foreground/5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground"
             >
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
@@ -136,15 +136,15 @@ export const CookiePreferencesModal = () => {
           </header>
 
           <p className="text-sm leading-relaxed text-foreground/60">
-            Choose which categories of cookies we&apos;re allowed to use. You can
-            change this any time. See our{" "}
+            Wähle aus, welche Cookie-Kategorien wir verwenden dürfen. Du kannst das
+            jederzeit ändern. Mehr in der{" "}
             <Link
-              href="/privacy-policy"
+              href="#"
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground underline underline-offset-2"
             >
-              privacy policy
+              Datenschutzerklärung
             </Link>
             .
           </p>
@@ -187,13 +187,13 @@ export const CookiePreferencesModal = () => {
 
           <footer className="mt-1 flex flex-col-reverse gap-2 sm:flex-row sm:items-center sm:justify-between">
             <CookieButton variant="secondary" onClick={rejectAll}>
-              Reject all
+              Nur notwendige
             </CookieButton>
             <div className="flex flex-col-reverse gap-2 sm:flex-row sm:items-center">
               <CookieButton variant="secondary" onClick={handleSave}>
-                Save preferences
+                Auswahl speichern
               </CookieButton>
-              <CookieButton onClick={acceptAll}>Accept all</CookieButton>
+              <CookieButton onClick={acceptAll}>Alle akzeptieren</CookieButton>
             </div>
           </footer>
         </animated.div>

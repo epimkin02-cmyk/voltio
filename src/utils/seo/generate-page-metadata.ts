@@ -55,7 +55,7 @@ export function generateMetadata({
       // declared numbers, not from the file. `public/open-graph.png` is
       // 1200×630, which is also the size every network prefers.
       images: [{ url: ogImage, width: 1200, height: 630 }],
-      locale: "en_US",
+      locale: siteConfig.locale,
       type: "website",
     },
     twitter: {

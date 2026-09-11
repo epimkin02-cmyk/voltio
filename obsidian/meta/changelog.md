@@ -1,6 +1,6 @@
 ---
 tags: [meta, changelog]
-updated: 2026-08-28
+updated: 2026-09-11
 ---
 
 # Changelog
@@ -13,6 +13,44 @@ dependency, a new route or section, a convention bent, a bug whose cause is wort
 remembering. Routine commits do not need an entry.
 
 For *why* the conventions are what they are, see [[decisions-log]].
+
+---
+
+## 2026-09-11 — Voltio rebuilt on the client's wireframe, in Transiett's branding
+
+The dark, IBM-3270 "Get Layers" concept is gone. The page now follows the
+wireframe in Figma file `yylm21nc34q4XvccygO6K8` ("Landingpage Wireframe",
+section "Home - Desktop", node `1:651`) block for block, with **its copy taken
+verbatim** — including the template placeholders outside the hero, on the
+client's instruction — and wears the visual language of transiett.com, Voltio's
+partner. See [[decisions-log]] ADR-0048.
+
+**Changed**
+- `globals.css` — new palette (Transiett greens, navy ink, mint tints), Poppins
+  for display and Figtree for body, an ordinary 16px root (the 1440-frame
+  scaling and the custom `lg` variant are removed), and three small utilities:
+  `slant-*` (angled band edges), `wedge` (the pale parallelogram behind media)
+  and `hero-ground` (the deep-green gradient with the frame's scrim).
+- `src/views/home/` — rebuilt: `header/`, `hero/` (with a real lead form) and
+  `sections/` (proof strip, pain, social proof ×2, three alternating benefits,
+  comparison table, steps, FAQ accordion, urgency band, footer). One content
+  file, `src/data/mocks/home.ts`, typed by `views/home/home.types.ts`.
+- `src/components/ui/` — `ButtonLink`, `Reveal` (the page's one entrance
+  spring), `PlaceholderBox`, `Eyebrow`, `SectionHeading`, inline `icons`.
+- `app/api/contact` — the lead schema (vehicle, year, mileage, name, email,
+  phone); forwards to `CONTACT_ENDPOINT` when set.
+- Cookie banner and modal, 404 and error pages are in German.
+- `.claude/launch.json` runs `npm run dev` (yarn is not installed on the
+  client's machine).
+
+**Removed**
+- `three`, `@types/three`, `spring-text-engine`, `resize-observer-polyfill`,
+  `@fontsource-variable/onest`, the IBM 3270 font and the Draco decoder; the
+  glTF car, the collection renders, the turntable reel and every lattice asset;
+  the preloader (it gated on a WebGL scene that no longer exists), the pointer
+  field, scramble text and the frame button.
+
+**Added** — `@fontsource/poppins`, `@fontsource/figtree`.
 
 ---
 

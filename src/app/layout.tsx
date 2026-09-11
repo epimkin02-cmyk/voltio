@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import localFont from "next/font/local";
 
-/** Onest, self-hosted. `next/font/google` fetches at build time, which fails on
- *  any builder without egress to fonts.googleapis.com; the woff2 files ship in
- *  node_modules instead, so the build is hermetic. See decisions-log ADR-0100. */
-import "@fontsource-variable/onest";
+/** Poppins (display) and Figtree (body) — Transiett's pairing, self-hosted via
+ *  @fontsource so the build never reaches out to a font CDN. */
+import "@fontsource/poppins/500.css";
+import "@fontsource/poppins/600.css";
+import "@fontsource/poppins/700.css";
+import "@fontsource/figtree/400.css";
+import "@fontsource/figtree/500.css";
+import "@fontsource/figtree/600.css";
 
 import {
   generateMetadata,
@@ -13,20 +16,10 @@ import {
 import { getSiteStructuredData } from "@/utils/seo/structured-data";
 
 import { LazyCookie } from "@/components/common/Cookie";
-import { Preloader } from "@/components/common/preloader";
 import { ReducedMotion } from "@/components/common/reduced-motion";
 import { ScrollLayout } from "@/layouts/scroll-layout";
 
 import "@/app/globals.css";
-
-/** IBM 3270 — the display face of the Figma "Get Layers" frame. */
-const ibm3270 = localFont({
-  src: "./fonts/3270-Regular.otf",
-  variable: "--font-3270",
-  weight: "400",
-  style: "normal",
-  display: "swap",
-});
 
 export const metadata: Metadata = generateMetadata();
 export const viewport: Viewport = generateViewport();
@@ -38,29 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <head>
-        {/* Where scripts never run the curtain can never lift, so it is not
-            shown at all — the page underneath is already complete. */}
-        <noscript>
-          <style>{`[data-preloader]{display:none!important}`}</style>
-        </noscript>
-      </head>
-      {/* `suppressHydrationWarning` on the body, and only on the body.
-          Browser extensions write their own attributes onto `<html>` and
-          `<body>` before React hydrates — ColorZilla's `cz-shortcut-listen`,
-          Grammarly's `data-gr-*`, various dark-mode add-ons — so React finds
-          markup it did not produce and reports a mismatch. It is the reader's
-          browser, not this page, and nothing here can render around it.
-
-          It suppresses **one level only**: the body's own attributes and text.
-          A real mismatch inside the app still reports normally, which is why it
-          belongs here rather than any higher or any lower. The class list is
-          the only attribute this element carries and `next/font` derives it
-          deterministically, so there is nothing of ours left for it to hide. */}
-      <body
-        className={ibm3270.variable}
-        suppressHydrationWarning
-      >
+      {/* `suppressHydrationWarning` on the body only: browser extensions write
+          their own attributes onto <body> before React hydrates. */}
+      <body className="font-body" suppressHydrationWarning>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -68,11 +41,7 @@ export default function RootLayout({
           }}
         />
         <ScrollLayout>
-          {/* No <AdaptiveGrid />: the root font-size scales purely in CSS at
-              every width (globals.css), so a JS pass would only add a flash of
-              unscaled layout on load. See decisions-log ADR-0024. */}
           <ReducedMotion />
-          <Preloader />
           <LazyCookie />
           {children}
         </ScrollLayout>

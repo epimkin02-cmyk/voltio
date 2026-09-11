@@ -1,451 +1,167 @@
-import type { CollectionsContent } from "@/views/home/collections";
-import type { DetailsContent } from "@/views/home/details";
-import type { FaqContent } from "@/views/home/faq";
-import type { FooterContent } from "@/views/home/footer";
-import type { TechnologyContent } from "@/views/home/technology";
-import type { HeroContent } from "@/views/home/hero";
+import type { HomeContent } from "@/views/home/home.types";
 
 /**
- * Voltio's page copy, until a CMS exists.
+ * Voltio's page copy — **taken verbatim from the wireframe** (Figma file
+ * yylm21nc34q4XvccygO6K8, page "Landingpage Wireframe", section "Home -
+ * Desktop"), on the client's instruction that the copy stand exactly as drawn.
  *
- * **Everything here is German**, because the audience is a private seller in the
- * DACH region, and the display face is set in caps — so the copy is written to
- * survive uppercasing. That rules out anything whose meaning rides on a capital
- * letter, and it is why the numerals stay Arabic and the units stay abbreviated.
+ * Only the hero carries final copy. Every other block still reads as the
+ * wireframe's template text ("GEWÜNSCHTE HAUPTAKTION", "Nutzenversprechen &
+ * großer Vorteil #1", "Frage #1" …) and is meant to be replaced here, in this
+ * one file, once the real wording exists. Nothing on the page is invented
+ * social proof: the rating in the hero is the frame's own line.
  *
- * **Three things in this file are placeholders and must not go live as they
- * stand.** They are marked `TODO(voltio)` where they sit:
- *   1. the company's real name, address, phone and e-mail (footer + legal),
- *   2. the model-year floors on the collection cards, which are plausible rather
- *      than agreed,
- *   3. every `href: "#"` — no routes exist behind them yet.
- * None of them is invented social proof: there are deliberately no purchase
- * counts, no testimonials and no "recently bought" figures anywhere on this
- * page, because a claim like that has to be true before it is designed.
+ * Three things were *not* in the frame and had to be written to make the page
+ * work — the lead form's field labels and messages, the FAQ answers (the frame
+ * draws collapsed rows with no body), and the footer's lines. All are marked
+ * `TODO(voltio)`.
  */
-export const homeHero: HeroContent = {
-  logo: {
-    src: "/assets/ui/logo-mark.png",
-    alt: "Voltio",
-    width: 75,
-    height: 30,
+
+const CTA_HREF = "#anfrage";
+const MAIN_ACTION = { label: "GEWÜNSCHTE HAUPTAKTION", href: CTA_HREF };
+
+const BENEFIT_BODY =
+  "Unsere Lösung leistet X, Y, Z (benenne den Hauptnutzen, den du bietest, und erkläre, wie du ihn auf eigene bzw. einzigartige Weise erzielst).";
+const BENEFIT_MEDIA = {
+  strong: "Bild oder Video",
+  rest: ", das das zentrale Nutzenversprechen ergänzt und verstärkt",
+};
+const SOCIAL_PROOF = {
+  heading: "Social-Proof-Sektion (Zahlen, Testimonials, Fallstudien etc.)",
+  box: "Social Proof",
+  cta: MAIN_ACTION,
+};
+
+export const homeContent: HomeContent = {
+  header: {
+    brand: "VOLTIO",
+    phone: { label: "333-333-3333", href: "tel:3333333333" },
+    cta: { label: "CTA-Button", href: CTA_HREF },
   },
-  nav: [
-    { label: "ANKAUF", href: "#ablauf" },
+
+  hero: {
+    rating: { score: "5,0", stars: 5, count: "776 Bewertungen" },
+    title: ["Dein Elektroauto in", "Ø 5 Tagen zum Bestpreis verkauft"],
+    bullets: [
+      "Wir vergleichen Angebote im gesamten DACH-Raum und garantieren den besten Preis",
+      "Von Angebot bis Abholung des Fahrzeugs alles aus einer Hand",
+      "Geld nach 5 Tagen auf dem Wunschkonto",
+    ],
+    cta: { label: "Jetzt verkauf anfragen", href: CTA_HREF },
+    note: "REIBUNG und FUDs REDUZIEREN (ANGST, UNSICHERHEIT, ZWEIFEL)",
+    form: {
+      heading: "Lead-Formular, um den Bereich „Above the Fold“ optimal zu nutzen.",
+      // TODO(voltio): field labels and messages are not in the wireframe.
+      fields: {
+        vehicle: "Marke & Modell",
+        year: "Erstzulassung",
+        mileage: "Kilometerstand",
+        name: "Name",
+        email: "E-Mail",
+        phone: "Telefon",
+      },
+      submit: "Jetzt verkauf anfragen",
+      sending: "Wird gesendet …",
+      success: "Anfrage gesendet. Wir melden uns bei dir.",
+      error: "Das hat nicht geklappt. Bitte versuche es noch einmal.",
+      privacy: "Mit dem Absenden stimmst du der Verarbeitung deiner Daten zu.",
+    },
+  },
+
+  proofStrip: "SOCIAL PROOF #2",
+
+  pain: {
+    heading:
+      "Sprich den größten Schmerzpunkt an, den du löst, sowie den „alten Weg“ und verknüpfe beides mit deinem einzigartigen Nutzen",
+    body: "Nutze diesen Abschnitt, um die Schmerzpunkte deines idealen Interessenten lebendig zu beschreiben und die Schwächen des Status quo aufzuzeigen. So zeigst du, dass du weißt, was er durchmacht. Ergänze das mit deinem einzigartigen Nutzenversprechen und Differenzierungsmerkmal.",
+    cta: MAIN_ACTION,
+    media: "Optionales Bild oder Video",
+  },
+
+  socialProof: SOCIAL_PROOF,
+
+  benefits: [
     {
-      label: "FAHRZEUGE",
-      href: "#fahrzeuge",
-      submenu: [
-        { label: "KOMPAKT & KLEINWAGEN", href: "#fahrzeuge" },
-        { label: "LIMOUSINE & SUV", href: "#fahrzeuge" },
-        { label: "PREMIUM & SPORT", href: "#fahrzeuge" },
-        { label: "TRANSPORTER", href: "#fahrzeuge" },
-      ],
+      eyebrow: "TRAUMERGEBNIS IN KÜRZE",
+      heading: "Nutzenversprechen & großer Vorteil #1 („WIIFM“)",
+      body: BENEFIT_BODY,
+      cta: MAIN_ACTION,
+      media: BENEFIT_MEDIA,
     },
-    { label: "PRÜFUNG", href: "#pruefung" },
-    { label: "FRAGEN", href: "#fragen" },
-  ],
-  cart: { label: "0800 000 000", href: "#kontakt" },
-  markerStart: {
-    lines: ["ANKAUF VON", "ELEKTROFAHRZEUGEN.", "DEUTSCHLANDWEIT."],
-  },
-  markerEnd: {
-    lines: ["FESTPREIS.", "ABHOLUNG INKLUSIVE.", "ZAHLUNG BEI ÜBERGABE."],
-  },
-  title: [
-    "DEIN ELEKTROAUTO IST MEHR WERT,",
-    "ALS DU DENKST.",
-  ],
-  cta: { label: "FAHRZEUG BEWERTEN", href: "#kontakt" },
-  badgeStart: {
-    icon: {
-      src: "/assets/hero/hero-icon-globe.svg",
-      alt: "",
-      width: 37,
-      height: 23,
+    {
+      eyebrow: "TRAUMERGEBNIS IN KÜRZE",
+      heading: "Nutzenversprechen & großer Vorteil #2 („WIIFM“)",
+      body: BENEFIT_BODY,
+      cta: MAIN_ACTION,
+      media: BENEFIT_MEDIA,
     },
-    caption: "DACH",
-    lines: [
-      "DEUTSCHLAND, ÖSTERREICH,",
-      "SCHWEIZ. WIR KOMMEN",
-      "ZU DIR — OHNE KOSTEN.",
+    {
+      eyebrow: "TRAUMERGEBNIS IN KÜRZE",
+      heading: "Nutzenversprechen & großer Vorteil #3 („WIIFM“)",
+      body: BENEFIT_BODY,
+      cta: MAIN_ACTION,
+      media: BENEFIT_MEDIA,
+    },
+  ],
+
+  comparison: {
+    heading:
+      "Nutzenorientierte Headline – wie du es machst und was dich unterscheidet",
+    cta: MAIN_ACTION,
+    brand: "Deine Marke",
+    competitors: [
+      "Konkurrent 1",
+      "Konkurrent 2",
+      "Konkurrent 3",
+      "Konkurrent 4",
+      "Konkurrent 5",
+    ],
+    // The tick pattern is the frame's own, column by column: brand first.
+    rows: [
+      { label: "Punkt #1", values: [true, false, false, false, false, false] },
+      { label: "Punkt #2", values: [true, false, false, false, false, false] },
+      { label: "Punkt #3", values: [true, false, true, false, false, true] },
+      { label: "Punkt #4", values: [true, false, true, false, false, true] },
+      { label: "Punkt #5", values: [true, false, false, false, false, false] },
     ],
   },
-  badgeEnd: {
-    icon: {
-      src: "/assets/hero/hero-icon-target.svg",
-      alt: "",
-      width: 23,
-      height: 23,
-    },
-    lines: ["ANGEBOT IN 24 STUNDEN", "SCHRIFTLICH & UNVERBINDLICH"],
-  },
-  subject: {
-    src: "/assets/hero/hero-car.glb",
-    label:
-      "Elektrofahrzeug in dunklem Lack, langsam gedreht auf dunkler Studiofläche",
-  },
-  backdrop: {
-    src: "/assets/hero/hero-wordmark.png",
-    alt: "",
-    // Intrinsic size of the plate — 4× the 1257×671 the frame draws it at, so
-    // `next/image` has real pixels to serve on a dense display.
-    width: 5028,
-    height: 2684,
-  },
-};
 
-/**
- * The five steps of the purchase, in the numbered rows Artefakt used for the
- * garment's specifications.
- *
- * The row layout was built for an ordered list of five and this is one, so the
- * composition is untouched — only the icons were re-drawn, in the same 2.5px
- * stroke language as the ones on the inspection screen below.
- */
-export const homeDetails: DetailsContent = {
-  heading: "SO LÄUFT DER ANKAUF.",
-  lede: "Fünf Schritte, kein Papierkram auf deiner Seite und keine Fahrt zu einem Händler. Vom Ausfüllen bis zum Geld auf dem Konto vergehen in der Regel wenige Tage.",
-  cta: { label: "FAHRZEUG BEWERTEN", href: "#kontakt" },
-  features: [
-    {
-      index: "01",
-      icon: {
-        src: "/assets/details/details-icon-data.svg",
-        alt: "",
-        width: 32,
-        height: 32,
-      },
-      title: "FAHRZEUGDATEN",
-      body: "MARKE, MODELL, BAUJAHR UND LAUFLEISTUNG. DAUERT ZWEI MINUTEN.",
-    },
-    {
-      index: "02",
-      icon: {
-        src: "/assets/details/details-icon-valuation.svg",
-        alt: "",
-        width: 32,
-        height: 32,
-      },
-      title: "BEWERTUNG",
-      body: "WIR PRÜFEN AUSSTATTUNG, AKKUZUSTAND UND DIE AKTUELLE MARKTLAGE.",
-    },
-    {
-      index: "03",
-      icon: {
-        src: "/assets/details/details-icon-offer.svg",
-        alt: "",
-        width: 32,
-        height: 32,
-      },
-      title: "FESTPREIS-ANGEBOT",
-      body: "SCHRIFTLICH, MIT GÜLTIGKEITSDATUM UND OHNE VERPFLICHTUNG FÜR DICH.",
-    },
-    {
-      index: "04",
-      icon: {
-        src: "/assets/details/details-icon-appointment.svg",
-        alt: "",
-        width: 32,
-        height: 32,
-      },
-      title: "TERMIN & SICHTPRÜFUNG",
-      body: "BEI DIR VOR ORT, ZUM WUNSCHTERMIN — NICHT IN EINER HALLE.",
-    },
-    {
-      index: "05",
-      icon: {
-        src: "/assets/details/details-icon-payout.svg",
-        alt: "",
-        width: 32,
-        height: 32,
-      },
-      title: "ZAHLUNG & ABHOLUNG",
-      body: "GELD BEI ÜBERGABE, ABMELDUNG UND TRANSPORT ÜBERNEHMEN WIR.",
-    },
-  ],
-};
-
-/**
- * The four vehicle classes Voltio buys.
- *
- * **The photographs are four renders of the hero's own model**, turned to four
- * angles and given four paints, produced from the same GLB, lighting rig and
- * material roles the live scene uses — so the cards and the hero are literally
- * the same car under the same lamps. They stand in for real vehicle photography
- * and should be replaced class by class as it arrives.
- *
- * The `price` slot carries a model-year floor rather than a figure. Artefakt put
- * a price there; a purchase price cannot be stated per class without knowing the
- * car, and inventing a range would be the one dishonest thing on the page.
- * TODO(voltio): confirm the four floors with Egor, or drop the slot.
- */
-export const homeCollections: CollectionsContent = {
-  heading: "WAS WIR ANKAUFEN.",
-  lede: "Reine Elektrofahrzeuge aller Klassen — auch mit laufender Finanzierung, hoher Laufleistung oder sichtbaren Mängeln.",
-  products: [
-    {
-      index: "01",
-      name: "KOMPAKT & KLEINWAGEN",
-      price: "AB BJ 2017",
-      views: [
-        {
-          src: "/assets/collections/collections-kompakt.png",
-          alt: "",
-          width: 1080,
-          height: 1080,
-        },
-      ],
-      swatches: 4,
-      defaultView: 1,
-      tags: ["ID.3", "ZOE", "CORSA-E", "KONA"],
-      href: "#kontakt",
-    },
-    {
-      index: "02",
-      name: "LIMOUSINE & SUV",
-      price: "AB BJ 2018",
-      views: [
-        {
-          src: "/assets/collections/collections-limousine.png",
-          alt: "",
-          width: 1080,
-          height: 1080,
-        },
-      ],
-      swatches: 4,
-      defaultView: 1,
-      tags: ["MODEL 3", "MODEL Y", "ENYAQ", "IONIQ 5"],
-      href: "#kontakt",
-    },
-    {
-      index: "03",
-      name: "PREMIUM & SPORT",
-      price: "AB BJ 2019",
-      views: [
-        {
-          src: "/assets/collections/collections-premium.png",
-          alt: "",
-          width: 1080,
-          height: 1080,
-        },
-      ],
-      swatches: 4,
-      defaultView: 1,
-      tags: ["TAYCAN", "E-TRON GT", "IX", "EQS"],
-      href: "#kontakt",
-    },
-    {
-      index: "04",
-      name: "TRANSPORTER",
-      price: "AB BJ 2019",
-      views: [
-        {
-          src: "/assets/collections/collections-transporter.png",
-          alt: "",
-          width: 1080,
-          height: 1080,
-        },
-      ],
-      swatches: 4,
-      defaultView: 1,
-      tags: ["ID. BUZZ", "E-VITO", "E-TRANSIT"],
-      href: "#kontakt",
-    },
-  ],
-  cta: { label: "MEIN FAHRZEUG BEWERTEN", href: "#kontakt" },
-};
-
-/**
- * The five things the inspection actually looks at.
- *
- * This screen's mechanic is a pinned stage whose scroll scrubs a frame reel
- * while one card walks down it, each state drawing a leader line to a point on
- * the artwork. Artefakt pointed those lines at the five material layers of an
- * exploded jacket. **The reel is now a 360° turntable of the car**, so the five
- * anchors point at parts of a vehicle instead — and because the car is turning
- * rather than exploding, an anchor has to name a region that stays roughly where
- * it is through the sweep. That is why the points sit low and central rather
- * than on a specific panel: the battery under the floor, the drive at the axle,
- * the body along the flank, the wheel at the arch, the cabin at the glass.
- *
- * `anchorFx`/`anchorFy` are fractions of the artwork, measured against the
- * settled arrangement of the new reel. Re-measure them if the reel is
- * re-rendered at a different fill or elevation.
- */
-export const homeTechnology: TechnologyContent = {
-  heading: ["PRÜFUNG", "WAS WIR UNS ANSEHEN"],
-  // The second line has a fixed box on the frame layout and clips rather than
-  // wraps, so it is written to the length that fits: five short lines, no more.
-  lede: [
-    "Eine Bewertung ist nur so gut wie das, was sie prüft.",
-    "Wir bewerten den tatsächlichen Zustand deines Fahrzeugs — vom State of Health des Akkus bis zum Reifenprofil. Was wir finden, steht im Angebot.",
-  ],
-  stack: {
-    src: "/assets/technology/technology-stack.webp",
-    alt: "Elektrofahrzeug, langsam um die eigene Achse gedreht",
-    width: 1024,
-    height: 954,
+  steps: {
+    heading:
+      "Wie funktioniert es? {Lass den Erfolg als sehr wahrscheinlich und mühelos erreichbar erscheinen}",
+    items: ["Schritt #1", "Schritt #2", "Schritt #3"],
+    cta: MAIN_ACTION,
   },
-  layers: [
-    {
-      index: "01",
-      title: "AKKU & LADELEISTUNG",
-      body: "State of Health, Ladezyklen und die tatsächlich erreichte Ladeleistung an AC und DC.",
-      icon: { src: "/assets/technology/technology-icon-battery.svg", alt: "", width: 32, height: 32 },
-      cardTop: 136,
-      cardSideY: 197,
-      anchorFx: 0.52,
-      anchorFy: 0.62,
-    },
-    {
-      index: "02",
-      title: "ANTRIEB & ELEKTRONIK",
-      body: "Motor, Leistungselektronik und ausgelesene Fehlerspeicher des Fahrzeugs.",
-      icon: { src: "/assets/technology/technology-icon-drive.svg", alt: "", width: 32, height: 32 },
-      cardTop: 236,
-      cardSideY: 287,
-      anchorFx: 0.4,
-      anchorFy: 0.58,
-    },
-    {
-      index: "03",
-      title: "KAROSSERIE & LACK",
-      body: "Spaltmaße, Lackschichtdicke und dokumentierte Vorschäden an der Karosserie.",
-      icon: { src: "/assets/technology/technology-icon-body.svg", alt: "", width: 32, height: 32 },
-      cardTop: 370,
-      cardSideY: 431,
-      anchorFx: 0.6,
-      anchorFy: 0.48,
-    },
-    {
-      index: "04",
-      title: "REIFEN & BREMSEN",
-      body: "Profiltiefe, Alter der Reifen und der Zustand von Scheiben und Belägen.",
-      icon: { src: "/assets/technology/technology-icon-wheels.svg", alt: "", width: 32, height: 32 },
-      cardTop: 492,
-      cardSideY: 553,
-      anchorFx: 0.68,
-      anchorFy: 0.66,
-    },
-    {
-      index: "05",
-      title: "INNENRAUM & AUSSTATTUNG",
-      body: "Sitze, Bedienteile und die Ausstattungslinie, die den Wiederverkaufswert trägt.",
-      icon: { src: "/assets/technology/technology-icon-interior.svg", alt: "", width: 32, height: 32 },
-      cardTop: 658,
-      cardSideY: 709,
-      anchorFx: 0.47,
-      anchorFy: 0.44,
-    },
-  ],
-};
 
-/**
- * The five questions a private seller actually asks first.
- *
- * The answers describe an intended process, not a measured one — they are the
- * design's best statement of how Voltio means to work, and Egor has to confirm
- * each before the page goes live. The finance one in particular commits to a
- * bank payoff; TODO(voltio): confirm that is offered.
- */
-export const homeFaq: FaqContent = {
-  heading: "GUT ZU WISSEN.",
-  subject: {
-    src: "/assets/hero/hero-car.glb",
-    label:
-      "Elektrofahrzeug in dunklem Lack, langsam gedreht auf dunkler Studiofläche",
+  faq: {
+    heading: "Häufig gestellte Fragen",
+    // TODO(voltio): the frame draws the rows collapsed; the answers are stand-ins.
+    items: [
+      { question: "Frage #1", answer: "Antwort #1" },
+      { question: "Frage #2", answer: "Antwort #2" },
+      { question: "Frage #3", answer: "Antwort #3" },
+      { question: "Frage #4", answer: "Antwort #4" },
+      { question: "Frage #5", answer: "Antwort #5" },
+      { question: "Frage #6", answer: "Antwort #6" },
+    ],
   },
-  entries: [
-    {
-      index: "01",
-      question: "KAUFT IHR AUCH MIT LAUFENDER FINANZIERUNG?",
-      questionWidth: 195,
-      answer:
-        "Ja. Wir lösen die Restschuld direkt bei der Bank ab und zahlen dir die Differenz aus. Nenne uns dafür bei der Anfrage einfach den aktuellen Ablösestand.",
-    },
-    {
-      index: "02",
-      question: "WAS PASSIERT BEI EINEM SCHWACHEN AKKU?",
-      answer:
-        "Ein niedriger State of Health senkt den Preis, schließt den Ankauf aber nicht aus. Wir kaufen auch Fahrzeuge mit deutlichem Kapazitätsverlust — der Wert steht dann entsprechend im Angebot.",
-    },
-    {
-      index: "03",
-      question: "WIE SCHNELL HABE ICH MEIN GELD?",
-      answer:
-        "Die Zahlung läuft bei der Übergabe. Auf Wunsch per Echtzeitüberweisung, sodass der Betrag auf deinem Konto ist, bevor wir mit dem Fahrzeug losfahren.",
-    },
-    {
-      index: "04",
-      question: "KAUFT IHR AUCH UNFALLWAGEN?",
-      answer:
-        "Ja. Nenne uns den Schaden bei der Anfrage, dann ist er im Angebot berücksichtigt — und es gibt bei der Übergabe keine Diskussion darüber.",
-    },
-    {
-      index: "05",
-      question: "MUSS ICH ZU EUCH FAHREN?",
-      answer:
-        "Nein. Sichtprüfung und Abholung finden bei dir statt, im gesamten DACH-Raum und ohne Transportkosten für dich.",
-    },
-  ],
-};
 
-/**
- * The footer.
- *
- * The sign-up block keeps Artefakt's newsletter composition but is worded as the
- * enquiry it will become: the real lead form goes to Leadmetrics / Leadtable and
- * is deliberately not wired here yet, so the field is present as design and the
- * endpoint is absent rather than faked.
- *
- * TODO(voltio): every link is `#`, and the legal column needs a real Impressum,
- * Datenschutz and AGB before this is publicly reachable — a German site without
- * them is not merely incomplete, it is non-compliant.
- */
-export const homeFooter: FooterContent = {
-  logo: {
-    src: "/assets/ui/logo-mark.png",
-    alt: "Voltio",
-    width: 99,
-    height: 40,
+  urgency: {
+    heading: "Warum sollten Menschen heute handeln? (Dringlichkeit erzeugen)",
+    body: "Formuliere den einen letzten Grund, warum Menschen dein Unternehmen für deine Leistung oder dein Produkt kontaktieren sollten. Das ist deine letzte Chance, ihre Aufmerksamkeit zu gewinnen.",
+    cta: MAIN_ACTION,
   },
-  columns: [
-    {
-      heading: { label: "ANKAUF", href: "#ablauf" },
-      links: [
-        { label: "ABLAUF", href: "#ablauf" },
-        { label: "FAHRZEUGE", href: "#fahrzeuge" },
-        { label: "PRÜFUNG", href: "#pruefung" },
-      ],
-    },
-    {
-      heading: { label: "UNTERNEHMEN", href: "#" },
-      links: [
-        { label: "ÜBER VOLTIO", href: "#" },
-        { label: "KONTAKT", href: "#kontakt" },
-      ],
-    },
-    { heading: { label: "FRAGEN", href: "#fragen" } },
-    {
-      heading: { label: "RECHTLICHES", href: "#" },
-      links: [
-        { label: "IMPRESSUM", href: "#" },
-        { label: "Datenschutz", href: "#" },
-        { label: "AGB", href: "#" },
-        { label: "WIDERRUF", href: "#" },
-      ],
-    },
-  ],
-  newsletter: {
-    heading: "FAHRZEUG BEWERTEN LASSEN.",
-    placeholder: "Deine E-Mail",
-    consent: "ICH MÖCHTE ZU MEINEM FAHRZEUG KONTAKTIERT WERDEN.",
+
+  // TODO(voltio): the frame's footer is a single word, "Footer". These lines are
+  // the minimum a German site needs; the legal links have no pages behind them yet.
+  footer: {
+    brand: "VOLTIO",
+    phone: { label: "333-333-3333", href: "tel:3333333333" },
+    cta: { label: "CTA-Button", href: CTA_HREF },
+    legal: [
+      { label: "Impressum", href: "#" },
+      { label: "Datenschutz", href: "#" },
+    ],
+    copyright: "© 2026 VOLTIO",
   },
-  copyright: "© 2026 VOLTIO. ANKAUF VON ELEKTROFAHRZEUGEN.",
-  social: [
-    { label: "INSTAGRAM", href: "#" },
-    { label: "FACEBOOK", href: "#" },
-    { label: "WHATSAPP", href: "#" },
-  ],
 };

@@ -1,6 +1,6 @@
 ---
 tags: [meta, decision]
-updated: 2026-08-28
+updated: 2026-09-11
 ---
 
 # Decisions Log (ADRs)
@@ -14,6 +14,42 @@ decisions on top, continuing the numbering. Amending an inherited decision is
 fine; write a new ADR that says so rather than editing the old one.
 
 Template: [[templates/adr-note]].
+
+---
+
+## ADR-0048 — Wireframe copy verbatim, Transiett's brand, no frame scaling
+
+**Date:** 2026-09-11 · **Status:** accepted
+
+**Context.** The first concept (ADR-0024 onward) reproduced a 1440×800 dark
+frame with a scaled root font-size, a 3D car and terminal typography. The
+client rejected it and supplied a low-fidelity wireframe plus a brand
+reference: transiett.com, a partner whose look Voltio is to share.
+
+**Decision.**
+1. **Copy is the wireframe's, verbatim.** Every string on the page is the
+   frame's own text, including the template placeholders ("GEWÜNSCHTE
+   HAUPTAKTION", "Punkt #1", "Frage #1"). The only additions are things the
+   frame does not contain and the page cannot work without: the lead form's
+   labels and messages, the FAQ answers, the footer's lines — each marked
+   `TODO(voltio)` in `src/data/mocks/home.ts`.
+2. **The brand is Transiett's.** Palette sampled from their compiled CSS,
+   Poppins + Figtree, white paper with angled mint bands, soft-shadow cards,
+   green control buttons, a deep-green closing band. No dark mode — the
+   brand is light.
+3. **Ordinary responsive flow at every width.** The frame-scaling root and
+   the aspect-gated `lg` variant are removed; the wireframe is a flow layout
+   with a 1200px content column, and phones get the same blocks stacked.
+4. **One entrance spring.** `Reveal` (a fixed `Inview` preset) is the only
+   scroll reveal; the FAQ's height and the button hovers are the only other
+   motion. Springs-only (ADR-0002) and the CSS-transition exception
+   (ADR-0014) still hold.
+
+**Consequences.** The page reads as a template until the real copy lands —
+that is the client's call and is the point of keeping it in one file. Images
+are placeholder cards with the frame's captions; the hero has no photograph
+and paints a gradient under the frame's 60% scrim. The `three`-dependent
+performance skill no longer applies to this project.
 
 ---
 
