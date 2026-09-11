@@ -39,8 +39,8 @@ export interface HeroContent {
   bullets: string[];
   cta: Link;
   note: string;
-  /** Background photograph under the frame's 60% scrim. */
-  image?: ImageAsset;
+  /** The 3D-rendered car that stands on the hero's floor, cut out on transparency. */
+  car?: ImageAsset;
   form: LeadFormContent;
 }
 

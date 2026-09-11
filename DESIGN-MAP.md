@@ -44,7 +44,7 @@ badges, no readable text — and are stand-ins until real photography exists.
 
 | File | Slot | Size |
 |------|------|------|
-| `hero.jpg` | Hero ground under the scrim (`1:39`) | 2400×1357 |
+| `hero-car.png` | 3D-rendered EV (cut out, transparent) standing under the hero copy (`1:39`); the ground stays the `hero-ground` gradient | 1640×740 |
 | `pain.jpg` | Pain media slot (`1:83`) | 1600×1600 |
 | `benefit-1.jpg` | Benefit 1 media (`1:99`) | 1600×1600 |
 | `benefit-2.jpg` | Benefit 2 media (`1:121`) | 1600×1600 |

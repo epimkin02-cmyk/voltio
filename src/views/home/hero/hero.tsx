@@ -15,21 +15,8 @@ const TITLE_ID = "hero-title";
  * Holds the page's `h1`.
  */
 export const Hero = ({ content }: { content: HeroContent }) => (
-  <section aria-labelledby={TITLE_ID} className="hero-ground relative text-content-inverse">
-    {/* The frame's ground: a photograph under a 60% black scrim. The gradient
-        stays underneath as the image's own fallback while it loads. */}
-    {content.image && (
-      <Image
-        src={content.image.src}
-        alt=""
-        width={content.image.width}
-        height={content.image.height}
-        priority
-        sizes="100vw"
-        className="absolute inset-0 size-full object-cover object-[70%_50%]"
-      />
-    )}
-    <div aria-hidden className="absolute inset-0 bg-scrim/75" />
+  <section aria-labelledby={TITLE_ID} className="hero-ground relative overflow-hidden text-content-inverse">
+    <div aria-hidden className="absolute inset-0 bg-scrim/40" />
     <div className="relative mx-auto grid w-full max-w-[81.5rem] gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,39.8rem)] lg:items-center lg:gap-20 lg:py-24">
       <div className="flex flex-col gap-6 lg:max-w-[36.5rem]">
         <Reveal tag="p" className="flex flex-wrap items-center gap-x-3 gap-y-1 text-lede">
@@ -69,6 +56,28 @@ export const Hero = ({ content }: { content: HeroContent }) => (
         <Reveal tag="p" delay={240} className="text-body font-semibold text-content-inverse-muted">
           {content.note}
         </Reveal>
+
+        {/* The car stands on the hero's floor under the copy: a cut-out 3D
+            render on a soft contact shadow, bleeding a little past the
+            section's bottom edge so it reads as parked on the stage rather
+            than pinned in a box. */}
+        {content.car && (
+          <Reveal delay={300} className="relative mt-4 lg:-mb-24 lg:mt-8">
+            <div
+              aria-hidden
+              className="absolute inset-x-[12%] bottom-[8%] h-[14%] rounded-[50%] bg-scrim blur-2xl"
+            />
+            <Image
+              src={content.car.src}
+              alt={content.car.alt}
+              width={content.car.width}
+              height={content.car.height}
+              priority
+              sizes="(min-width: 1024px) 36rem, 100vw"
+              className="relative w-full max-w-[42rem] lg:w-[42rem] lg:max-w-none drop-shadow-[0_30px_40px_rgb(0_0_0/0.45)]"
+            />
+          </Reveal>
+        )}
       </div>
 
       <Reveal id="anfrage" delay={120} className="scroll-mt-28 rounded-card bg-surface p-6 text-content shadow-float sm:p-8 lg:p-10">

@@ -49,11 +49,11 @@ export const homeContent: HomeContent = {
     ],
     cta: { label: "Jetzt verkauf anfragen", href: CTA_HREF },
     note: "REIBUNG und FUDs REDUZIEREN (ANGST, UNSICHERHEIT, ZWEIFEL)",
-    image: {
-      src: "/assets/images/hero.jpg",
-      alt: "",
-      width: 2400,
-      height: 1357,
+    car: {
+      src: "/assets/images/hero-car.png",
+      alt: "3D-Rendering eines modernen Elektroautos in dunklem Grün",
+      width: 1640,
+      height: 740,
     },
     form: {
       heading: "Lead-Formular, um den Bereich „Above the Fold“ optimal zu nutzen.",
