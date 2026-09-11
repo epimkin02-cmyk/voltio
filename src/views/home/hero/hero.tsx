@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { ButtonLink } from "@/components/ui/button";
 import { CheckIcon, StarIcon } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
@@ -14,7 +16,20 @@ const TITLE_ID = "hero-title";
  */
 export const Hero = ({ content }: { content: HeroContent }) => (
   <section aria-labelledby={TITLE_ID} className="hero-ground relative text-content-inverse">
-    <div aria-hidden className="absolute inset-0 bg-scrim/40" />
+    {/* The frame's ground: a photograph under a 60% black scrim. The gradient
+        stays underneath as the image's own fallback while it loads. */}
+    {content.image && (
+      <Image
+        src={content.image.src}
+        alt=""
+        width={content.image.width}
+        height={content.image.height}
+        priority
+        sizes="100vw"
+        className="absolute inset-0 size-full object-cover object-[70%_50%]"
+      />
+    )}
+    <div aria-hidden className="absolute inset-0 bg-scrim/75" />
     <div className="relative mx-auto grid w-full max-w-[81.5rem] gap-12 px-5 py-16 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,39.8rem)] lg:items-center lg:gap-20 lg:py-24">
       <div className="flex flex-col gap-6 lg:max-w-[36.5rem]">
         <Reveal tag="p" className="flex flex-wrap items-center gap-x-3 gap-y-1 text-lede">

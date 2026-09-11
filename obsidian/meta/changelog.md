@@ -50,7 +50,10 @@ partner. See [[decisions-log]] ADR-0048.
   the preloader (it gated on a WebGL scene that no longer exists), the pointer
   field, scramble text and the frame button.
 
-**Added** — `@fontsource/poppins`, `@fontsource/figtree`.
+**Added** — `@fontsource/poppins`, `@fontsource/figtree`; five generated
+photographs in `public/assets/images/` (hero ground, pain, three benefits),
+wired through an optional `image` on the content types — `PlaceholderBox`
+shows the photograph when one is set and the frame's caption when not.
 
 ---
 

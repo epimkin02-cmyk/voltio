@@ -23,7 +23,7 @@ export const Benefit = ({ content, index, mediaSide }: BenefitProps) => {
           delay={100}
           className={mediaSide === "start" ? "lg:order-1" : "lg:order-2"}
         >
-          <PlaceholderBox wedge>
+          <PlaceholderBox wedge image={content.image}>
             <strong className="font-semibold text-content">{content.media.strong}</strong>
             {content.media.rest}
           </PlaceholderBox>

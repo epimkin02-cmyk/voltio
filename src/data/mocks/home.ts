@@ -49,6 +49,12 @@ export const homeContent: HomeContent = {
     ],
     cta: { label: "Jetzt verkauf anfragen", href: CTA_HREF },
     note: "REIBUNG und FUDs REDUZIEREN (ANGST, UNSICHERHEIT, ZWEIFEL)",
+    image: {
+      src: "/assets/images/hero.jpg",
+      alt: "",
+      width: 2400,
+      height: 1357,
+    },
     form: {
       heading: "Lead-Formular, um den Bereich „Above the Fold“ optimal zu nutzen.",
       // TODO(voltio): field labels and messages are not in the wireframe.
@@ -76,6 +82,12 @@ export const homeContent: HomeContent = {
     body: "Nutze diesen Abschnitt, um die Schmerzpunkte deines idealen Interessenten lebendig zu beschreiben und die Schwächen des Status quo aufzuzeigen. So zeigst du, dass du weißt, was er durchmacht. Ergänze das mit deinem einzigartigen Nutzenversprechen und Differenzierungsmerkmal.",
     cta: MAIN_ACTION,
     media: "Optionales Bild oder Video",
+    image: {
+      src: "/assets/images/pain.jpg",
+      alt: "Privatverkäufer am Küchentisch, frustriert über unübersichtliche Fahrzeuginserate am Laptop",
+      width: 1600,
+      height: 1600,
+    },
   },
 
   socialProof: SOCIAL_PROOF,
@@ -87,6 +99,12 @@ export const homeContent: HomeContent = {
       body: BENEFIT_BODY,
       cta: MAIN_ACTION,
       media: BENEFIT_MEDIA,
+      image: {
+        src: "/assets/images/benefit-1.jpg",
+        alt: "Hand hält ein Smartphone mit einem Vergleich mehrerer Preisangebote, im Hintergrund ein Elektroauto",
+        width: 1600,
+        height: 1600,
+      },
     },
     {
       eyebrow: "TRAUMERGEBNIS IN KÜRZE",
@@ -94,6 +112,12 @@ export const homeContent: HomeContent = {
       body: BENEFIT_BODY,
       cta: MAIN_ACTION,
       media: BENEFIT_MEDIA,
+      image: {
+        src: "/assets/images/benefit-2.jpg",
+        alt: "Elektroauto wird vor einem Wohnhaus auf einen Transporter geladen, der Fahrer übergibt Unterlagen",
+        width: 1600,
+        height: 1600,
+      },
     },
     {
       eyebrow: "TRAUMERGEBNIS IN KÜRZE",
@@ -101,6 +125,12 @@ export const homeContent: HomeContent = {
       body: BENEFIT_BODY,
       cta: MAIN_ACTION,
       media: BENEFIT_MEDIA,
+      image: {
+        src: "/assets/images/benefit-3.jpg",
+        alt: "Mann vor seinem Haus zeigt lächelnd eine Zahlungsbestätigung auf dem Smartphone und übergibt den Autoschlüssel",
+        width: 1600,
+        height: 1600,
+      },
     },
   ],
 

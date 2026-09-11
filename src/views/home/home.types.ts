@@ -3,6 +3,13 @@ export interface Link {
   href: string;
 }
 
+export interface ImageAsset {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
 export interface HeaderContent {
   brand: string;
   phone: Link;
@@ -32,6 +39,8 @@ export interface HeroContent {
   bullets: string[];
   cta: Link;
   note: string;
+  /** Background photograph under the frame's 60% scrim. */
+  image?: ImageAsset;
   form: LeadFormContent;
 }
 
@@ -40,6 +49,7 @@ export interface PainContent {
   body: string;
   cta: Link;
   media: string;
+  image?: ImageAsset;
 }
 
 export interface SocialProofContent {
@@ -54,6 +64,7 @@ export interface BenefitContent {
   body: string;
   cta: Link;
   media: { strong: string; rest: string };
+  image?: ImageAsset;
 }
 
 export interface ComparisonContent {

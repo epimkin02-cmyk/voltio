@@ -37,3 +37,15 @@ None from the frame: its only exports are a 256px checker placeholder behind
 the hero (`1:39`) and a phone glyph (`1:31`), both replaced by CSS and an
 inline SVG. Icons (check, cross, star, phone, chevron, arrow) live in
 `src/components/ui/icons.tsx`.
+
+The photographs in `public/assets/images/` were generated on 2026-09-11
+(Higgsfield, gpt_image_2, 2k) to the brand's palette — generic cars without
+badges, no readable text — and are stand-ins until real photography exists.
+
+| File | Slot | Size |
+|------|------|------|
+| `hero.jpg` | Hero ground under the scrim (`1:39`) | 2400×1357 |
+| `pain.jpg` | Pain media slot (`1:83`) | 1600×1600 |
+| `benefit-1.jpg` | Benefit 1 media (`1:99`) | 1600×1600 |
+| `benefit-2.jpg` | Benefit 2 media (`1:121`) | 1600×1600 |
+| `benefit-3.jpg` | Benefit 3 media (`1:125`) | 1600×1600 |

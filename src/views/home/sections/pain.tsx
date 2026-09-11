@@ -25,7 +25,9 @@ export const Pain = ({ content }: { content: PainContent }) => (
         </Reveal>
       </div>
       <Reveal delay={120}>
-        <PlaceholderBox wedge>{content.media}</PlaceholderBox>
+        <PlaceholderBox wedge image={content.image}>
+          {content.media}
+        </PlaceholderBox>
       </Reveal>
     </div>
   </section>
