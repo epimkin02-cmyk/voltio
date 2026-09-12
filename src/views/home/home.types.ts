@@ -42,8 +42,16 @@ export interface LeadFormContent {
   close: string;
 }
 
+export interface VideoScene {
+  src: string;
+  /** Still shown before the clip plays (and for reduced motion). */
+  poster: string;
+}
+
 export interface HeroContent {
-  rating: { score: string; stars: number; count: string };
+  rating: { score: string; stars: number; count: string; href: string };
+  /** Two clips that cross-fade into each other forever. */
+  video: VideoScene[];
   title: string;
   bullets: string[];
   cta: Link;

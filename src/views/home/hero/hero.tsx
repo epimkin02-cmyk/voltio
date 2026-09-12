@@ -1,11 +1,10 @@
-import Image from "next/image";
-
 import { Float } from "@/components/animation/float";
 import { Spring } from "@/components/animation/springs/spring";
-
 import { ButtonLink } from "@/components/ui/button";
 import { CheckIcon, StarIcon } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
+
+import { HeroVideo } from "./hero-video";
 
 import type { HeroContent, TrustCard } from "../home.types";
 
@@ -19,44 +18,35 @@ const Stars = ({ count }: { count: number }) => (
   </span>
 );
 
-/** One of the floating cards beside the car. */
-const Card = ({ card, stars, className }: { card: TrustCard; stars?: number; className: string }) => (
-  <div
-    className={`flex items-center gap-3 rounded-card bg-surface px-4 py-3 text-content shadow-float ${className}`}
-  >
+const Card = ({ card, className }: { card: TrustCard; className: string }) => (
+  <div className={`flex items-center gap-3 rounded-card bg-surface/95 px-4 py-3 text-content shadow-float backdrop-blur ${className}`}>
     {card.figure ? (
-      <span className="font-display text-title font-bold leading-none text-primary-deep">
-        {card.figure}
-      </span>
+      <span className="font-display text-title font-bold leading-none text-primary-deep">{card.figure}</span>
     ) : (
       <span className="grid size-8 shrink-0 place-items-center rounded-pill bg-surface-tint text-primary">
         <CheckIcon className="size-4" />
       </span>
     )}
-    <span className="flex flex-col gap-0.5">
-      {stars && <Stars count={stars} />}
-      <span className="max-w-[11rem] text-small font-medium leading-snug">{card.label}</span>
-    </span>
+    <span className="max-w-[12rem] text-small font-medium leading-snug">{card.label}</span>
   </div>
 );
 
 /**
- * Wireframe frame 1:39, reworked at the client's request: the lead form has
- * moved to the closing section, and the right half is the car on a stage —
- * a cut-out 3D render on a glowing floor, ringed by the trust cards. Holds
- * the page's `h1`.
+ * Transiett's hero, for Voltio: real footage full-bleed behind the copy — a
+ * drone following a Model Y through serpentines, then the stop at the
+ * lay-by — with the copy on a dark gradient at the left and the rating card
+ * pinned bottom-right, as Transiett pins theirs. Holds the page's `h1`.
  */
 export const Hero = ({ content }: { content: HeroContent }) => (
-  <section aria-labelledby={TITLE_ID} className="hero-ground relative overflow-hidden text-content-inverse">
-    <div aria-hidden className="absolute inset-0 bg-scrim/40" />
-    <div className="relative mx-auto grid w-full max-w-[81.5rem] items-center gap-12 px-5 pt-14 pb-16 sm:px-8 lg:grid-cols-[minmax(0,34rem)_minmax(0,1fr)] lg:gap-10 lg:py-24">
-      <div className="flex flex-col gap-6">
-        <Reveal tag="p" className="flex flex-wrap items-center gap-x-3 gap-y-1 text-lede">
-          <span className="font-display font-semibold">{content.rating.score}</span>
-          <Stars count={content.rating.stars} />
-          <span className="text-content-inverse-muted">{content.rating.count}</span>
-        </Reveal>
+  <section aria-labelledby={TITLE_ID} className="relative overflow-hidden text-content-inverse">
+    <HeroVideo scenes={content.video} />
+    {/* Legibility: a deep-green wash from the left where the copy sits, and a
+        vignette along the bottom under the cards. */}
+    <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,var(--surface-deep)_0%,rgb(12_40_29/0.85)_30%,rgb(12_40_29/0.35)_60%,rgb(12_40_29/0.15)_100%)]" />
+    <div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,transparent,rgb(12_40_29/0.7))]" />
 
+    <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-[81.5rem] flex-col justify-center px-5 py-16 sm:px-8 lg:py-24">
+      <div className="flex max-w-[38rem] flex-col gap-6">
         <Reveal tag="h1" id={TITLE_ID} delay={60} className="text-display-compact font-bold leading-tight tracking-display text-pretty sm:text-display">
           {content.title}
         </Reveal>
@@ -72,8 +62,8 @@ export const Hero = ({ content }: { content: HeroContent }) => (
           ))}
         </Reveal>
 
-        <Reveal delay={180} className="pt-2">
-          <ButtonLink href={content.cta.href} variant="light" size="lg" arrow>
+        <Reveal delay={180} className="pt-3">
+          <ButtonLink href={content.cta.href} variant="hero" size="lg" arrow>
             {content.cta.label}
           </ButtonLink>
         </Reveal>
@@ -88,63 +78,27 @@ export const Hero = ({ content }: { content: HeroContent }) => (
         </Reveal>
       </div>
 
-      {content.car && (
-        <div className="relative mx-auto w-full max-w-[44rem] lg:max-w-none">
-          {/* The stage: a soft green glow and a contact shadow under the car. */}
-          <div
-            aria-hidden
-            className="absolute inset-x-[5%] top-[10%] bottom-[15%] rounded-[50%] bg-primary/35 blur-3xl"
-          />
-          <div
-            aria-hidden
-            className="absolute inset-x-[15%] bottom-[10%] h-[10%] rounded-[50%] bg-scrim blur-2xl"
-          />
-          {/* The car drives in from the right on load — a long, soft spring
-              with a little overshoot, so it settles like something rolling to
-              a stop rather than snapping into place. */}
-          <Spring
-            mode="once"
-            from={{ x: 320, opacity: 0 }}
-            to={{ x: 0, opacity: 1 }}
-            delayIn={150}
-            config={{ tension: 60, friction: 18 }}
-            className="relative"
-          >
-            <Image
-              src={content.car.src}
-              alt={content.car.alt}
-              width={content.car.width}
-              height={content.car.height}
-              priority
-              sizes="(min-width: 1024px) 44rem, 100vw"
-              className="relative w-full drop-shadow-[0_40px_50px_rgb(0_0_0/0.5)] lg:translate-x-6 lg:scale-110"
-            />
+      {/* The rating, pinned bottom-right on the footage, and one promise
+          card floating above it. */}
+      <div className="mt-12 flex flex-col items-start gap-4 lg:absolute lg:right-8 lg:bottom-10 lg:mt-0 lg:items-end">
+        {content.trust[1] && (
+          <Spring mode="once" from={{ opacity: 0, y: 16, scale: 0.9 }} to={{ opacity: 1, y: 0, scale: 1 }} delayIn={700} config={{ tension: 220, friction: 20 }}>
+            <Float amplitude={5}>
+              <Card card={content.trust[1]} className="" />
+            </Float>
           </Spring>
-
-          {/* The cards pop in after the car has parked, then hover. */}
-          {content.trust[0] && (
-            <Spring mode="once" from={{ opacity: 0, scale: 0.8, y: 12 }} to={{ opacity: 1, scale: 1, y: 0 }} delayIn={900} config={{ tension: 220, friction: 18 }} className="absolute top-[6%] left-0 sm:left-[2%]">
-              <Float amplitude={5}>
-                <Card card={content.trust[0]} stars={content.rating.stars} className="" />
-              </Float>
-            </Spring>
-          )}
-          {content.trust[1] && (
-            <Spring mode="once" from={{ opacity: 0, scale: 0.8, y: 12 }} to={{ opacity: 1, scale: 1, y: 0 }} delayIn={1050} config={{ tension: 220, friction: 18 }} className="absolute right-0 bottom-[8%] sm:right-[2%]">
-              <Float amplitude={6} delay={600}>
-                <Card card={content.trust[1]} className="" />
-              </Float>
-            </Spring>
-          )}
-          {content.trust[2] && (
-            <Spring mode="once" from={{ opacity: 0, scale: 0.8, y: 12 }} to={{ opacity: 1, scale: 1, y: 0 }} delayIn={1200} config={{ tension: 220, friction: 18 }} className="absolute bottom-[-2%] left-[4%] max-sm:hidden">
-              <Float amplitude={4} delay={1200}>
-                <Card card={content.trust[2]} className="" />
-              </Float>
-            </Spring>
-          )}
-        </div>
-      )}
+        )}
+        <Spring mode="once" from={{ opacity: 0, y: 16 }} to={{ opacity: 1, y: 0 }} delayIn={500} config={{ tension: 200, friction: 22 }}>
+          <a
+            href={content.rating.href}
+            className="flex items-center gap-3 rounded-card bg-surface-deep/70 px-5 py-4 text-content-inverse shadow-float ring-1 ring-line-inverse backdrop-blur transition duration-[var(--duration-fast)] ease-entrance hover:bg-surface-deep/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-content-inverse"
+          >
+            <span className="font-display text-title font-bold">{content.rating.score}</span>
+            <Stars count={content.rating.stars} />
+            <span className="text-body font-semibold underline underline-offset-4">{content.rating.count}</span>
+          </a>
+        </Spring>
+      </div>
     </div>
   </section>
 );

@@ -16,6 +16,30 @@ For *why* the conventions are what they are, see [[decisions-log]].
 
 ---
 
+## 2026-09-12 (4) — Footage in the hero, the hero button
+
+**Changed**
+- `hero/hero-video` — two 8-second clips (Kling 3.0 Pro, 1080p, re-encoded
+  to ~4 Mbit/s H.264 with AVFoundation) cross-fade into each other forever:
+  a drone above a white Model Y on alpine serpentines, then the car pulling
+  into a lay-by and its door opening, nobody in shot. Both `<video>`s stay
+  mounted; the waiting one restarts and fades in 1.4 s before the active one
+  ends. Reduced motion shows the first poster, still.
+- `hero/hero` — Transiett's composition: footage full-bleed, a deep-green
+  wash from the left under the copy, the rating card pinned bottom-right
+  with one promise card floating above it. The 3D render and the trust-card
+  cluster are gone from the hero; the render stays in the assets.
+- `ui/button` — `variant="hero"`: a pill with a green-to-deep-green
+  gradient, a glass highlight, an outer glow that swells on hover, a sheen
+  that sweeps across on a spring loop, an arrow disc that slides, and a
+  magnetic lean toward the pointer (spring), springing back on leave.
+
+**Assets** — `public/assets/video/hero-serpentine.{mp4,jpg}`,
+`hero-stop.{mp4,jpg}`. Two alternative takes per scene exist as Higgsfield
+jobs only.
+
+---
+
 ## 2026-09-12 (3) — One car per lane with front views, the Voltio column, the Transiett footer
 
 **Changed**

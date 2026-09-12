@@ -17,7 +17,7 @@ treatment comes from the brand reference, not from the frame.
 | Block | Node | View / component | Notes |
 |-------|------|------------------|-------|
 | Navigation | `1:22` | `views/home/header` → `SiteHeader` | 64px bar: inline SVG logo (`ui/logo`), four section links (ours — the frame has none), phone (`1:36`) + CTA (`1:38`) |
-| Hero | `1:39` | `views/home/hero` → `Hero` | Copy left (`1:41`); right half is the cut-out 3D car on a glowing floor with three floating trust cards (rating, Ø 5 days, best price). **The lead form (`1:64`) moved to the closing section** at the client's request. Holds the `h1` (`1:46`) |
+| Hero | `1:39` | `views/home/hero` → `Hero` + `HeroVideo` | Transiett's hero: two cross-fading drone clips full-bleed (`public/assets/video/`), copy left on a green wash, rating card bottom-right, one promise card above it. Holds the `h1` (`1:46`) |
 | Brands | — (Transiett's "Most popular brands") | `sections/brands` | Logo tiles as CSS masks over `public/assets/brands/*.svg`; parallax illustration left |
 | Categories | — (Transiett's "Key Categories") | `sections/categories` | Scroll-driven real EV cut-outs, one per lane, `public/assets/cars/`; label cards with front views; sticky stage |
 | Proof strip | `1:66` | `sections/proof-strip` | Grey band, four key figures (the frame's "SOCIAL PROOF #2", `1:69`) |

@@ -2,7 +2,7 @@
 
 import { animated } from "@react-spring/web";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { ButtonLink } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -91,16 +91,14 @@ const CONVOY_GAP = 0.28;
 
 const Lane = ({ lane, progress, index }: LaneProps) => {
   const dir = lane.from === "left" ? 1 : -1;
-  // The viewport width lives in a ref that starts at the design width on
-  // both server and client, and is corrected after mount — reading `window`
-  // during render would make the first client paint disagree with the SSR
-  // markup (a hydration mismatch). Scroll re-interpolates the transforms
-  // straight away, so the correction is never visible.
-  const vwRef = useRef(1440);
+  // The viewport width starts at the design width on both server and client
+  // and is corrected after mount — reading `window` during render would make
+  // the first client paint disagree with the SSR markup (a hydration
+  // mismatch). The cars are off-screen at progress 0 either way, so the
+  // correction is never visible.
+  const [vw, setVw] = useState(1440);
   useEffect(() => {
-    const set = () => {
-      vwRef.current = window.innerWidth;
-    };
+    const set = () => setVw(window.innerWidth);
     set();
     window.addEventListener("resize", set, { passive: true });
     return () => window.removeEventListener("resize", set);
@@ -157,7 +155,6 @@ const Lane = ({ lane, progress, index }: LaneProps) => {
               className={`absolute bottom-3 h-[calc(100%-1.5rem)] ${lane.from === "left" ? "left-0" : "right-0"}`}
               style={{
                 transform: progress.to((p) => {
-                  const vw = vwRef.current;
                   const laneH = vw >= 1024 ? 232 : vw >= 640 ? 152 : 120;
                   const carW = laneH * CAR_ASPECT;
                   const pitch = carW * (1 + CONVOY_GAP);

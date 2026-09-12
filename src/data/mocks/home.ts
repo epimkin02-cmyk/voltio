@@ -27,8 +27,14 @@ export const homeContent: HomeContent = {
   },
 
   hero: {
-    rating: { score: "5,0", stars: 5, count: "776 Bewertungen" },
-    title: "Dein Elektroauto in Ø 5 Tagen zum Bestpreis verkauft",
+    rating: { score: "5,0", stars: 5, count: "Lies unsere 776 Bewertungen", href: "#" },
+    // Two 8-second clips (Kling 3.0): a drone follows a white Model Y through
+    // alpine serpentines, then it pulls into a lay-by and the door opens.
+    video: [
+      { src: "/assets/video/hero-serpentine.mp4", poster: "/assets/video/hero-serpentine.jpg" },
+      { src: "/assets/video/hero-stop.mp4", poster: "/assets/video/hero-stop.jpg" },
+    ],
+    title: "Dein Elektroauto in Ø\u00a05\u00a0Tagen zum Bestpreis verkauft",
     bullets: [
       "Wir vergleichen Angebote im gesamten DACH-Raum und garantieren den besten Preis",
       "Von Angebot bis Abholung des Fahrzeugs alles aus einer Hand",
@@ -36,12 +42,6 @@ export const homeContent: HomeContent = {
     ],
     cta: { label: "Jetzt Verkauf anfragen", href: "#anfrage" },
     assurances: ["Kostenlos & unverbindlich", "Keine Nachverhandlung", "Abmeldung inklusive"],
-    car: {
-      src: "/assets/images/hero-car.png",
-      alt: "3D-Rendering eines modernen Elektro-Crossovers in Petrol",
-      width: 1680,
-      height: 900,
-    },
     trust: [
       { figure: "5,0", label: "776 Bewertungen" },
       { figure: "Ø 5", label: "Tage bis zum Geld auf dem Wunschkonto" },
