@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { ButtonLink } from "@/components/ui/button";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 
@@ -19,7 +20,8 @@ const HEADING_ID = "steps-heading";
 export const Steps = ({ content }: { content: StepsContent }) => (
   <section id="ablauf" aria-labelledby={HEADING_ID} className="slant-y scroll-mt-16 bg-surface-tint py-24 sm:py-28 lg:py-32">
     <div className="mx-auto flex w-full max-w-[75rem] flex-col items-center gap-14 px-5 sm:px-8">
-      <Reveal>
+      <Reveal className="flex flex-col items-center gap-4">
+        <Eyebrow>{content.eyebrow}</Eyebrow>
         <SectionHeading id={HEADING_ID} align="center">
           {content.heading}
         </SectionHeading>
@@ -40,10 +42,14 @@ export const Steps = ({ content }: { content: StepsContent }) => (
             ) : (
               <div className="aspect-[3/2] w-full rounded-card bg-surface/60" />
             )}
-            <span className="font-display text-body-lg font-semibold text-primary-deep">
+            <span className="flex items-center gap-3 font-display text-body-lg font-semibold text-primary-deep">
               {String(index + 1).padStart(2, "0")}.
+              <span className="rounded-pill bg-surface px-3 py-1 text-fine font-semibold uppercase tracking-eyebrow text-primary">
+                {item.duration}
+              </span>
             </span>
             <h3 className="text-title font-semibold text-content">{item.title}</h3>
+            <p className="text-body-lg leading-relaxed text-content-muted">{item.body}</p>
           </Reveal>
         ))}
       </ol>

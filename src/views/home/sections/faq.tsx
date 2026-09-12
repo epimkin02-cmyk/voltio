@@ -14,8 +14,9 @@ export const Faq = ({ content }: { content: FaqContent }) => (
   <section id="faq" aria-labelledby={HEADING_ID} className="scroll-mt-16 py-16 sm:py-20 lg:py-24">
     <div className="mx-auto grid w-full max-w-[75rem] gap-12 px-5 sm:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,40rem)] lg:items-start lg:gap-20">
       <div className="flex flex-col gap-8 lg:sticky lg:top-28">
-        <Reveal>
+        <Reveal className="flex flex-col gap-4">
           <SectionHeading id={HEADING_ID}>{content.heading}</SectionHeading>
+          <p className="max-w-[28rem] text-body-lg leading-relaxed text-content-muted">{content.body}</p>
         </Reveal>
         {content.image && (
           <Reveal delay={80} className="max-lg:hidden">

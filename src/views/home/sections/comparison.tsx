@@ -1,4 +1,5 @@
 import { ButtonLink } from "@/components/ui/button";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { CheckIcon, CrossIcon } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -29,15 +30,12 @@ const Mark = ({ yes }: { yes: boolean }) =>
 export const Comparison = ({ content }: { content: ComparisonContent }) => (
   <section id="vergleich" aria-labelledby={HEADING_ID} className="scroll-mt-16 py-16 sm:py-20 lg:py-24">
     <div className="mx-auto flex w-full max-w-[75rem] flex-col items-center gap-10 px-5 sm:px-8">
-      <Reveal>
+      <Reveal className="flex flex-col items-center gap-4">
+        <Eyebrow>{content.eyebrow}</Eyebrow>
         <SectionHeading id={HEADING_ID} align="center">
           {content.heading}
         </SectionHeading>
-      </Reveal>
-      <Reveal delay={80}>
-        <ButtonLink href={content.cta.href} arrow>
-          {content.cta.label}
-        </ButtonLink>
+        <p className="max-w-[40rem] text-center text-body-lg leading-relaxed text-content-muted">{content.body}</p>
       </Reveal>
 
       <Reveal delay={140} className="w-full overflow-x-auto pt-4 pb-6">
@@ -97,6 +95,11 @@ export const Comparison = ({ content }: { content: ComparisonContent }) => (
             })}
           </tbody>
         </table>
+      </Reveal>
+      <Reveal delay={80}>
+        <ButtonLink href={content.cta.href} arrow>
+          {content.cta.label}
+        </ButtonLink>
       </Reveal>
     </div>
   </section>

@@ -1,4 +1,5 @@
 import { ButtonLink } from "@/components/ui/button";
+import { CrossIcon } from "@/components/ui/icons";
 import { PlaceholderBox } from "@/components/ui/placeholder-box";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -15,6 +16,16 @@ export const Pain = ({ content }: { content: PainContent }) => (
         <Reveal>
           <SectionHeading id={HEADING_ID}>{content.heading}</SectionHeading>
         </Reveal>
+        <Reveal tag="ul" delay={60} className="flex flex-col gap-2.5">
+          {content.pains.map((pain) => (
+            <li key={pain} className="flex items-start gap-3 text-body-lg text-content">
+              <span className="mt-1 grid size-5 shrink-0 place-items-center rounded-pill bg-danger/10 text-danger">
+                <CrossIcon className="size-3" />
+              </span>
+              {pain}
+            </li>
+          ))}
+        </Reveal>
         <Reveal tag="p" delay={80} className="text-body-lg leading-relaxed text-content-muted">
           {content.body}
         </Reveal>
@@ -26,7 +37,7 @@ export const Pain = ({ content }: { content: PainContent }) => (
       </div>
       <Reveal delay={120}>
         <PlaceholderBox wedge image={content.image}>
-          {content.media}
+          {content.heading}
         </PlaceholderBox>
       </Reveal>
     </div>

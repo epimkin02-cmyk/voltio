@@ -1,21 +1,25 @@
 import { homeContent } from "@/data/mocks/home";
 
+import { LeadModal } from "@/components/lead/lead-modal";
+
 import { SiteHeader } from "./header/site-header";
 import { Hero } from "./hero/hero";
 import { Benefit } from "./sections/benefit";
 import { Comparison } from "./sections/comparison";
 import { Faq } from "./sections/faq";
 import { SiteFooter } from "./sections/footer";
+import { Numbers } from "./sections/numbers";
 import { Pain } from "./sections/pain";
 import { ProofStrip } from "./sections/proof-strip";
-import { SocialProof } from "./sections/social-proof";
 import { Steps } from "./sections/steps";
+import { Testimonials } from "./sections/testimonials";
 import { Urgency } from "./sections/urgency";
 
 /**
  * Home view — the wireframe's "Home - Desktop" section (Figma
  * yylm21nc34q4XvccygO6K8, node 1:651), block for block, in Transiett's
- * clothes. A Server Component; every animated piece is a client leaf.
+ * clothes. A Server Component; every animated piece is a client leaf. The
+ * lead popup is mounted once here and opened by every CTA.
  */
 export const HomeView = () => (
   <div className="relative overflow-x-clip bg-background text-content">
@@ -30,9 +34,9 @@ export const HomeView = () => (
 
     <main id="main">
       <Hero content={homeContent.hero} />
-      <ProofStrip label={homeContent.proofStrip} />
+      <ProofStrip stats={homeContent.stats} />
       <Pain content={homeContent.pain} />
-      <SocialProof content={homeContent.socialProof} id="social-proof-1" />
+      <Testimonials content={homeContent.testimonials} />
       {homeContent.benefits.map((benefit, index) => (
         <Benefit
           key={benefit.heading}
@@ -41,7 +45,7 @@ export const HomeView = () => (
           mediaSide={index % 2 === 0 ? "start" : "end"}
         />
       ))}
-      <SocialProof content={homeContent.socialProof} id="social-proof-2" />
+      <Numbers content={homeContent.numbers} />
       <Comparison content={homeContent.comparison} />
       <Steps content={homeContent.steps} />
       <Faq content={homeContent.faq} />
@@ -49,5 +53,6 @@ export const HomeView = () => (
     </main>
 
     <SiteFooter content={homeContent.footer} />
+    <LeadModal content={homeContent.leadForm} />
   </div>
 );

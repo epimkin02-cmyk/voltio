@@ -55,7 +55,7 @@ export const Hero = ({ content }: { content: HeroContent }) => (
         </Reveal>
 
         <Reveal tag="h1" id={TITLE_ID} delay={60} className="text-display-compact font-bold leading-tight tracking-display text-pretty sm:text-display">
-          {content.title[0]} {content.title[1]}
+          {content.title}
         </Reveal>
 
         <Reveal tag="ul" delay={120} className="flex flex-col gap-3">
@@ -75,8 +75,13 @@ export const Hero = ({ content }: { content: HeroContent }) => (
           </ButtonLink>
         </Reveal>
 
-        <Reveal tag="p" delay={240} className="text-body font-semibold text-content-inverse-muted">
-          {content.note}
+        <Reveal tag="ul" delay={240} className="flex flex-wrap gap-x-5 gap-y-2 text-small font-semibold text-content-inverse-muted">
+          {content.assurances.map((item) => (
+            <li key={item} className="flex items-center gap-2">
+              <CheckIcon className="size-4 text-primary" />
+              {item}
+            </li>
+          ))}
         </Reveal>
       </div>
 

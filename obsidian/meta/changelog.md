@@ -1,6 +1,6 @@
 ---
 tags: [meta, changelog]
-updated: 2026-09-11
+updated: 2026-09-12
 ---
 
 # Changelog
@@ -13,6 +13,29 @@ dependency, a new route or section, a convention bent, a bug whose cause is wort
 remembering. Routine commits do not need an entry.
 
 For *why* the conventions are what they are, see [[decisions-log]].
+
+---
+
+## 2026-09-12 — Real copy, testimonials and figures; the lead form is a popup
+
+The wireframe's template text is gone. `src/data/mocks/home.ts` now carries
+written German copy for every block — pain points, three benefits with bullet
+points, a comparison against five alternatives, three steps with durations,
+six FAQ answers, a closing argument. **All figures and the three testimonials
+are invented for the draft** and marked as such at the top of the file.
+
+**Changed**
+- The two wireframe "Social Proof" blocks became `sections/testimonials`
+  (three quote cards under the rating) and `sections/numbers` (four big
+  figures on cards); the strip under the hero shows four key figures.
+- The lead form left the closing band. `components/lead/lead-modal` is a
+  react-spring dialog mounted once in `views/home`; `ButtonLink` turns into a
+  button that opens it whenever its href is `#anfrage` (`LEAD_HREF`), so
+  every CTA on the page — header, hero, sections, footer — opens the popup.
+  Escape and the backdrop close it, Lenis pauses while it is up, focus
+  returns to the opener. `components/lead/lead-form` moved with it.
+- Hero: the "friction" line is three check-marked assurances; steps carry a
+  duration chip and a body; benefits and the pain block carry point lists.
 
 ---
 

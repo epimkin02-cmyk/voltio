@@ -18,17 +18,18 @@ treatment comes from the brand reference, not from the frame.
 |-------|------|------------------|-------|
 | Navigation | `1:22` | `views/home/header` → `SiteHeader` | 64px bar: inline SVG logo (`ui/logo`), four section links (ours — the frame has none), phone (`1:36`) + CTA (`1:38`) |
 | Hero | `1:39` | `views/home/hero` → `Hero` | Copy left (`1:41`); right half is the cut-out 3D car on a glowing floor with three floating trust cards (rating, Ø 5 days, best price). **The lead form (`1:64`) moved to the closing section** at the client's request. Holds the `h1` (`1:46`) |
-| Proof strip | `1:66` | `sections/proof-strip` | 81 tall grey band, "SOCIAL PROOF #2" (`1:69`) |
+| Proof strip | `1:66` | `sections/proof-strip` | Grey band, four key figures (the frame's "SOCIAL PROOF #2", `1:69`) |
 | Pain | `1:70` | `sections/pain` | Headline `1:78`, body `1:79`, CTA `1:82`, media slot `1:83` (574×534) |
-| Social proof | `1:85` | `sections/social-proof` (`social-proof-1`) | Heading `1:89`, box `1:92` (1200×311), CTA `1:95`. Angled mint band |
+| Testimonials | `1:85` | `sections/testimonials` | The frame's first social-proof block (`1:89`/`1:92`/`1:95`) as rating + three quote cards. Angled mint band |
 | Benefit 1 | `1:96` | `sections/benefit` (media start) | Eyebrow `1:103`, heading `1:104`, body `1:105`, CTA `1:108`, media `1:99` |
 | Benefit 2 | `1:109` | `sections/benefit` (media end) | `1:114` / `1:115` / `1:116` / `1:119`, media `1:121` |
 | Benefit 3 | `1:122` | `sections/benefit` (media start) | `1:129` / `1:130` / `1:131` / `1:134`, media `1:125` |
-| Social proof | `1:135` | `sections/social-proof` (`social-proof-2`) | Same composition as `1:85` |
+| Numbers | `1:135` | `sections/numbers` | The frame's second social-proof block as four big figures on cards |
 | Comparison | `1:146` | `sections/comparison` | Heading `1:150`, CTA `1:153`, rows `1:159`–`1:171`, columns `1:177`–`1:205`. Tick pattern is the frame's; brand column lifted |
 | Steps | `1:313` | `sections/steps` | Heading `1:317`, three steps `1:320`–`1:324` as illustration + number + title (Transiett's "How does it work"), CTA `1:327`. Angled mint band |
 | FAQ | `1:328` | `sections/faq` + `faq-item` | Heading `1:332`, rows `1:338`–`1:373`, drawn collapsed — answers are stand-ins |
-| Urgency | `1:376` | `sections/urgency` | Heading `1:380`, body `1:381`; the lead form (`1:64`) sits beside them, `id="anfrage"`, where every CTA lands. Deep-green band, as Transiett's closing block |
+| Urgency | `1:376` | `sections/urgency` | Heading `1:380`, body `1:381`, one button (`1:384`) that opens the lead popup. Deep-green band, as Transiett's closing block |
+| Lead popup | `1:64` | `components/lead/lead-modal` + `lead-form` | The frame's hero form, as a dialog every CTA opens (`ButtonLink` with `href="#anfrage"`) |
 | Footer | `1:385` | `sections/footer` | The frame says only "Footer" (`1:389`); built with brand, phone, CTA, legal links |
 
 ## Assets

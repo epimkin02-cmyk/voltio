@@ -25,6 +25,7 @@ export interface TrustCard {
 
 export interface LeadFormContent {
   heading: string;
+  intro: string;
   fields: {
     vehicle: string;
     year: string;
@@ -38,31 +39,56 @@ export interface LeadFormContent {
   success: string;
   error: string;
   privacy: string;
+  close: string;
 }
 
 export interface HeroContent {
   rating: { score: string; stars: number; count: string };
-  title: [string, string];
+  title: string;
   bullets: string[];
   cta: Link;
-  note: string;
+  /** Friction reducers under the button: short, comma-free assurances. */
+  assurances: string[];
   /** The 3D-rendered car on the right, cut out on transparency. */
   car?: ImageAsset;
   /** Floating cards around the car — the page's trust signals. */
   trust: TrustCard[];
 }
 
+export interface Stat {
+  figure: string;
+  label: string;
+}
+
 export interface PainContent {
   heading: string;
   body: string;
+  /** The "old way" pains, one line each. */
+  pains: string[];
   cta: Link;
-  media: string;
   image?: ImageAsset;
 }
 
-export interface SocialProofContent {
+export interface Testimonial {
+  quote: string;
+  name: string;
+  place: string;
+  vehicle: string;
+}
+
+export interface TestimonialsContent {
+  eyebrow: string;
   heading: string;
-  box: string;
+  rating: { score: string; count: string };
+  items: Testimonial[];
+  cta: Link;
+}
+
+export interface NumbersContent {
+  eyebrow: string;
+  heading: string;
+  body: string;
+  stats: Stat[];
   cta: Link;
 }
 
@@ -70,13 +96,15 @@ export interface BenefitContent {
   eyebrow: string;
   heading: string;
   body: string;
+  points: string[];
   cta: Link;
-  media: { strong: string; rest: string };
   image?: ImageAsset;
 }
 
 export interface ComparisonContent {
+  eyebrow: string;
   heading: string;
+  body: string;
   cta: Link;
   brand: string;
   competitors: string[];
@@ -85,10 +113,13 @@ export interface ComparisonContent {
 
 export interface StepItem {
   title: string;
+  body: string;
+  duration: string;
   image?: ImageAsset;
 }
 
 export interface StepsContent {
+  eyebrow: string;
   heading: string;
   items: StepItem[];
   cta: Link;
@@ -96,6 +127,7 @@ export interface StepsContent {
 
 export interface FaqContent {
   heading: string;
+  body: string;
   items: { question: string; answer: string }[];
   image?: ImageAsset;
 }
@@ -104,12 +136,14 @@ export interface UrgencyContent {
   heading: string;
   body: string;
   cta: Link;
-  form: LeadFormContent;
+  assurances: string[];
 }
 
 export interface FooterContent {
   brand: string;
+  tagline: string;
   phone: Link;
+  email: Link;
   cta: Link;
   legal: Link[];
   copyright: string;
@@ -118,13 +152,15 @@ export interface FooterContent {
 export interface HomeContent {
   header: HeaderContent;
   hero: HeroContent;
-  proofStrip: string;
+  stats: Stat[];
   pain: PainContent;
-  socialProof: SocialProofContent;
+  testimonials: TestimonialsContent;
   benefits: BenefitContent[];
+  numbers: NumbersContent;
   comparison: ComparisonContent;
   steps: StepsContent;
   faq: FaqContent;
   urgency: UrgencyContent;
+  leadForm: LeadFormContent;
   footer: FooterContent;
 }

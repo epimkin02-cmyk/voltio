@@ -4,7 +4,7 @@ import { useId, useState, type FormEvent } from "react";
 
 import { apiFetch } from "@/lib/api-client";
 
-import type { LeadFormContent } from "../home.types";
+import type { LeadFormContent } from "@/views/home/home.types";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -12,12 +12,19 @@ const FIELD =
   "h-12 w-full rounded-control border border-line bg-surface px-4 text-body text-content placeholder:text-content-faint transition duration-[var(--duration-fast)] ease-entrance hover:border-primary focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/25";
 
 /**
- * The hero's lead form (wireframe 1:64). A real form rather than the frame's
- * picture of one: it posts to `/api/contact`, which validates and forwards to
- * `CONTACT_ENDPOINT` when that is configured.
+ * The lead form (wireframe 1:64), shown inside the lead popup. It posts to
+ * `/api/contact`, which validates and forwards to `CONTACT_ENDPOINT` when
+ * that is configured.
  */
-export const LeadForm = ({ content }: { content: LeadFormContent }) => {
+export interface LeadFormProps {
+  content: LeadFormContent;
+  /** Id for the heading, so a dialog can label itself with it. */
+  titleId?: string;
+}
+
+export const LeadForm = ({ content, titleId }: LeadFormProps) => {
   const id = useId();
+  const headingId = titleId ?? `${id}-heading`;
   const [status, setStatus] = useState<Status>("idle");
 
   const field = (name: keyof LeadFormContent["fields"]) => `${id}-${name}`;
@@ -43,14 +50,14 @@ export const LeadForm = ({ content }: { content: LeadFormContent }) => {
     <form
       onSubmit={onSubmit}
       className="flex flex-col gap-4"
-      aria-labelledby={`${id}-heading`}
+      aria-labelledby={headingId}
     >
-      <h2
-        id={`${id}-heading`}
-        className="text-title font-semibold leading-snug text-content"
-      >
-        {content.heading}
-      </h2>
+      <div className="flex flex-col gap-2 pr-10">
+        <h2 id={headingId} className="text-title font-semibold leading-snug text-content">
+          {content.heading}
+        </h2>
+        <p className="text-body leading-normal text-content-muted">{content.intro}</p>
+      </div>
 
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="sm:col-span-2">

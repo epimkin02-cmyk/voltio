@@ -1,5 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import type { ReactNode } from "react";
+
+import { useLeadModal } from "@/components/lead/lead-modal-store";
 
 import { ArrowIcon } from "./icons";
 
@@ -16,8 +20,11 @@ export interface ButtonLinkProps {
   className?: string;
 }
 
+/** The one href that opens the lead popup instead of navigating. */
+export const LEAD_HREF = "#anfrage";
+
 const BASE =
-  "group inline-flex items-center justify-center gap-3 rounded-control font-display font-semibold leading-none whitespace-nowrap transition duration-[var(--duration-normal)] ease-entrance focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+  "group inline-flex cursor-pointer items-center justify-center gap-3 rounded-control font-display font-semibold leading-none whitespace-nowrap transition duration-[var(--duration-normal)] ease-entrance focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
 
 const VARIANTS: Record<ButtonVariant, string> = {
   primary:
@@ -34,9 +41,9 @@ const SIZES: Record<ButtonSize, string> = {
 };
 
 /**
- * The page's one call to action, as a link. Hover is a CSS transition on
- * token timing — a two-state colour and a 2px lift, the narrow exception to
- * the springs-only rule (ADR-0014).
+ * The page's call to action. Pointed at `LEAD_HREF` it is a button that opens
+ * the lead popup; any other href is a plain link. Hover is a CSS transition
+ * on token timing — the narrow exception to the springs-only rule (ADR-0014).
  */
 export const ButtonLink = ({
   href,
@@ -45,11 +52,28 @@ export const ButtonLink = ({
   size = "md",
   arrow = false,
   className = "",
-}: ButtonLinkProps) => (
-  <Link href={href} className={`${BASE} ${VARIANTS[variant]} ${SIZES[size]} ${className}`}>
-    <span>{children}</span>
-    {arrow && (
-      <ArrowIcon className="size-5 shrink-0 transition-transform duration-[var(--duration-normal)] ease-entrance group-hover:translate-x-1" />
-    )}
-  </Link>
-);
+}: ButtonLinkProps) => {
+  const openModal = useLeadModal((s) => s.openModal);
+  const classes = `${BASE} ${VARIANTS[variant]} ${SIZES[size]} ${className}`;
+  const inner = (
+    <>
+      <span>{children}</span>
+      {arrow && (
+        <ArrowIcon className="size-5 shrink-0 transition-transform duration-[var(--duration-normal)] ease-entrance group-hover:translate-x-1" />
+      )}
+    </>
+  );
+
+  if (href === LEAD_HREF) {
+    return (
+      <button type="button" onClick={openModal} className={classes}>
+        {inner}
+      </button>
+    );
+  }
+  return (
+    <Link href={href} className={classes}>
+      {inner}
+    </Link>
+  );
+};

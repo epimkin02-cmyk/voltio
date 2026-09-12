@@ -1,4 +1,5 @@
 import { ButtonLink } from "@/components/ui/button";
+import { CheckIcon } from "@/components/ui/icons";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { PlaceholderBox } from "@/components/ui/placeholder-box";
 import { Reveal } from "@/components/ui/reveal";
@@ -24,8 +25,7 @@ export const Benefit = ({ content, index, mediaSide }: BenefitProps) => {
           className={mediaSide === "start" ? "lg:order-1" : "lg:order-2"}
         >
           <PlaceholderBox wedge image={content.image}>
-            <strong className="font-semibold text-content">{content.media.strong}</strong>
-            {content.media.rest}
+            {content.heading}
           </PlaceholderBox>
         </Reveal>
         <div className={`flex flex-col gap-5 ${mediaSide === "start" ? "lg:order-2" : "lg:order-1"}`}>
@@ -37,6 +37,16 @@ export const Benefit = ({ content, index, mediaSide }: BenefitProps) => {
           </Reveal>
           <Reveal tag="p" delay={80} className="text-body-lg leading-relaxed text-content-muted">
             {content.body}
+          </Reveal>
+          <Reveal tag="ul" delay={110} className="flex flex-col gap-2.5">
+            {content.points.map((point) => (
+              <li key={point} className="flex items-start gap-3 text-body-lg text-content">
+                <span className="mt-1 grid size-5 shrink-0 place-items-center rounded-pill bg-surface-tint text-primary">
+                  <CheckIcon className="size-3" />
+                </span>
+                {point}
+              </li>
+            ))}
           </Reveal>
           <Reveal delay={140} className="pt-2">
             <ButtonLink href={content.cta.href} arrow>
