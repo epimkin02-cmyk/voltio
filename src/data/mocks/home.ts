@@ -27,7 +27,7 @@ export const homeContent: HomeContent = {
   },
 
   hero: {
-    rating: { score: "5,0", stars: 5, count: "Lies unsere 776 Bewertungen", href: "#" },
+    rating: { score: "5,0", stars: 5, count: "Lies unsere 776 Bewertungen", href: "#bewertungen" },
     // Three 8-second clips (Kling 3.0, 16:9): a drone follows a white Model Y
     // along an alpine pass, the car stops at a viewpoint and the driver steps
     // out of the left door, then a low tracking shot on a tree-lined country
@@ -350,7 +350,7 @@ export const homeContent: HomeContent = {
   footer: {
     brand: "VOLTIO",
     tagline: "Der Ankaufservice für Elektroautos in Deutschland, Österreich und der Schweiz. Bestpreis, Abholung und Auszahlung aus einer Hand.",
-    rating: { score: "5,0", label: "Lies unsere 776 Bewertungen", href: "#" },
+    rating: { score: "5,0", label: "Lies unsere 776 Bewertungen", href: "#bewertungen" },
     phone: { label: "0800 555 20 20", href: "tel:+498005552020" },
     email: { label: "hallo@voltio.de", href: "mailto:hallo@voltio.de" },
     cta: { label: "Fahrzeug bewerten", href: "#anfrage" },
@@ -358,10 +358,10 @@ export const homeContent: HomeContent = {
       {
         title: "Unternehmen",
         links: [
-          { label: "Über uns", href: "#" },
-          { label: "Kontakt", href: "#" },
-          { label: "Impressum", href: "#" },
-          { label: "Datenschutz", href: "#" },
+          { label: "Über uns", href: "#zahlen" },
+          { label: "Kontakt", href: "#anfrage" },
+          { label: "Impressum", href: "/impressum" },
+          { label: "Datenschutz", href: "/datenschutz" },
           { label: "Cookie-Einstellungen", href: "#cookies" },
         ],
       },
@@ -385,9 +385,10 @@ export const homeContent: HomeContent = {
       ],
     },
     social: [
-      { name: "instagram", href: "#" },
-      { name: "facebook", href: "#" },
-      { name: "linkedin", href: "#" },
+      // TODO(voltio): profile URLs — an entry with an empty href is not rendered.
+      { name: "instagram", href: "" },
+      { name: "facebook", href: "" },
+      { name: "linkedin", href: "" },
     ],
     copyright: "© 2026 VOLTIO. Alle Rechte vorbehalten.",
     watermark: { src: "/assets/images/footer-lineup.jpg", alt: "", width: 2400, height: 1350 },

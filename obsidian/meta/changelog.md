@@ -16,6 +16,31 @@ For *why* the conventions are what they are, see [[decisions-log]].
 
 ---
 
+## 2026-09-12 (6) — Finishing pass: no dead links, mobile menu, legal pages, real icons
+
+**Fixed**
+- Every `href="#"` is gone. Rating links go to `#bewertungen`, "Über uns"
+  to `#zahlen`, "Kontakt" opens the lead popup, "Cookie-Einstellungen" opens
+  the cookie preferences (`ui/smart-link` handles both virtual targets),
+  Impressum and Datenschutz are pages. Social entries without a URL are not
+  rendered. Section anchors are written `/#id`, so they work from any route.
+- The template's ARTEFAKT favicons, app icons, `manifest.json`,
+  `browserconfig.xml` and Open Graph image are replaced with Voltio's (icon
+  rendered from the wordmark's V, OG card from the hero poster).
+- `siteConfig.url` falls back to `VERCEL_PROJECT_PRODUCTION_URL`, so
+  canonical URLs and the share image resolve on Vercel without env setup.
+- Footer watermark uses `fill` (was a next/image aspect warning).
+
+**Added**
+- Mobile menu in `header/site-header`: section links, phone and CTA drop
+  from the bar on a spring below `lg`; closes on link, Escape, or resize.
+- `/impressum` and `/datenschutz` (`views/legal`, copy in
+  `data/mocks/legal.ts` — bracketed values are placeholders to fill).
+- FAQPage JSON-LD from the FAQ content; a honeypot field on the lead form
+  that the endpoint drops silently.
+
+---
+
 ## 2026-09-12 (5) — Three coherent hero scenes, one cut for every screen
 
 **Changed**

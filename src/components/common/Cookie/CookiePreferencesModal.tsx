@@ -139,7 +139,7 @@ export const CookiePreferencesModal = () => {
             Wähle aus, welche Cookie-Kategorien wir verwenden dürfen. Du kannst das
             jederzeit ändern. Mehr in der{" "}
             <Link
-              href="#"
+              href="/datenschutz"
               target="_blank"
               rel="noopener noreferrer"
               className="text-foreground underline underline-offset-2"

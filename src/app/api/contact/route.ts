@@ -15,10 +15,13 @@ const leadSchema = z.object({
   name: z.string().trim().min(1).max(100),
   email: z.email(),
   phone: z.string().trim().max(40).optional().or(z.literal("")),
+  /** Honeypot: a field no person sees. Bots fill it; we then say thanks and drop the lead. */
+  website: z.string().max(200).optional().or(z.literal("")),
 });
 
 export const POST = handle(async (req) => {
-  const input = leadSchema.parse(await req.json());
+  const { website, ...input } = leadSchema.parse(await req.json());
+  if (website) return { received: true };
 
   const { CONTACT_ENDPOINT } = getServerEnv();
 

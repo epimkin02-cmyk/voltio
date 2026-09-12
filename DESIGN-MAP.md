@@ -16,7 +16,7 @@ treatment comes from the brand reference, not from the frame.
 
 | Block | Node | View / component | Notes |
 |-------|------|------------------|-------|
-| Navigation | `1:22` | `views/home/header` → `SiteHeader` | 64px bar: inline SVG logo (`ui/logo`), four section links (ours — the frame has none), phone (`1:36`) + CTA (`1:38`) |
+| Navigation | `1:22` | `views/home/header` → `SiteHeader` | 64px bar: inline SVG logo (`ui/logo`), four section links (ours — the frame has none), phone (`1:36`) + CTA (`1:38`); below `lg` a spring-animated menu with the same links |
 | Hero | `1:39` | `views/home/hero` → `Hero` + `HeroVideo` | Transiett's hero: two cross-fading drone clips full-bleed (`public/assets/video/`), copy left on a green wash, rating card bottom-right, one promise card above it. Holds the `h1` (`1:46`) |
 | Brands | — (Transiett's "Most popular brands") | `sections/brands` | Logo tiles as CSS masks over `public/assets/brands/*.svg`; parallax illustration left |
 | Categories | — (Transiett's "Key Categories") | `sections/categories` | Scroll-driven real EV cut-outs, one per lane, `public/assets/cars/`; label cards with front views; sticky stage |
@@ -32,6 +32,7 @@ treatment comes from the brand reference, not from the frame.
 | FAQ | `1:328` | `sections/faq` + `faq-item` | Heading `1:332`, rows `1:338`–`1:373`, drawn collapsed — answers are stand-ins |
 | Urgency | `1:376` | `sections/urgency` | Heading `1:380`, body `1:381`, one button (`1:384`) that opens the lead popup. Deep-green band, as Transiett's closing block |
 | Lead popup | `1:64` | `components/lead/lead-modal` + `lead-form` | The frame's hero form, as a dialog every CTA opens (`ButtonLink` with `href="#anfrage"`) |
+| Impressum / Datenschutz | — | `views/legal` → `LegalView` | Reading column between the site header and footer; copy in `data/mocks/legal.ts` |
 | Footer | `1:385` | `sections/footer` | Transiett's footer: watermark lineup (`images/footer-lineup.jpg`), brand + rating, link columns, hours, social |
 
 ## Assets

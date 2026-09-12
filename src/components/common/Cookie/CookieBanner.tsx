@@ -44,7 +44,7 @@ export const CookieBanner = () => {
         <p className="text-sm leading-relaxed text-foreground/70">
           Wir nutzen Cookies, damit die Seite funktioniert und wir verstehen, wie sie genutzt wird. Alle akzeptieren, nur notwendige zulassen oder einzeln auswählen. Mehr in der{" "}
           <Link
-            href="#"
+            href="/datenschutz"
             className="underline underline-offset-2 hover:text-foreground/70"
           >
             Datenschutzerklärung

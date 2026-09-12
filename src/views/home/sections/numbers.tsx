@@ -13,7 +13,7 @@ const HEADING_ID = "numbers-heading";
  * "in numbers": four big figures on cards.
  */
 export const Numbers = ({ content }: { content: NumbersContent }) => (
-  <section aria-labelledby={HEADING_ID} className="slant-y bg-surface-tint py-24 sm:py-28 lg:py-32">
+  <section id="zahlen" aria-labelledby={HEADING_ID} className="slant-y scroll-mt-16 bg-surface-tint py-24 sm:py-28 lg:py-32">
     <div className="mx-auto flex w-full max-w-[75rem] flex-col items-center gap-12 px-5 sm:px-8">
       <Reveal className="flex flex-col items-center gap-4">
         <Eyebrow>{content.eyebrow}</Eyebrow>

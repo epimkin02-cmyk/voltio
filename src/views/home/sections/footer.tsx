@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { ButtonLink } from "@/components/ui/button";
+import { SmartLink } from "@/components/ui/smart-link";
 import { PhoneIcon, StarIcon } from "@/components/ui/icons";
 import { Logo } from "@/components/ui/logo";
 
@@ -37,10 +38,9 @@ export const SiteFooter = ({ content }: { content: FooterContent }) => (
         <Image
           src={content.watermark.src}
           alt=""
-          width={content.watermark.width}
-          height={content.watermark.height}
+          fill
           sizes="100vw"
-          className="absolute inset-x-0 bottom-0 h-full w-full object-cover object-bottom opacity-25 mix-blend-luminosity [mask-image:linear-gradient(180deg,transparent_0%,black_45%,black_100%)]"
+          className="object-cover object-bottom opacity-25 mix-blend-luminosity [mask-image:linear-gradient(180deg,transparent_0%,black_45%,black_100%)]"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,var(--surface-deep)_0%,transparent_30%,transparent_70%,var(--surface-deep)_100%)] opacity-70" />
       </div>
@@ -57,7 +57,7 @@ export const SiteFooter = ({ content }: { content: FooterContent }) => (
             <Logo tone="light" />
           </Link>
           <p className="text-body leading-relaxed text-content-inverse-muted">{content.tagline}</p>
-          <a
+          <SmartLink
             href={content.rating.href}
             className="flex flex-wrap items-center gap-2 text-body font-semibold hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-content-inverse"
           >
@@ -68,7 +68,7 @@ export const SiteFooter = ({ content }: { content: FooterContent }) => (
               ))}
             </span>
             <span className="underline underline-offset-4">{content.rating.label}</span>
-          </a>
+          </SmartLink>
           <div className="flex flex-col gap-2 pt-2">
             <a href={content.phone.href} className="flex items-center gap-2 font-display text-body-lg font-semibold hover:text-primary">
               <PhoneIcon className="size-5" />
@@ -86,12 +86,12 @@ export const SiteFooter = ({ content }: { content: FooterContent }) => (
             <ul className="flex flex-col gap-2.5">
               {column.links.map((link) => (
                 <li key={link.label}>
-                  <Link
+                  <SmartLink
                     href={link.href}
                     className="text-body text-content-inverse-muted underline-offset-4 transition duration-[var(--duration-fast)] ease-entrance hover:text-content-inverse hover:underline"
                   >
                     {link.label}
-                  </Link>
+                  </SmartLink>
                 </li>
               ))}
             </ul>
@@ -116,8 +116,10 @@ export const SiteFooter = ({ content }: { content: FooterContent }) => (
 
       <div className="flex flex-col gap-6 border-t border-line-inverse pt-6 sm:flex-row sm:items-center sm:justify-between">
         <p className="text-small text-content-inverse-muted">{content.copyright}</p>
+        {/* Profiles without a URL yet are simply not rendered — a dead
+            icon would be a link to nowhere. */}
         <ul className="flex gap-3">
-          {content.social.map((item) => (
+          {content.social.filter((item) => item.href).map((item) => (
             <li key={item.name}>
               <a
                 href={item.href}

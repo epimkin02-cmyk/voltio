@@ -1,6 +1,7 @@
 import { Float } from "@/components/animation/float";
 import { Spring } from "@/components/animation/springs/spring";
 import { ButtonLink } from "@/components/ui/button";
+import { SmartLink } from "@/components/ui/smart-link";
 import { CheckIcon, StarIcon } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
 
@@ -89,14 +90,14 @@ export const Hero = ({ content }: { content: HeroContent }) => (
           </Spring>
         )}
         <Spring mode="once" from={{ opacity: 0, y: 16 }} to={{ opacity: 1, y: 0 }} delayIn={500} config={{ tension: 200, friction: 22 }}>
-          <a
+          <SmartLink
             href={content.rating.href}
             className="flex items-center gap-3 rounded-card bg-surface-deep/70 px-5 py-4 text-content-inverse shadow-float ring-1 ring-line-inverse backdrop-blur transition duration-[var(--duration-fast)] ease-entrance hover:bg-surface-deep/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-content-inverse"
           >
             <span className="font-display text-title font-bold">{content.rating.score}</span>
             <Stars count={content.rating.stars} />
             <span className="text-body font-semibold underline underline-offset-4">{content.rating.count}</span>
-          </a>
+          </SmartLink>
         </Spring>
       </div>
     </div>

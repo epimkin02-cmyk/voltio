@@ -59,6 +59,17 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
         <p className="text-body leading-normal text-content-muted">{content.intro}</p>
       </div>
 
+      {/* Honeypot — off-screen, skipped by tabbing and screen readers; only
+          bots fill it, and the endpoint drops those submissions quietly. */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute -left-[9999px] h-0 w-0 opacity-0"
+      />
+
       <div className="grid gap-3 sm:grid-cols-2">
         <label className="sm:col-span-2">
           <span className="sr-only">{content.fields.vehicle}</span>
