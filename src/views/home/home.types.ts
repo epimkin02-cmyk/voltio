@@ -67,6 +67,8 @@ export interface PainContent {
   pains: string[];
   cta: Link;
   image?: ImageAsset;
+  /** A flat illustration floating beside the photograph, on its own depth. */
+  illustration?: ImageAsset;
 }
 
 export interface Testimonial {
@@ -149,10 +151,51 @@ export interface FooterContent {
   copyright: string;
 }
 
+export interface Brand {
+  name: string;
+  /** File under /assets/brands, used as a CSS mask so it takes any colour. */
+  slug: string;
+}
+
+export interface BrandsContent {
+  eyebrow: string;
+  heading: string;
+  body: string;
+  brands: Brand[];
+  more: string;
+  image?: ImageAsset;
+}
+
+export interface CategoryCar {
+  name: string;
+  image: ImageAsset;
+  /** Relative speed on scroll; 1 is the lane's base speed. */
+  speed: number;
+}
+
+export interface CategoryLane {
+  title: string;
+  body: string;
+  chips: string[];
+  /** Which edge the cars enter from. */
+  from: "left" | "right";
+  cars: CategoryCar[];
+}
+
+export interface CategoriesContent {
+  eyebrow: string;
+  heading: string;
+  body: string;
+  lanes: CategoryLane[];
+  cta: Link;
+}
+
 export interface HomeContent {
   header: HeaderContent;
   hero: HeroContent;
   stats: Stat[];
+  brands: BrandsContent;
+  categories: CategoriesContent;
   pain: PainContent;
   testimonials: TestimonialsContent;
   benefits: BenefitContent[];

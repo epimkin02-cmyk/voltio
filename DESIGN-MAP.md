@@ -18,6 +18,8 @@ treatment comes from the brand reference, not from the frame.
 |-------|------|------------------|-------|
 | Navigation | `1:22` | `views/home/header` → `SiteHeader` | 64px bar: inline SVG logo (`ui/logo`), four section links (ours — the frame has none), phone (`1:36`) + CTA (`1:38`) |
 | Hero | `1:39` | `views/home/hero` → `Hero` | Copy left (`1:41`); right half is the cut-out 3D car on a glowing floor with three floating trust cards (rating, Ø 5 days, best price). **The lead form (`1:64`) moved to the closing section** at the client's request. Holds the `h1` (`1:46`) |
+| Brands | — (Transiett's "Most popular brands") | `sections/brands` | Logo tiles as CSS masks over `public/assets/brands/*.svg`; parallax illustration left |
+| Categories | — (Transiett's "Key Categories") | `sections/categories` | Scroll-driven convoy of real EV cut-outs, `public/assets/cars/`; two lanes, label cards, sticky stage |
 | Proof strip | `1:66` | `sections/proof-strip` | Grey band, four key figures (the frame's "SOCIAL PROOF #2", `1:69`) |
 | Pain | `1:70` | `sections/pain` | Headline `1:78`, body `1:79`, CTA `1:82`, media slot `1:83` (574×534) |
 | Testimonials | `1:85` | `sections/testimonials` | The frame's first social-proof block (`1:89`/`1:92`/`1:95`) as rating + three quote cards. Angled mint band |

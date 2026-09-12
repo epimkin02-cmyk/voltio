@@ -1,5 +1,8 @@
 import Image from "next/image";
 
+import { Float } from "@/components/animation/float";
+import { Spring } from "@/components/animation/springs/spring";
+
 import { ButtonLink } from "@/components/ui/button";
 import { CheckIcon, StarIcon } from "@/components/ui/icons";
 import { Reveal } from "@/components/ui/reveal";
@@ -86,7 +89,7 @@ export const Hero = ({ content }: { content: HeroContent }) => (
       </div>
 
       {content.car && (
-        <Reveal delay={150} className="relative mx-auto w-full max-w-[44rem] lg:max-w-none">
+        <div className="relative mx-auto w-full max-w-[44rem] lg:max-w-none">
           {/* The stage: a soft green glow and a contact shadow under the car. */}
           <div
             aria-hidden
@@ -96,30 +99,51 @@ export const Hero = ({ content }: { content: HeroContent }) => (
             aria-hidden
             className="absolute inset-x-[15%] bottom-[10%] h-[10%] rounded-[50%] bg-scrim blur-2xl"
           />
-          <Image
-            src={content.car.src}
-            alt={content.car.alt}
-            width={content.car.width}
-            height={content.car.height}
-            priority
-            sizes="(min-width: 1024px) 44rem, 100vw"
-            className="relative w-full drop-shadow-[0_40px_50px_rgb(0_0_0/0.5)] lg:translate-x-6 lg:scale-110"
-          />
-
-          {content.trust[0] && (
-            <Card
-              card={content.trust[0]}
-              stars={content.rating.stars}
-              className="absolute top-[6%] left-0 sm:left-[2%]"
+          {/* The car drives in from the right on load — a long, soft spring
+              with a little overshoot, so it settles like something rolling to
+              a stop rather than snapping into place. */}
+          <Spring
+            mode="once"
+            from={{ x: 320, opacity: 0 }}
+            to={{ x: 0, opacity: 1 }}
+            delayIn={150}
+            config={{ tension: 60, friction: 18 }}
+            className="relative"
+          >
+            <Image
+              src={content.car.src}
+              alt={content.car.alt}
+              width={content.car.width}
+              height={content.car.height}
+              priority
+              sizes="(min-width: 1024px) 44rem, 100vw"
+              className="relative w-full drop-shadow-[0_40px_50px_rgb(0_0_0/0.5)] lg:translate-x-6 lg:scale-110"
             />
+          </Spring>
+
+          {/* The cards pop in after the car has parked, then hover. */}
+          {content.trust[0] && (
+            <Spring mode="once" from={{ opacity: 0, scale: 0.8, y: 12 }} to={{ opacity: 1, scale: 1, y: 0 }} delayIn={900} config={{ tension: 220, friction: 18 }} className="absolute top-[6%] left-0 sm:left-[2%]">
+              <Float amplitude={5}>
+                <Card card={content.trust[0]} stars={content.rating.stars} className="" />
+              </Float>
+            </Spring>
           )}
           {content.trust[1] && (
-            <Card card={content.trust[1]} className="absolute right-0 bottom-[8%] sm:right-[2%]" />
+            <Spring mode="once" from={{ opacity: 0, scale: 0.8, y: 12 }} to={{ opacity: 1, scale: 1, y: 0 }} delayIn={1050} config={{ tension: 220, friction: 18 }} className="absolute right-0 bottom-[8%] sm:right-[2%]">
+              <Float amplitude={6} delay={600}>
+                <Card card={content.trust[1]} className="" />
+              </Float>
+            </Spring>
           )}
           {content.trust[2] && (
-            <Card card={content.trust[2]} className="absolute bottom-[-2%] left-[4%] max-sm:hidden" />
+            <Spring mode="once" from={{ opacity: 0, scale: 0.8, y: 12 }} to={{ opacity: 1, scale: 1, y: 0 }} delayIn={1200} config={{ tension: 220, friction: 18 }} className="absolute bottom-[-2%] left-[4%] max-sm:hidden">
+              <Float amplitude={4} delay={1200}>
+                <Card card={content.trust[2]} className="" />
+              </Float>
+            </Spring>
           )}
-        </Reveal>
+        </div>
       )}
     </div>
   </section>

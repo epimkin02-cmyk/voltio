@@ -1,3 +1,6 @@
+import Image from "next/image";
+
+import { Parallax } from "@/components/animation/parallax";
 import { ButtonLink } from "@/components/ui/button";
 import { CrossIcon } from "@/components/ui/icons";
 import { PlaceholderBox } from "@/components/ui/placeholder-box";
@@ -35,10 +38,26 @@ export const Pain = ({ content }: { content: PainContent }) => (
           </ButtonLink>
         </Reveal>
       </div>
-      <Reveal delay={120}>
+      <Reveal delay={120} className="relative">
         <PlaceholderBox wedge image={content.image}>
           {content.heading}
         </PlaceholderBox>
+        {/* The illustration hangs off the photo's corner on its own depth:
+            it drifts faster than the page, so the two read as layers. */}
+        {content.illustration && (
+          <Parallax distance={-90} distanceX={-30} className="absolute -bottom-10 -left-10 w-[46%] max-lg:hidden">
+            <div className="rounded-card bg-surface p-3 shadow-float">
+              <Image
+                src={content.illustration.src}
+                alt={content.illustration.alt}
+                width={content.illustration.width}
+                height={content.illustration.height}
+                sizes="16rem"
+                className="w-full rounded-control object-contain"
+              />
+            </div>
+          </Parallax>
+        )}
       </Reveal>
     </div>
   </section>

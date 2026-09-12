@@ -5,6 +5,8 @@ import { LeadModal } from "@/components/lead/lead-modal";
 import { SiteHeader } from "./header/site-header";
 import { Hero } from "./hero/hero";
 import { Benefit } from "./sections/benefit";
+import { Brands } from "./sections/brands";
+import { Categories } from "./sections/categories";
 import { Comparison } from "./sections/comparison";
 import { Faq } from "./sections/faq";
 import { SiteFooter } from "./sections/footer";
@@ -35,6 +37,8 @@ export const HomeView = () => (
     <main id="main">
       <Hero content={homeContent.hero} />
       <ProofStrip stats={homeContent.stats} />
+      <Brands content={homeContent.brands} />
+      <Categories content={homeContent.categories} />
       <Pain content={homeContent.pain} />
       <Testimonials content={homeContent.testimonials} />
       {homeContent.benefits.map((benefit, index) => (

@@ -16,6 +16,33 @@ For *why* the conventions are what they are, see [[decisions-log]].
 
 ---
 
+## 2026-09-12 (2) — Logo in the word, real EVs on a scroll-driven road, brand tiles, motion
+
+**Changed**
+- `ui/logo` — the V-with-bolt is now the first letter of the wordmark
+  ("V⚡OLTIO"), not a mark beside it.
+- New `sections/brands` — Transiett's "popular brands" block: heading and a
+  parallax illustration left, twenty logo tiles right on a mint wedge. Logos
+  are monochrome SVGs from Simple Icons (`public/assets/brands/`), drawn as
+  CSS masks over `currentColor`; Mercedes and BYD are hand-drawn stand-ins.
+- New `sections/categories` — two lanes of cut-out real EVs (Tesla Model Y,
+  Mercedes EQE, BMW i4, Audi Q4 e-tron, Hyundai Ioniq 5, BYD Seal; VW ID.
+  Buzz, Mercedes eVito) driving in from opposite edges on the section's
+  scroll progress (`useProgressTrigger` → one spring, each car at its own
+  speed), with a sliding dashed road line and a label card the traffic passes
+  behind. The stage is sticky inside a 190svh section so the drive has room.
+  Copy states plainly that cars **and** vans/transporters are bought.
+- Motion: `animation/parallax` (scroll depth), `animation/float` (endless
+  bob), `ui/count-up` (figures run up on reveal). The hero car drives in on
+  load and its trust cards pop and hover; the header grows a shadow once
+  scrolled; cards lift on hover.
+- Two more illustrations (`ill-savings`, `ill-handshake`), one under the
+  brands heading, one hanging off the pain photograph on its own parallax.
+
+**Assets** — eight EV renders (gpt_image_2, cut out) in `public/assets/cars/`.
+
+---
+
 ## 2026-09-12 — Real copy, testimonials and figures; the lead form is a popup
 
 The wireframe's template text is gone. `src/data/mocks/home.ts` now carries

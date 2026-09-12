@@ -38,7 +38,7 @@ export const Testimonials = ({ content }: { content: TestimonialsContent }) => (
             tag="li"
             key={item.name}
             delay={80 + index * 90}
-            className="flex flex-col gap-5 rounded-card border border-line-soft bg-surface p-7 shadow-card"
+            className="flex flex-col gap-5 rounded-card border border-line-soft bg-surface p-7 shadow-card transition duration-[var(--duration-normal)] ease-entrance hover:-translate-y-1 hover:shadow-float"
           >
             <span className="flex items-center gap-0.5 text-star" aria-label="5 von 5 Sternen">
               {Array.from({ length: 5 }, (_, i) => (

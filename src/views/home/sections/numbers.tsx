@@ -1,4 +1,5 @@
 import { ButtonLink } from "@/components/ui/button";
+import { CountUp } from "@/components/ui/count-up";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -28,11 +29,12 @@ export const Numbers = ({ content }: { content: NumbersContent }) => (
             tag="li"
             key={stat.label}
             delay={80 + index * 70}
-            className="flex flex-col gap-3 rounded-card border border-line-soft bg-surface p-7 shadow-card"
+            className="flex flex-col gap-3 rounded-card border border-line-soft bg-surface p-7 shadow-card transition duration-[var(--duration-normal)] ease-entrance hover:-translate-y-1 hover:shadow-float"
           >
-            <span className="font-display text-display-compact font-bold leading-none tracking-display text-primary-deep">
-              {stat.figure}
-            </span>
+            <CountUp
+              figure={stat.figure}
+              className="font-display text-display-compact font-bold leading-none tracking-display text-primary-deep"
+            />
             <span className="text-body-lg leading-snug text-content-muted">{stat.label}</span>
           </Reveal>
         ))}

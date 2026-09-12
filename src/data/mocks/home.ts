@@ -56,6 +56,69 @@ export const homeContent: HomeContent = {
     { figure: "100 %", label: "kostenlos und unverbindlich" },
   ],
 
+  brands: {
+    eyebrow: "ALLE MARKEN",
+    heading: "Wir kaufen jedes Elektroauto an. Egal, welches Logo vorne drauf ist.",
+    body: "Vom Tesla bis zum Dacia Spring, vom Firmen-Transporter bis zum Kleinwagen: Wenn es rein elektrisch fährt, machen wir dir ein Angebot. Das sind die Marken, die wir am häufigsten kaufen.",
+    brands: [
+      { name: "Tesla", slug: "tesla" },
+      { name: "Mercedes-Benz", slug: "mercedes" },
+      { name: "BMW", slug: "bmw" },
+      { name: "Audi", slug: "audi" },
+      { name: "Volkswagen", slug: "volkswagen" },
+      { name: "Hyundai", slug: "hyundai" },
+      { name: "Kia", slug: "kia" },
+      { name: "BYD", slug: "byd" },
+      { name: "Porsche", slug: "porsche" },
+      { name: "Polestar", slug: "polestar" },
+      { name: "Škoda", slug: "skoda" },
+      { name: "Volvo", slug: "volvo" },
+      { name: "Renault", slug: "renault" },
+      { name: "Nissan", slug: "nissan" },
+      { name: "MG", slug: "mg" },
+      { name: "Opel", slug: "opel" },
+      { name: "Peugeot", slug: "peugeot" },
+      { name: "Mini", slug: "mini" },
+      { name: "smart", slug: "smart" },
+      { name: "Fiat", slug: "fiat" },
+    ],
+    more: "… und jede weitere Marke mit Elektroantrieb.",
+    image: { src: "/assets/images/ill-savings.jpg", alt: "", width: 1200, height: 797 },
+  },
+
+  categories: {
+    eyebrow: "PKW UND TRANSPORTER",
+    heading: "Wir kaufen alles, was elektrisch fährt. Vom Kleinwagen bis zum Transporter.",
+    body: "Privatwagen, Firmenwagen, Leasingrückläufer oder die ganze Flotte: Unsere Käufer suchen jede Klasse. Scroll weiter und schau, was bei uns täglich vom Hof rollt.",
+    lanes: [
+      {
+        title: "Pkw",
+        body: "Kompakt, Limousine, SUV oder Coupé. Jedes Alter ab 2017, jede Laufleistung.",
+        chips: ["Model 3 & Y", "ID.3 & ID.4", "EQE & EQS", "i4 & iX", "Ioniq 5 & 6", "Q4 e-tron", "Seal & Atto 3"],
+        from: "left",
+        cars: [
+          { name: "Tesla Model Y", image: { src: "/assets/cars/tesla.png", alt: "Tesla Model Y", width: 1400, height: 514 }, speed: 1 },
+          { name: "Mercedes-Benz EQE", image: { src: "/assets/cars/mercedes.png", alt: "Mercedes-Benz EQE", width: 1400, height: 514 }, speed: 1.08 },
+          { name: "BMW i4", image: { src: "/assets/cars/bmw.png", alt: "BMW i4", width: 1400, height: 514 }, speed: 0.94 },
+          { name: "Audi Q4 e-tron", image: { src: "/assets/cars/audi.png", alt: "Audi Q4 e-tron", width: 1400, height: 514 }, speed: 1.04 },
+          { name: "Hyundai Ioniq 5", image: { src: "/assets/cars/hyundai.png", alt: "Hyundai Ioniq 5", width: 1400, height: 514 }, speed: 0.98 },
+          { name: "BYD Seal", image: { src: "/assets/cars/byd.png", alt: "BYD Seal", width: 1400, height: 514 }, speed: 1.06 },
+        ],
+      },
+      {
+        title: "Transporter & Vans",
+        body: "eVito, ID. Buzz, e-Transit, Zoe Van und Co. Auch mit Firmenbeschriftung, auch als Flotte.",
+        chips: ["ID. Buzz", "eVito & EQV", "e-Transit", "e-Expert", "Zoe Van"],
+        from: "right",
+        cars: [
+          { name: "VW ID. Buzz", image: { src: "/assets/cars/idbuzz.png", alt: "Volkswagen ID. Buzz", width: 1400, height: 514 }, speed: 1 },
+          { name: "Mercedes-Benz eVito", image: { src: "/assets/cars/evito.png", alt: "Mercedes-Benz eVito", width: 1400, height: 514 }, speed: 1.1 },
+        ],
+      },
+    ],
+    cta: CTA,
+  },
+
   pain: {
     heading: "Privat verkaufen kostet Nerven. Und am Ende meistens Geld.",
     body: "Wer sein Elektroauto selbst inseriert, kennt das Spiel: Dutzende Nachrichten, Preisdrücker, Probefahrten ohne Ergebnis. Und beim Händler um die Ecke bekommst du ein Angebot, das den Akku vorsichtshalber schlecht rechnet. Voltio macht es anders: Wir holen für dein Fahrzeug Gebote von über 1.200 geprüften Käufern im gesamten DACH-Raum ein und geben dir den besten Preis als festes Angebot.",
@@ -71,6 +134,7 @@ export const homeContent: HomeContent = {
       width: 1600,
       height: 1600,
     },
+    illustration: { src: "/assets/images/ill-handshake.jpg", alt: "", width: 1200, height: 797 },
   },
 
   testimonials: {
