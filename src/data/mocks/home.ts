@@ -28,11 +28,15 @@ export const homeContent: HomeContent = {
 
   hero: {
     rating: { score: "5,0", stars: 5, count: "Lies unsere 776 Bewertungen", href: "#" },
-    // Two 8-second clips (Kling 3.0): a drone follows a white Model Y through
-    // alpine serpentines, then it pulls into a lay-by and the door opens.
+    // Three 8-second clips (Kling 3.0, 16:9): a drone follows a white Model Y
+    // along an alpine pass, the car stops at a viewpoint and the driver steps
+    // out of the left door, then a low tracking shot on a tree-lined country
+    // road. Phones crop each frame to its `focus`. Plates are blank — a
+    // generated plate cannot carry the Voltio mark reliably.
     video: [
-      { src: "/assets/video/hero-serpentine.mp4", poster: "/assets/video/hero-serpentine.jpg" },
-      { src: "/assets/video/hero-stop.mp4", poster: "/assets/video/hero-stop.jpg" },
+      { src: "/assets/video/hero-pass.mp4", poster: "/assets/video/hero-pass.jpg", focus: "50% 60%" },
+      { src: "/assets/video/hero-stop.mp4", poster: "/assets/video/hero-stop.jpg", focus: "72% 55%" },
+      { src: "/assets/video/hero-road.mp4", poster: "/assets/video/hero-road.jpg", focus: "50% 55%" },
     ],
     title: "Dein Elektroauto in Ø\u00a05\u00a0Tagen zum Bestpreis verkauft",
     bullets: [

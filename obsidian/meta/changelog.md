@@ -16,6 +16,25 @@ For *why* the conventions are what they are, see [[decisions-log]].
 
 ---
 
+## 2026-09-12 (5) — Three coherent hero scenes, one cut for every screen
+
+**Changed**
+- The hero footage is three clips now (Kling 3.0 Pro, 16:9): a drone
+  following the Model Y along a single alpine pass road; the car stopping at
+  a viewpoint and the driver stepping out of the **left** door (European
+  left-hand drive); a low tracking shot on a tree-lined Bavarian road, plate
+  blank. The earlier serpentine take is gone — its road made no sense.
+- Phones do not get separate portrait clips: 9:16 renders came back rotated
+  or badly composed. Each scene carries a `focus` (CSS `object-position`)
+  instead, so the portrait crop of the 16:9 frame keeps the car in view.
+- The hero button is the plain light button again; `variant="hero"` stays
+  in `ui/button` for later.
+
+**Assets** — `public/assets/video/hero-pass`, `hero-stop`, `hero-road`
+(`.mp4` ~4 MB each at 4.2 Mbit/s, `.jpg` posters). `hero-serpentine` removed.
+
+---
+
 ## 2026-09-12 (4) — Footage in the hero, the hero button
 
 **Changed**

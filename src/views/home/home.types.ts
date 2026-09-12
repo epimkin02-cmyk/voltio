@@ -43,9 +43,16 @@ export interface LeadFormContent {
 }
 
 export interface VideoScene {
+  /** 16:9 clip. */
   src: string;
   /** Still shown before the clip plays (and for reduced motion). */
   poster: string;
+  /**
+   * Where the subject sits, as a CSS `object-position`. A portrait phone
+   * shows only the middle third of a 16:9 frame, so each scene names the
+   * spot the crop must keep — the car, not the scenery.
+   */
+  focus: string;
 }
 
 export interface HeroContent {

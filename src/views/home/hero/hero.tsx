@@ -63,7 +63,7 @@ export const Hero = ({ content }: { content: HeroContent }) => (
         </Reveal>
 
         <Reveal delay={180} className="pt-3">
-          <ButtonLink href={content.cta.href} variant="hero" size="lg" arrow>
+          <ButtonLink href={content.cta.href} variant="light" size="lg" arrow>
             {content.cta.label}
           </ButtonLink>
         </Reveal>

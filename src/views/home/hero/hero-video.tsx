@@ -23,10 +23,10 @@ export const HeroVideo = ({ scenes }: { scenes: VideoScene[] }) => {
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setStill(mq.matches);
-    const onChange = () => setStill(mq.matches);
-    mq.addEventListener("change", onChange);
-    return () => mq.removeEventListener("change", onChange);
+    const sync = () => setStill(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
   }, []);
 
   useEffect(() => {
@@ -36,6 +36,13 @@ export const HeroVideo = ({ scenes }: { scenes: VideoScene[] }) => {
     switching.current = false;
     current.currentTime = 0;
     void current.play().catch(() => setStill(true));
+    // Park every other clip at its first frame so the next fade starts clean.
+    refs.current.forEach((v, i) => {
+      if (v && i !== active) {
+        v.pause();
+        v.currentTime = 0;
+      }
+    });
 
     const onTime = () => {
       if (switching.current) return;
@@ -58,6 +65,7 @@ export const HeroVideo = ({ scenes }: { scenes: VideoScene[] }) => {
           }}
           src={scene.src}
           poster={scene.poster}
+          style={{ objectPosition: scene.focus }}
           muted
           playsInline
           preload={i === 0 ? "auto" : "metadata"}
