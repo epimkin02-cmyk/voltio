@@ -16,6 +16,26 @@ For *why* the conventions are what they are, see [[decisions-log]].
 
 ---
 
+## 2026-09-12 (3) — One car per lane with front views, the Voltio column, the Transiett footer
+
+**Changed**
+- `sections/categories` — one cut-out per lane (Model Y from the left, ID.
+  Buzz from the right); each label card carries a front-view cut-out riding
+  its top edge. The sticky stage is auto-height (a viewport-tall centred box
+  overflowed above the section and hid the eyebrow under the brands wedge);
+  the card is anchored to the road, the traffic in a clipped inner layer.
+- `sections/comparison` — the Voltio column is a raised deep-green pillar
+  with the wordmark at its head, white check discs and an "Empfohlen" badge.
+- `sections/footer` — Transiett's footer: deep-green ground with a faded,
+  luminosity-blended lineup of EVs as a watermark, brand + rating + contact,
+  two link columns, opening hours, social marks, legal line.
+
+**Assets** — `cars/tesla-front.png`, `cars/idbuzz-front.png` (front views,
+cut out), `images/footer-lineup.jpg` (dark studio lineup, generic cars).
+Two more front views (Mercedes EQS, BMW iX) were generated and are unused.
+
+---
+
 ## 2026-09-12 (2) — Logo in the word, real EVs on a scroll-driven road, brand tiles, motion
 
 **Changed**

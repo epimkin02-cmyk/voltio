@@ -19,7 +19,7 @@ const HEADING_ID = "categories-heading";
  * Cars start fully off-screen on their side and cross the whole stage, so a
  * reader who keeps scrolling sees them keep driving.
  */
-const TRAVEL = 1.15;
+const TRAVEL = 1.3;
 
 /**
  * Transiett's "Key Categories", pushed further: two lanes of real cut-out
@@ -48,7 +48,10 @@ export const Categories = ({ content }: { content: CategoriesContent }) => {
       aria-labelledby={HEADING_ID}
       className="relative scroll-mt-16 lg:h-[190svh]"
     >
-      <div className="flex flex-col gap-12 overflow-hidden py-16 sm:py-20 lg:sticky lg:top-16 lg:h-[calc(100svh-4rem)] lg:justify-center lg:py-0">
+      {/* Sticky, but auto-height: a fixed viewport-tall box with centred
+          content overflowed above the section on short screens and hid the
+          eyebrow under the previous block's wedge. */}
+      <div className="flex flex-col gap-12 overflow-hidden py-16 sm:py-20 lg:sticky lg:top-16 lg:py-14">
         <div className="mx-auto flex w-full max-w-[75rem] flex-col items-center gap-4 px-5 text-center sm:px-8">
           <Reveal className="flex flex-col items-center gap-4">
             <Eyebrow>{content.eyebrow}</Eyebrow>
@@ -59,7 +62,7 @@ export const Categories = ({ content }: { content: CategoriesContent }) => {
           </Reveal>
         </div>
 
-        <div className="flex flex-col gap-10 lg:gap-4">
+        <div className="flex flex-col gap-10 lg:mt-10 lg:gap-8">
           {content.lanes.map((lane, index) => (
             <Lane key={lane.title} lane={lane} progress={interpolatedProgress} index={index} />
           ))}
@@ -106,63 +109,75 @@ const Lane = ({ lane, progress, index }: LaneProps) => {
 
   return (
     <div className="relative">
-      {/* The label card sits on the far side of the road; the convoy passes
-          behind it. Below `lg` it stacks above the road instead. */}
-      <div className={`relative z-10 mx-auto flex w-full max-w-[81.5rem] px-5 sm:px-8 ${side}`}>
-        <Reveal
-          delay={60 + index * 80}
-          className="flex w-full max-w-[22rem] flex-col gap-3 rounded-card bg-surface/90 p-5 shadow-card backdrop-blur max-lg:mb-4 lg:absolute lg:top-1/2 lg:-translate-y-1/2"
-        >
-          <h3 className="font-display text-title font-semibold text-content">{lane.title}</h3>
-          <p className="text-body leading-relaxed text-content-muted">{lane.body}</p>
-          <ul className="flex flex-wrap gap-2">
-            {lane.chips.map((chip) => (
-              <li key={chip} className="rounded-pill bg-surface-tint px-3 py-1 text-fine font-semibold text-primary-deep">
-                {chip}
-              </li>
-            ))}
-          </ul>
-        </Reveal>
-      </div>
-
-      {/* The road: full-bleed, clipped, with a dashed centre line that slides
-          with the traffic so the ground moves too. */}
-      <div className="relative h-36 w-full overflow-hidden sm:h-44 lg:h-52">
-        <div aria-hidden className="absolute inset-x-0 bottom-3 h-px bg-line" />
-        <animated.div
-          aria-hidden
-          className="absolute inset-x-0 bottom-3 h-px bg-[repeating-linear-gradient(90deg,var(--primary)_0_2.5rem,transparent_2.5rem_5rem)] opacity-40"
-          style={{ backgroundPositionX: progress.to((p) => `${dir * p * -900}px`) }}
-        />
-        {lane.cars.map((car, i) => (
-          <animated.div
-            key={car.name}
-            className={`absolute bottom-3 h-[calc(100%-1.5rem)] ${lane.from === "left" ? "left-0" : "right-0"}`}
-            style={{
-              transform: progress.to((p) => {
-                // Lane height → car width; the convoy starts fully off its
-                // edge, one car-and-gap behind the next, and the whole line
-                // drives across the viewport and out the other side.
-                const vw = vwRef.current;
-                const laneH = vw >= 1024 ? 184 : vw >= 640 ? 152 : 120;
-                const carW = laneH * CAR_ASPECT;
-                const pitch = carW * (1 + CONVOY_GAP);
-                const startX = -(carW + i * pitch);
-                const distance = (vw + lane.cars.length * pitch) * TRAVEL * car.speed;
-                return `translate3d(${dir * (startX + p * distance)}px, 0, 0)`;
-              }),
-            }}
+      {/* The road: full-bleed. The cars live in an inner clipped layer so
+          they enter and leave at the edges; the label card sits on the same
+          road, on the far side of the traffic, but outside the clip so its
+          front-view car can ride above the card's top edge. Below `lg` the
+          card stacks above the road instead. */}
+      <div className="relative w-full lg:h-64">
+        <div className={`relative z-10 mx-auto flex w-full max-w-[81.5rem] px-5 sm:px-8 lg:h-full lg:items-center ${side}`}>
+          <Reveal
+            delay={60 + index * 80}
+            className="relative mt-20 flex w-full max-w-[24rem] flex-col gap-3 rounded-card bg-surface/90 p-5 pt-6 shadow-card backdrop-blur max-lg:mb-4 lg:mt-0"
           >
-            <Image
-              src={car.image.src}
-              alt={car.image.alt}
-              width={car.image.width}
-              height={car.image.height}
-              sizes="(min-width: 1024px) 32rem, 50vw"
-              className="h-full w-auto max-w-none drop-shadow-[0_24px_24px_rgb(9_40_50/0.18)]"
-            />
-          </animated.div>
-        ))}
+            {lane.front && (
+              <Image
+                src={lane.front.src}
+                alt={lane.front.alt}
+                width={lane.front.width}
+                height={lane.front.height}
+                sizes="14rem"
+                className={`pointer-events-none absolute -top-16 w-44 drop-shadow-[0_18px_20px_rgb(9_40_50/0.25)] sm:-top-20 sm:w-52 ${
+                  lane.from === "left" ? "-left-4" : "-right-4"
+                }`}
+              />
+            )}
+            <h3 className={`font-display text-title font-semibold text-content ${lane.from === "left" ? "pl-44 sm:pl-48" : "pr-44 sm:pr-48"}`}>{lane.title}</h3>
+            <p className="text-body leading-relaxed text-content-muted">{lane.body}</p>
+            <ul className="flex flex-wrap gap-2">
+              {lane.chips.map((chip) => (
+                <li key={chip} className="rounded-pill bg-surface-tint px-3 py-1 text-fine font-semibold text-primary-deep">
+                  {chip}
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+
+        <div className="relative h-36 w-full overflow-hidden sm:h-44 lg:absolute lg:inset-0 lg:h-auto">
+          <div aria-hidden className="absolute inset-x-0 bottom-3 h-px bg-line" />
+          <animated.div
+            aria-hidden
+            className="absolute inset-x-0 bottom-3 h-px bg-[repeating-linear-gradient(90deg,var(--primary)_0_2.5rem,transparent_2.5rem_5rem)] opacity-40"
+            style={{ backgroundPositionX: progress.to((p) => `${dir * p * -900}px`) }}
+          />
+          {lane.cars.map((car, i) => (
+            <animated.div
+              key={car.name}
+              className={`absolute bottom-3 h-[calc(100%-1.5rem)] ${lane.from === "left" ? "left-0" : "right-0"}`}
+              style={{
+                transform: progress.to((p) => {
+                  const vw = vwRef.current;
+                  const laneH = vw >= 1024 ? 232 : vw >= 640 ? 152 : 120;
+                  const carW = laneH * CAR_ASPECT;
+                  const pitch = carW * (1 + CONVOY_GAP);
+                  const startX = -(carW + i * pitch);
+                  const distance = (vw + lane.cars.length * pitch) * TRAVEL * car.speed;
+                  return `translate3d(${dir * (startX + p * distance)}px, 0, 0)`;
+                }),
+              }}
+            >
+              <Image
+                src={car.image.src}
+                alt={car.image.alt}
+                width={car.image.width}
+                height={car.image.height}
+                sizes="(min-width: 1024px) 40rem, 50vw"
+                className="h-full w-auto max-w-none drop-shadow-[0_24px_24px_rgb(9_40_50/0.18)]"
+              />
+            </animated.div>
+          ))}
+        </div>
       </div>
     </div>
   );

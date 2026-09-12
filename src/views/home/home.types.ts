@@ -109,6 +109,7 @@ export interface ComparisonContent {
   body: string;
   cta: Link;
   brand: string;
+  badge: string;
   competitors: string[];
   rows: { label: string; values: boolean[] }[];
 }
@@ -141,14 +142,28 @@ export interface UrgencyContent {
   assurances: string[];
 }
 
+export interface FooterColumn {
+  title: string;
+  links: Link[];
+}
+
 export interface FooterContent {
   brand: string;
   tagline: string;
+  rating: { score: string; label: string; href: string };
   phone: Link;
   email: Link;
   cta: Link;
-  legal: Link[];
+  columns: FooterColumn[];
+  hours: { title: string; rows: { day: string; time: string }[] };
+  social: { name: "instagram" | "facebook" | "linkedin"; href: string }[];
   copyright: string;
+  /** Faded lineup behind the footer, as a watermark. */
+  watermark?: ImageAsset;
+}
+
+export interface ComparisonBadge {
+  label: string;
 }
 
 export interface Brand {
@@ -177,6 +192,8 @@ export interface CategoryLane {
   title: string;
   body: string;
   chips: string[];
+  /** Front-view cut-out shown on the lane's label card. */
+  front?: ImageAsset;
   /** Which edge the cars enter from. */
   from: "left" | "right";
   cars: CategoryCar[];

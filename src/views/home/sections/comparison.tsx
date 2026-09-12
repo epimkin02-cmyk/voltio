@@ -1,6 +1,7 @@
 import { ButtonLink } from "@/components/ui/button";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { CheckIcon, CrossIcon } from "@/components/ui/icons";
+import { Logo } from "@/components/ui/logo";
 import { Reveal } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
 
@@ -8,10 +9,14 @@ import type { ComparisonContent } from "../home.types";
 
 const HEADING_ID = "comparison-heading";
 
-const Mark = ({ yes }: { yes: boolean }) =>
+const Mark = ({ yes, brand = false }: { yes: boolean; brand?: boolean }) =>
   yes ? (
-    <span className="grid size-7 place-items-center rounded-pill bg-primary text-content-inverse">
-      <CheckIcon className="size-4" />
+    <span
+      className={`grid place-items-center rounded-pill ${
+        brand ? "size-9 bg-surface text-primary-deep shadow-card" : "size-7 bg-primary text-content-inverse"
+      }`}
+    >
+      <CheckIcon className={brand ? "size-5" : "size-4"} />
       <span className="sr-only">Ja</span>
     </span>
   ) : (
@@ -43,11 +48,18 @@ export const Comparison = ({ content }: { content: ComparisonContent }) => (
           <thead>
             <tr>
               <th scope="col" className="w-[13rem] pb-6 text-left" />
-              <th
-                scope="col"
-                className="rounded-t-card border border-b-0 border-primary/30 bg-surface-tint px-4 pt-8 pb-4 font-display text-small font-semibold text-primary-deep shadow-card"
-              >
-                {content.brand}
+              {/* The brand column is a raised deep-green pillar with the
+                  wordmark at its head and a badge above — the one column on
+                  the table that is drawn, not just filled. */}
+              <th scope="col" className="relative px-2 pt-10 pb-5">
+                <span className="absolute top-1 left-1/2 -translate-x-1/2 rounded-pill bg-star px-3 py-1 text-fine font-bold uppercase tracking-eyebrow text-content whitespace-nowrap">
+                  {content.badge}
+                </span>
+                <span className="absolute inset-x-0 top-6 bottom-0 rounded-t-card bg-[linear-gradient(180deg,var(--primary)_0%,var(--primary-deep)_100%)] shadow-float" aria-hidden />
+                <span className="relative flex justify-center pt-2">
+                  <Logo tone="light" className="scale-90" />
+                  <span className="sr-only">{content.brand}</span>
+                </span>
               </th>
               {content.competitors.map((name) => (
                 <th
@@ -76,16 +88,15 @@ export const Comparison = ({ content }: { content: ComparisonContent }) => (
                     return (
                       <td
                         key={colIndex}
-                        className={`border-t border-line-soft py-3 ${
+                        className={`py-3 ${
                           brand
-                            ? `border-x border-primary/30 bg-surface-tint ${
-                                last ? "rounded-b-card border-b pb-6" : ""
-                              }`
-                            : ""
+                            ? `relative bg-primary-deep ${last ? "rounded-b-card pb-7 shadow-float" : ""}`
+                            : "border-t border-line-soft"
                         }`}
                       >
-                        <div className="flex justify-center">
-                          <Mark yes={value} />
+                        {brand && <span aria-hidden className="absolute inset-x-4 top-0 h-px bg-line-inverse" />}
+                        <div className="relative flex justify-center">
+                          <Mark yes={value} brand={brand} />
                         </div>
                       </td>
                     );

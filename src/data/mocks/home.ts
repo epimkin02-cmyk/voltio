@@ -95,24 +95,20 @@ export const homeContent: HomeContent = {
         title: "Pkw",
         body: "Kompakt, Limousine, SUV oder Coupé. Jedes Alter ab 2017, jede Laufleistung.",
         chips: ["Model 3 & Y", "ID.3 & ID.4", "EQE & EQS", "i4 & iX", "Ioniq 5 & 6", "Q4 e-tron", "Seal & Atto 3"],
+        front: { src: "/assets/cars/tesla-front.png", alt: "Tesla Model Y von vorn", width: 1200, height: 686 },
         from: "left",
         cars: [
           { name: "Tesla Model Y", image: { src: "/assets/cars/tesla.png", alt: "Tesla Model Y", width: 1400, height: 514 }, speed: 1 },
-          { name: "Mercedes-Benz EQE", image: { src: "/assets/cars/mercedes.png", alt: "Mercedes-Benz EQE", width: 1400, height: 514 }, speed: 1.08 },
-          { name: "BMW i4", image: { src: "/assets/cars/bmw.png", alt: "BMW i4", width: 1400, height: 514 }, speed: 0.94 },
-          { name: "Audi Q4 e-tron", image: { src: "/assets/cars/audi.png", alt: "Audi Q4 e-tron", width: 1400, height: 514 }, speed: 1.04 },
-          { name: "Hyundai Ioniq 5", image: { src: "/assets/cars/hyundai.png", alt: "Hyundai Ioniq 5", width: 1400, height: 514 }, speed: 0.98 },
-          { name: "BYD Seal", image: { src: "/assets/cars/byd.png", alt: "BYD Seal", width: 1400, height: 514 }, speed: 1.06 },
         ],
       },
       {
         title: "Transporter & Vans",
         body: "eVito, ID. Buzz, e-Transit, Zoe Van und Co. Auch mit Firmenbeschriftung, auch als Flotte.",
         chips: ["ID. Buzz", "eVito & EQV", "e-Transit", "e-Expert", "Zoe Van"],
+        front: { src: "/assets/cars/idbuzz-front.png", alt: "VW ID. Buzz von vorn", width: 1200, height: 686 },
         from: "right",
         cars: [
           { name: "VW ID. Buzz", image: { src: "/assets/cars/idbuzz.png", alt: "Volkswagen ID. Buzz", width: 1400, height: 514 }, speed: 1 },
-          { name: "Mercedes-Benz eVito", image: { src: "/assets/cars/evito.png", alt: "Mercedes-Benz eVito", width: 1400, height: 514 }, speed: 1.1 },
         ],
       },
     ],
@@ -240,6 +236,7 @@ export const homeContent: HomeContent = {
     body: "Jeder Weg hat seinen Preis. Wir haben die fünf üblichen mit dem verglichen, was bei Voltio Standard ist.",
     cta: CTA,
     brand: "Voltio",
+    badge: "Empfohlen",
     competitors: [
       "Händler vor Ort",
       "Kleinanzeigen",
@@ -348,14 +345,47 @@ export const homeContent: HomeContent = {
 
   footer: {
     brand: "VOLTIO",
-    tagline: "Der Ankaufservice für Elektroautos in Deutschland, Österreich und der Schweiz.",
+    tagline: "Der Ankaufservice für Elektroautos in Deutschland, Österreich und der Schweiz. Bestpreis, Abholung und Auszahlung aus einer Hand.",
+    rating: { score: "5,0", label: "Lies unsere 776 Bewertungen", href: "#" },
     phone: { label: "0800 555 20 20", href: "tel:+498005552020" },
     email: { label: "hallo@voltio.de", href: "mailto:hallo@voltio.de" },
     cta: { label: "Fahrzeug bewerten", href: "#anfrage" },
-    legal: [
-      { label: "Impressum", href: "#" },
-      { label: "Datenschutz", href: "#" },
+    columns: [
+      {
+        title: "Unternehmen",
+        links: [
+          { label: "Über uns", href: "#" },
+          { label: "Kontakt", href: "#" },
+          { label: "Impressum", href: "#" },
+          { label: "Datenschutz", href: "#" },
+          { label: "Cookie-Einstellungen", href: "#cookies" },
+        ],
+      },
+      {
+        title: "Verkaufen",
+        links: [
+          { label: "Vorteile", href: "#vorteile" },
+          { label: "Marken & Modelle", href: "#kategorien" },
+          { label: "So funktioniert es", href: "#ablauf" },
+          { label: "Vergleich", href: "#vergleich" },
+          { label: "Häufige Fragen", href: "#faq" },
+        ],
+      },
     ],
-    copyright: "© 2026 VOLTIO",
+    hours: {
+      title: "Erreichbarkeit",
+      rows: [
+        { day: "Mo – Fr", time: "09:00 – 19:00" },
+        { day: "Samstag", time: "10:00 – 16:00" },
+        { day: "Sonntag", time: "geschlossen" },
+      ],
+    },
+    social: [
+      { name: "instagram", href: "#" },
+      { name: "facebook", href: "#" },
+      { name: "linkedin", href: "#" },
+    ],
+    copyright: "© 2026 VOLTIO. Alle Rechte vorbehalten.",
+    watermark: { src: "/assets/images/footer-lineup.jpg", alt: "", width: 2400, height: 1350 },
   },
 };
