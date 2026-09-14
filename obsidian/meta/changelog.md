@@ -16,6 +16,14 @@ For *why* the conventions are what they are, see [[decisions-log]].
 
 ---
 
+## 2026-09-14 (4) — Brands section unmounted
+
+`sections/brands` (the logo tiles) is no longer rendered; the component,
+its content and the logo SVGs stay in the repo so it can be put back with
+one line in `views/home/index.tsx`.
+
+---
+
 ## 2026-09-14 (3) — The hero on phones
 
 Below `lg` the hero stacks instead of layering: the photograph in a band at
