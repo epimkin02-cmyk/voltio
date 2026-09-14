@@ -121,13 +121,13 @@ export const homeContent: HomeContent = {
 
   pain: {
     heading: "Privat verkaufen kostet Nerven. Und am Ende meistens Geld.",
-    body: "Wer sein Elektroauto selbst inseriert, kennt das Spiel: Dutzende Nachrichten, Preisdrücker, Probefahrten ohne Ergebnis. Und beim Händler um die Ecke bekommst du ein Angebot, das den Akku vorsichtshalber schlecht rechnet. Voltio macht es anders: Wir holen für dein Fahrzeug Gebote von über 1.200 geprüften Käufern im gesamten DACH-Raum ein und geben dir den besten Preis als festes Angebot.",
+    body: "Wer sein Elektroauto selbst inseriert, kennt das Spiel: Dutzende Nachrichten, Preisdrücker, Probefahrten ohne Ergebnis. Und beim Händler um die Ecke bekommst du ein Angebot, mit dem du nicht zufrieden bist. Voltio macht es anders: Wir holen für dein Fahrzeug Gebote von über 1.200 geprüften Käufern im gesamten DACH-Raum ein und geben dir den besten Preis als festes Angebot.",
     pains: [
-      "Inserate, Anfragen und Besichtigungen fressen Wochen",
+      "Inserate, Anfragen und Besichtigungen kosten mehrere Wochen",
       "Händler vor Ort rechnen den Akku pauschal schlecht",
-      "Verkauf, Abmeldung und Zahlung liegen bei dir",
+      "Verhandlung, Verkauf und der Papierkram liegt bei dir",
     ],
-    cta: CTA,
+    cta: { label: "Kostenfreie Anfrage stellen", href: "#anfrage" },
     image: {
       src: "/assets/images/pain.jpg",
       alt: "Privatverkäufer sitzt frustriert vor Laptop mit Fahrzeuginseraten",
