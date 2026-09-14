@@ -63,7 +63,7 @@ export const homeContent: HomeContent = {
   brands: {
     eyebrow: "ALLE MARKEN",
     heading: "Wir kaufen jedes Elektroauto an. Egal, welches Logo vorne drauf ist.",
-    body: "Vom Tesla bis zum Dacia Spring, vom Firmen-Transporter bis zum Kleinwagen: Wenn es rein elektrisch fährt, machen wir dir ein Angebot. Das sind die Marken, die wir am häufigsten kaufen.",
+    body: "Vom Tesla bis zum Dacia Spring, vom Firmen-Transporter bis zum Kleinwagen: Wenn es elektrisch fährt, machen wir dir ein Angebot. Das sind die Marken, die wir am häufigsten kaufen.",
     brands: [
       { name: "Tesla", slug: "tesla" },
       { name: "Mercedes-Benz", slug: "mercedes" },
@@ -92,7 +92,7 @@ export const homeContent: HomeContent = {
 
   categories: {
     eyebrow: "PKW UND TRANSPORTER",
-    heading: "Wir kaufen alles, was elektrisch fährt. Vom Kleinwagen bis zum Transporter.",
+    heading: "Wir bekommen auf jedes Hybrid und Elektrofahrzeug die besten Konditionen in ganz Europa",
     body: "Privatwagen, Firmenwagen, Leasingrückläufer oder die ganze Flotte: Unsere Käufer suchen jede Klasse. Scroll weiter und schau, was bei uns täglich vom Hof rollt.",
     lanes: [
       {
