@@ -9,7 +9,10 @@ import { ApiError, handle } from "@/lib/api";
  * server-side so the site runs as-is in development.
  */
 const leadSchema = z.object({
-  vehicle: z.string().trim().min(1).max(120),
+  brand: z.string().trim().min(1).max(60),
+  /** Empty when the brand is "other" — the free-text field carries it then. */
+  model: z.string().trim().max(80).optional().or(z.literal("")),
+  vehicleOther: z.string().trim().max(120).optional().or(z.literal("")),
   year: z.string().trim().max(4).optional().or(z.literal("")),
   mileage: z.string().trim().max(12).optional().or(z.literal("")),
   name: z.string().trim().min(1).max(100),
@@ -20,8 +23,13 @@ const leadSchema = z.object({
 });
 
 export const POST = handle(async (req) => {
-  const { website, ...input } = leadSchema.parse(await req.json());
+  const { website, ...raw } = leadSchema.parse(await req.json());
   if (website) return { received: true };
+  // One readable line for the CRM, alongside the structured fields.
+  const input = {
+    ...raw,
+    vehicle: [raw.brand, raw.model, raw.vehicleOther].filter(Boolean).join(" · "),
+  };
 
   const { CONTACT_ENDPOINT } = getServerEnv();
 

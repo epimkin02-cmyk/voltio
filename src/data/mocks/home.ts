@@ -331,7 +331,9 @@ export const homeContent: HomeContent = {
     heading: "Kostenlose Bewertung anfragen",
     intro: "Zwei Minuten, keine Verpflichtung. Du bekommst innerhalb von 24 Stunden ein schriftliches Festpreisangebot.",
     fields: {
-      vehicle: "Marke & Modell",
+      brand: "Marke wählen",
+      model: "Modell wählen",
+      vehicleOther: "Marke & Modell eintragen",
       year: "Erstzulassung",
       mileage: "Kilometerstand",
       name: "Name",

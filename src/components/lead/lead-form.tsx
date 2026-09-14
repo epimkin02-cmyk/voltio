@@ -2,6 +2,8 @@
 
 import { useId, useState, type FormEvent } from "react";
 
+import { ChevronIcon } from "@/components/ui/icons";
+import { OTHER_BRAND, OTHER_MODEL, VEHICLE_BRANDS } from "@/data/vehicles";
 import { apiFetch } from "@/lib/api-client";
 
 import type { LeadFormContent } from "@/views/home/home.types";
@@ -9,12 +11,25 @@ import type { LeadFormContent } from "@/views/home/home.types";
 type Status = "idle" | "sending" | "sent" | "error";
 
 const FIELD =
-  "h-12 w-full rounded-control border border-line bg-surface px-4 text-body text-content placeholder:text-content-faint transition duration-[var(--duration-fast)] ease-entrance hover:border-primary focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/25";
+  "h-12 w-full rounded-control border border-line bg-surface px-4 text-body text-content placeholder:text-content-faint transition duration-[var(--duration-fast)] ease-entrance hover:border-primary focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/25 disabled:cursor-not-allowed disabled:opacity-60";
+
+/** A native select in the field's clothes: native for the phone's picker, styled to match. */
+const Select = ({
+  className = "",
+  ...props
+}: React.SelectHTMLAttributes<HTMLSelectElement>) => (
+  <span className="relative block">
+    <select {...props} className={`${FIELD} appearance-none pr-10 ${props.value === "" ? "text-content-faint" : ""} ${className}`} />
+    <ChevronIcon className="pointer-events-none absolute top-1/2 right-4 size-4 -translate-y-1/2 text-content-faint" />
+  </span>
+);
 
 /**
- * The lead form (wireframe 1:64), shown inside the lead popup. It posts to
- * `/api/contact`, which validates and forwards to `CONTACT_ENDPOINT` when
- * that is configured.
+ * The lead form (wireframe 1:64), shown inside the lead popup. Brand and
+ * model are two dependent selects fed by `data/vehicles` — every electric and
+ * plug-in hybrid model on the DACH market — with "Andere" on both levels
+ * opening a free-text field. It posts to `/api/contact`, which validates
+ * and forwards to `CONTACT_ENDPOINT` when that is configured.
  */
 export interface LeadFormProps {
   content: LeadFormContent;
@@ -26,8 +41,13 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
   const id = useId();
   const headingId = titleId ?? `${id}-heading`;
   const [status, setStatus] = useState<Status>("idle");
+  const [brand, setBrand] = useState("");
+  const [model, setModel] = useState("");
 
-  const field = (name: keyof LeadFormContent["fields"]) => `${id}-${name}`;
+  const field = (name: string) => `${id}-${name}`;
+  const models = VEHICLE_BRANDS.find((b) => b.name === brand)?.models ?? [];
+  const otherBrand = brand === OTHER_BRAND;
+  const needsFreeText = otherBrand || model === OTHER_MODEL;
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -41,6 +61,8 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
       });
       setStatus("sent");
       form.reset();
+      setBrand("");
+      setModel("");
     } catch {
       setStatus("error");
     }
@@ -71,17 +93,63 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
       />
 
       <div className="grid gap-3 sm:grid-cols-2">
-        <label className="sm:col-span-2">
-          <span className="sr-only">{content.fields.vehicle}</span>
-          <input
-            id={field("vehicle")}
-            name="vehicle"
+        <label>
+          <span className="sr-only">{content.fields.brand}</span>
+          <Select
+            id={field("brand")}
+            name="brand"
             required
-            autoComplete="off"
-            placeholder={content.fields.vehicle}
-            className={FIELD}
-          />
+            value={brand}
+            onChange={(e) => {
+              setBrand(e.target.value);
+              setModel("");
+            }}
+          >
+            <option value="" disabled>
+              {content.fields.brand}
+            </option>
+            {VEHICLE_BRANDS.map((b) => (
+              <option key={b.name} value={b.name}>
+                {b.name}
+              </option>
+            ))}
+            <option value={OTHER_BRAND}>{OTHER_BRAND}</option>
+          </Select>
         </label>
+        <label>
+          <span className="sr-only">{content.fields.model}</span>
+          <Select
+            id={field("model")}
+            name="model"
+            required={!otherBrand}
+            disabled={!brand || otherBrand}
+            value={otherBrand ? OTHER_MODEL : model}
+            onChange={(e) => setModel(e.target.value)}
+          >
+            <option value="" disabled>
+              {content.fields.model}
+            </option>
+            {models.map((m) => (
+              <option key={m} value={m}>
+                {m}
+              </option>
+            ))}
+            <option value={OTHER_MODEL}>{OTHER_MODEL}</option>
+          </Select>
+        </label>
+        {needsFreeText && (
+          <label className="sm:col-span-2">
+            <span className="sr-only">{content.fields.vehicleOther}</span>
+            <input
+              id={field("vehicleOther")}
+              name="vehicleOther"
+              required
+              autoComplete="off"
+              placeholder={content.fields.vehicleOther}
+              className={FIELD}
+            />
+          </label>
+        )}
         <label>
           <span className="sr-only">{content.fields.year}</span>
           <input

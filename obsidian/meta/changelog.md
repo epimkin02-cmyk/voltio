@@ -16,6 +16,19 @@ For *why* the conventions are what they are, see [[decisions-log]].
 
 ---
 
+## 2026-09-14 (2) — Brand and model selects in the lead form
+
+**Changed**
+- `components/lead/lead-form` — "Marke & Modell" is two dependent native
+  selects (native for the phone's picker, styled like the fields): the brand
+  first, then that brand's models. "Andere Marke" and "Anderes Modell" open a
+  free-text field. Fed by `src/data/vehicles.ts`, a catalogue of every
+  electric and plug-in hybrid model on the DACH market, by brand.
+- `api/contact` — schema takes `brand`, `model`, `vehicleOther`; the payload
+  still carries one readable `vehicle` line for the CRM, joined from them.
+
+---
+
 ## 2026-09-14 — Hero photograph, "Anfrage stellen", Hybrid in the headline
 
 **Changed** (client's list, in order)

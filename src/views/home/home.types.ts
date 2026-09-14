@@ -27,7 +27,10 @@ export interface LeadFormContent {
   heading: string;
   intro: string;
   fields: {
-    vehicle: string;
+    brand: string;
+    model: string;
+    /** Placeholder for the free-text field shown when brand or model is "other". */
+    vehicleOther: string;
     year: string;
     mileage: string;
     name: string;
