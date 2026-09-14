@@ -139,7 +139,7 @@ export const homeContent: HomeContent = {
 
   testimonials: {
     eyebrow: "DAS SAGEN VERKÄUFER",
-    heading: "776 Elektroautos verkauft. Und jedes Mal ohne Feilschen.",
+    heading: "Was 776 zufriedene Kunden sagen:",
     rating: { score: "5,0", count: "776 Bewertungen" },
     items: [
       {
@@ -164,20 +164,21 @@ export const homeContent: HomeContent = {
         vehicle: "Hyundai Ioniq 5, 2022",
       },
     ],
-    cta: CTA,
+    cta: { label: "Jetzt kostenfreie Anfrage stellen", href: "#anfrage" },
   },
 
   benefits: [
     {
+      intro: "So funktioniert es:",
       eyebrow: "BESTPREIS-GARANTIE",
-      heading: "Ein Angebot, das den ganzen Markt kennt",
-      body: "Statt drei Händlern in deiner Stadt fragen wir über 1.200 geprüfte Käufer in Deutschland, Österreich und der Schweiz. Elektroautos werden regional sehr unterschiedlich bewertet. Genau diesen Unterschied holen wir für dich heraus und geben ihn als festen Preis weiter.",
+      heading: "Wir übernehmen die Vergleichs-Arbeit. Du bekommst das beste Angebot im DACH-Raum",
+      body: "Statt bei vereinzelten Händlern anzufragen greifen wir bei Voltio auf unser Netzwerk aus über 1.200 geprüften Käufern zurück. Wir übernehmen die gesamte Vergleichs-Arbeit und garantieren dir innerhalb von 24 Stunden das beste Angebot am Markt.",
       points: [
         "Angebot innerhalb von 24 Stunden",
         "Festpreis, schriftlich und ohne Nachverhandlung",
         "Ø 1.900 € über dem besten lokalen Händlerangebot",
       ],
-      cta: CTA,
+      cta: { label: "Jetzt kostenfreie Anfrage stellen", href: "#anfrage" },
       image: {
         src: "/assets/images/benefit-1.jpg",
         alt: "Hände halten ein Smartphone mit mehreren Preisangeboten, im Hintergrund ein Elektroauto",

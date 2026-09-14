@@ -19,6 +19,14 @@ export const Benefit = ({ content, index, mediaSide }: BenefitProps) => {
   const headingId = `benefit-${index}-heading`;
   return (
     <section id={index === 1 ? "vorteile" : undefined} aria-labelledby={headingId} className="scroll-mt-16 py-12 sm:py-14 lg:py-16">
+      {content.intro && (
+        <Reveal
+          tag="h2"
+          className="mx-auto mb-12 w-full max-w-[75rem] px-5 text-center text-heading-compact font-semibold leading-tight tracking-display text-content sm:px-8 sm:text-heading lg:mb-16"
+        >
+          {content.intro}
+        </Reveal>
+      )}
       <div className="mx-auto grid w-full max-w-[75rem] items-center gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-[5.75rem]">
         <Reveal
           delay={100}

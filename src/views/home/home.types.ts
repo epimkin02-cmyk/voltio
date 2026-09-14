@@ -112,6 +112,8 @@ export interface NumbersContent {
 }
 
 export interface BenefitContent {
+  /** Optional centred heading above the block, introducing the run of benefits. */
+  intro?: string;
   eyebrow: string;
   heading: string;
   body: string;
