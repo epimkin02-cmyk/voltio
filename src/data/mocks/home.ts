@@ -171,8 +171,8 @@ export const homeContent: HomeContent = {
     {
       intro: "So funktioniert es:",
       eyebrow: "BESTPREIS-GARANTIE",
-      heading: "Wir übernehmen die Vergleichs-Arbeit. Du bekommst das beste Angebot im DACH-Raum",
-      body: "Statt bei vereinzelten Händlern anzufragen greifen wir bei Voltio auf unser Netzwerk aus über 1.200 geprüften Käufern zurück. Wir übernehmen die gesamte Vergleichs-Arbeit und garantieren dir innerhalb von 24 Stunden das beste Angebot am Markt.",
+      heading: "Wir übernehmen die Vergleicharbeit. Du bekommst das beste Angebot im DACH-Raum",
+      body: "Statt bei vereinzelten Händlern anzufragen greifen wir bei Voltio auf unser Netzwerk aus über 1.200 geprüften Käufern zurück. Wir übernehmen die gesamte Vergleicharbeit und garantieren dir innerhalb von 24 Stunden das beste Angebot am Markt.",
       points: [
         "Angebot innerhalb von 24 Stunden",
         "Festpreis, schriftlich und ohne Nachverhandlung",
@@ -188,14 +188,14 @@ export const homeContent: HomeContent = {
     },
     {
       eyebrow: "ALLES AUS EINER HAND",
-      heading: "Von der Bewertung bis zur Abholung vor deiner Haustür",
-      body: "Du musst nirgendwo hinfahren und niemanden treffen, den du nicht kennst. Unser Fahrer holt das Fahrzeug bei dir ab, prüft es vor Ort in 20 Minuten und nimmt die Papiere mit. Abmeldung, Kaufvertrag und Übergabeprotokoll erledigen wir.",
+      heading: "Wir bewerten dein Fahrzeug und holen es vor deiner Haustüre ab.",
+      body: "Du musst nirgendwo hinfahren und niemanden treffen, den du nicht kennst. Unser Fahrer holt das Fahrzeug bei dir ab, prüft es vor Ort in 20 Minuten und nimmt die Papiere mit. Kaufvertrag und Übergabeprotokoll übernehmen wir.",
       points: [
-        "Kostenlose Abholung in ganz DACH",
+        "Kostenlose Abholung in ganz Deutschland",
         "Sichtprüfung vor Ort, kein Werkstatttermin",
-        "Abmeldung und Kaufvertrag übernehmen wir",
+        "Kaufvertrag übernehmen wir",
       ],
-      cta: CTA,
+      cta: { label: "Jetzt kostenfreie Anfrage stellen", href: "#anfrage" },
       image: {
         src: "/assets/images/benefit-2.jpg",
         alt: "Elektroauto wird vor einem Wohnhaus auf einen Transporter geladen",
@@ -205,14 +205,14 @@ export const homeContent: HomeContent = {
     },
     {
       eyebrow: "SCHNELLE AUSZAHLUNG",
-      heading: "Geld auf dem Konto, bevor das Auto vom Hof ist",
-      body: "Die Überweisung geht bei der Übergabe raus, auf Wunsch per Echtzeitüberweisung. Im Schnitt vergehen von der Anfrage bis zum Geldeingang fünf Tage. Läuft noch eine Finanzierung, lösen wir sie direkt bei der Bank ab und zahlen dir die Differenz aus.",
+      heading: "In 5 Tagen hast du den Verkaufspreis auf deinem Wunschkonto.",
+      body: "Die Überweisung geht nach der Übergabe raus, auf Wunsch per Echtzeitüberweisung. Im Schnitt vergehen von der Anfrage bis zum Geldeingang fünf Tage. Läuft noch eine Finanzierung, lösen wir sie direkt bei der Bank ab und zahlen dir die Differenz aus.",
       points: [
-        "Zahlung bei Übergabe, auf Wunsch in Echtzeit",
+        "Zahlung nach der Übergabe, auf Wunsch in Echtzeit",
         "Ablösung von Finanzierung oder Leasing",
         "Kein Bargeld, keine Vorkasse, keine Wartezeit",
       ],
-      cta: CTA,
+      cta: { label: "Jetzt kostenfreie Anfrage stellen", href: "#anfrage" },
       image: {
         src: "/assets/images/benefit-3.jpg",
         alt: "Verkäufer mit Zahlungsbestätigung auf dem Smartphone bei der Schlüsselübergabe",
