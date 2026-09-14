@@ -225,23 +225,21 @@ export const homeContent: HomeContent = {
   numbers: {
     eyebrow: "VOLTIO IN ZAHLEN",
     heading: "Warum über 700 Verkäufer uns ihr Elektroauto anvertraut haben",
-    body: "Wir kaufen ausschließlich Elektrofahrzeuge. Deshalb wissen wir, was ein Akku mit 92 % State of Health wert ist, und deshalb kennen unsere Käufer den Unterschied auch.",
+    body: "Wir kaufen ausschließlich Hybrid und Elektrofahrzeuge. Deshalb wissen wir, was ein Akku mit 92 % State of Health wert ist, und deshalb kennen unsere Käufer den Unterschied auch.",
     stats: [
       { figure: "776", label: "verkaufte Elektroautos seit 2023" },
       { figure: "1.900 €", label: "durchschnittlich mehr als beim lokalen Händler" },
       { figure: "24 h", label: "bis zum schriftlichen Angebot" },
       { figure: "98 %", label: "würden Voltio weiterempfehlen" },
     ],
-    cta: CTA,
+    cta: { label: "In 2 Minuten kostenfreie Anfrage stellen", href: "#anfrage" },
   },
 
   comparison: {
     eyebrow: "DER VERGLEICH",
     heading: "Warum Voltio statt Portal, Händler oder Auktion?",
-    body: "Jeder Weg hat seinen Preis. Wir haben die fünf üblichen mit dem verglichen, was bei Voltio Standard ist.",
-    cta: CTA,
+    cta: { label: "In 2 Minuten kostenfreie Anfrage stellen", href: "#anfrage" },
     brand: "Voltio",
-    badge: "Empfohlen",
     competitors: [
       "Händler vor Ort",
       "Kleinanzeigen",
@@ -281,7 +279,7 @@ export const homeContent: HomeContent = {
         image: { src: "/assets/images/step-3.jpg", alt: "", width: 1200, height: 797 },
       },
     ],
-    cta: CTA,
+    cta: { label: "Kostenfreie Anfrage stellen", href: "#anfrage" },
   },
 
   faq: {
@@ -325,7 +323,7 @@ export const homeContent: HomeContent = {
   urgency: {
     heading: "Dein Elektroauto verliert jeden Monat an Wert. Dein Angebot nicht.",
     body: "Gebrauchte Elektroautos verlieren im Schnitt 1,5 % ihres Werts pro Monat. Wer heute anfragt, hat morgen ein Festpreisangebot, das sieben Tage gilt. Kostenlos, unverbindlich und ohne einen einzigen Besichtigungstermin.",
-    cta: { label: "Jetzt kostenlos bewerten lassen", href: "#anfrage" },
+    cta: { label: "Kostenfreie Anfrage stellen", href: "#anfrage" },
     assurances: ["Angebot in 24 Stunden", "7 Tage gültig", "Keine Verpflichtung"],
   },
 

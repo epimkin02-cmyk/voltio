@@ -40,7 +40,6 @@ export const Comparison = ({ content }: { content: ComparisonContent }) => (
         <SectionHeading id={HEADING_ID} align="center">
           {content.heading}
         </SectionHeading>
-        <p className="max-w-[40rem] text-center text-body-lg leading-relaxed text-content-muted">{content.body}</p>
       </Reveal>
 
       <Reveal delay={140} className="w-full overflow-x-auto pt-4 pb-6">
@@ -49,13 +48,10 @@ export const Comparison = ({ content }: { content: ComparisonContent }) => (
             <tr>
               <th scope="col" className="w-[13rem] pb-6 text-left" />
               {/* The brand column is a raised deep-green pillar with the
-                  wordmark at its head and a badge above — the one column on
-                  the table that is drawn, not just filled. */}
-              <th scope="col" className="relative px-2 pt-10 pb-5">
-                <span className="absolute top-1 left-1/2 -translate-x-1/2 rounded-pill bg-star px-3 py-1 text-fine font-bold uppercase tracking-eyebrow text-content whitespace-nowrap">
-                  {content.badge}
-                </span>
-                <span className="absolute inset-x-0 top-6 bottom-0 rounded-t-card bg-[linear-gradient(180deg,var(--primary)_0%,var(--primary-deep)_100%)] shadow-float" aria-hidden />
+                  wordmark at its head — the one column on the table that is
+                  drawn, not just filled. */}
+              <th scope="col" className="relative px-2 pt-6 pb-5">
+                <span className="absolute inset-x-0 top-0 bottom-0 rounded-t-card bg-[linear-gradient(180deg,var(--primary)_0%,var(--primary-deep)_100%)] shadow-float" aria-hidden />
                 <span className="relative flex justify-center pt-2">
                   <Logo tone="light" className="scale-90" />
                   <span className="sr-only">{content.brand}</span>

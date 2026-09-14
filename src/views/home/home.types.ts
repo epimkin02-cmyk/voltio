@@ -125,10 +125,8 @@ export interface BenefitContent {
 export interface ComparisonContent {
   eyebrow: string;
   heading: string;
-  body: string;
   cta: Link;
   brand: string;
-  badge: string;
   competitors: string[];
   rows: { label: string; values: boolean[] }[];
 }
