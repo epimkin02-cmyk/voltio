@@ -40,28 +40,39 @@ const Card = ({ card, className }: { card: TrustCard; className: string }) => (
  * beside them — with the copy on a dark gradient at the left and the rating
  * card pinned bottom-right, as Transiett pins theirs. The footage loop is
  * still wired: give `video` scenes and it plays instead. Holds the page's `h1`.
+ *
+ * **Below `lg` the picture and the copy are stacked, not layered.** Nine in
+ * ten visitors come on a phone, and there a portrait crop of a 16:9 frame
+ * under a full-height wash showed half a face behind the headline. So the
+ * photograph sits at the top in its own band, cropped to the handshake and
+ * fading into the green at its foot; the copy follows on solid green, the
+ * headline overlapping the fade; the rating is one compact row.
  */
 export const Hero = ({ content }: { content: HeroContent }) => (
-  <section aria-labelledby={TITLE_ID} className="relative overflow-hidden text-content-inverse">
-    {content.video?.length ? (
-      <HeroVideo scenes={content.video} />
-    ) : (
-      <Image
-        src={content.image.src}
-        alt={content.image.alt}
-        fill
-        priority
-        sizes="100vw"
-        style={{ objectPosition: content.image.focus }}
-        className="object-cover"
-      />
-    )}
-    {/* Legibility: a deep-green wash from the left where the copy sits, and a
-        vignette along the bottom under the cards. */}
-    <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,var(--surface-deep)_0%,rgb(12_40_29/0.85)_30%,rgb(12_40_29/0.35)_60%,rgb(12_40_29/0.15)_100%)]" />
-    <div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,transparent,rgb(12_40_29/0.7))]" />
+  <section aria-labelledby={TITLE_ID} className="relative overflow-hidden bg-surface-deep text-content-inverse">
+    <div className="relative h-[46svh] min-h-[17rem] max-h-[26rem] lg:absolute lg:inset-0 lg:h-auto lg:max-h-none lg:min-h-0">
+      {content.video?.length ? (
+        <HeroVideo scenes={content.video} />
+      ) : (
+        <Image
+          src={content.image.src}
+          alt={content.image.alt}
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectPosition: content.image.focus }}
+          className="object-cover"
+        />
+      )}
+      {/* Phone: the picture melts into the green band the copy sits on. */}
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-28 bg-[linear-gradient(180deg,transparent,var(--surface-deep))] lg:hidden" />
+    </div>
+    {/* Desktop legibility: a deep-green wash from the left where the copy
+        sits, and a vignette along the bottom under the cards. */}
+    <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,var(--surface-deep)_0%,rgb(12_40_29/0.85)_30%,rgb(12_40_29/0.35)_60%,rgb(12_40_29/0.15)_100%)] max-lg:hidden" />
+    <div aria-hidden className="absolute inset-x-0 bottom-0 h-40 bg-[linear-gradient(180deg,transparent,rgb(12_40_29/0.7))] max-lg:hidden" />
 
-    <div className="relative mx-auto flex min-h-[calc(100svh-4rem)] w-full max-w-[81.5rem] flex-col justify-center px-5 py-16 sm:px-8 lg:py-24">
+    <div className="relative mx-auto flex w-full max-w-[81.5rem] flex-col px-5 pt-0 pb-10 max-lg:-mt-14 sm:px-8 lg:min-h-[calc(100svh-4rem)] lg:justify-center lg:py-24">
       <div className="flex max-w-[38rem] flex-col gap-6">
         <Reveal tag="h1" id={TITLE_ID} delay={60} className="text-display-compact font-bold leading-tight tracking-display text-pretty sm:text-display">
           {content.title}
@@ -94,11 +105,13 @@ export const Hero = ({ content }: { content: HeroContent }) => (
         </Reveal>
       </div>
 
-      {/* The rating, pinned bottom-right on the footage, and one promise
-          card floating above it. */}
-      <div className="mt-12 flex flex-col items-start gap-4 lg:absolute lg:right-8 lg:bottom-10 lg:mt-0 lg:items-end">
+      {/* Desktop: the rating pinned bottom-right on the footage, one promise
+          card floating above it. Phone: the rating as one row under the
+          assurances, over a hairline; the promise card is skipped — it
+          repeats the third bullet. */}
+      <div className="mt-8 border-t border-line-inverse pt-6 lg:absolute lg:right-8 lg:bottom-10 lg:mt-0 lg:flex lg:flex-col lg:items-end lg:gap-4 lg:border-0 lg:pt-0">
         {content.trust[1] && (
-          <Spring mode="once" from={{ opacity: 0, y: 16, scale: 0.9 }} to={{ opacity: 1, y: 0, scale: 1 }} delayIn={700} config={{ tension: 220, friction: 20 }}>
+          <Spring mode="once" from={{ opacity: 0, y: 16, scale: 0.9 }} to={{ opacity: 1, y: 0, scale: 1 }} delayIn={700} config={{ tension: 220, friction: 20 }} className="max-lg:hidden">
             <Float amplitude={5}>
               <Card card={content.trust[1]} className="" />
             </Float>
@@ -107,7 +120,7 @@ export const Hero = ({ content }: { content: HeroContent }) => (
         <Spring mode="once" from={{ opacity: 0, y: 16 }} to={{ opacity: 1, y: 0 }} delayIn={500} config={{ tension: 200, friction: 22 }}>
           <SmartLink
             href={content.rating.href}
-            className="flex items-center gap-3 rounded-card bg-surface-deep/70 px-5 py-4 text-content-inverse shadow-float ring-1 ring-line-inverse backdrop-blur transition duration-[var(--duration-fast)] ease-entrance hover:bg-surface-deep/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-content-inverse"
+            className="flex flex-wrap items-center gap-x-3 gap-y-1 text-content-inverse transition duration-[var(--duration-fast)] ease-entrance hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-content-inverse lg:rounded-card lg:bg-surface-deep/70 lg:px-5 lg:py-4 lg:shadow-float lg:ring-1 lg:ring-line-inverse lg:backdrop-blur lg:hover:bg-surface-deep/90 lg:hover:text-content-inverse"
           >
             <span className="font-display text-title font-bold">{content.rating.score}</span>
             <Stars count={content.rating.stars} />

@@ -16,6 +16,16 @@ For *why* the conventions are what they are, see [[decisions-log]].
 
 ---
 
+## 2026-09-14 (3) — The hero on phones
+
+Below `lg` the hero stacks instead of layering: the photograph in a band at
+the top (46svh, capped), cropped to the handshake and fading into the green
+at its foot; the copy on solid green with the headline overlapping the fade;
+the rating as one row over a hairline, the promise card hidden (it repeats
+the third bullet). The desktop composition is untouched.
+
+---
+
 ## 2026-09-14 (2) — Brand and model selects in the lead form
 
 **Changed**
