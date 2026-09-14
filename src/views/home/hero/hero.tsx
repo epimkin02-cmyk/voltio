@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { Float } from "@/components/animation/float";
 import { Spring } from "@/components/animation/springs/spring";
 import { ButtonLink } from "@/components/ui/button";
@@ -33,14 +35,27 @@ const Card = ({ card, className }: { card: TrustCard; className: string }) => (
 );
 
 /**
- * Transiett's hero, for Voltio: real footage full-bleed behind the copy — a
- * drone following a Model Y through serpentines, then the stop at the
- * lay-by — with the copy on a dark gradient at the left and the rating card
- * pinned bottom-right, as Transiett pins theirs. Holds the page's `h1`.
+ * Transiett's hero, for Voltio: one photograph full-bleed behind the copy —
+ * the seller and the Voltio buyer shaking hands in the driveway, the Tesla
+ * beside them — with the copy on a dark gradient at the left and the rating
+ * card pinned bottom-right, as Transiett pins theirs. The footage loop is
+ * still wired: give `video` scenes and it plays instead. Holds the page's `h1`.
  */
 export const Hero = ({ content }: { content: HeroContent }) => (
   <section aria-labelledby={TITLE_ID} className="relative overflow-hidden text-content-inverse">
-    <HeroVideo scenes={content.video} />
+    {content.video?.length ? (
+      <HeroVideo scenes={content.video} />
+    ) : (
+      <Image
+        src={content.image.src}
+        alt={content.image.alt}
+        fill
+        priority
+        sizes="100vw"
+        style={{ objectPosition: content.image.focus }}
+        className="object-cover"
+      />
+    )}
     {/* Legibility: a deep-green wash from the left where the copy sits, and a
         vignette along the bottom under the cards. */}
     <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,var(--surface-deep)_0%,rgb(12_40_29/0.85)_30%,rgb(12_40_29/0.35)_60%,rgb(12_40_29/0.15)_100%)]" />

@@ -57,8 +57,10 @@ export interface VideoScene {
 
 export interface HeroContent {
   rating: { score: string; stars: number; count: string; href: string };
-  /** Two clips that cross-fade into each other forever. */
-  video: VideoScene[];
+  /** The hero photograph — the handshake in the driveway. */
+  image: ImageAsset & { focus?: string };
+  /** Optional clips that cross-fade forever; shown instead of the image when set. */
+  video?: VideoScene[];
   title: string;
   bullets: string[];
   cta: Link;

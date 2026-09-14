@@ -23,29 +23,29 @@ export const homeContent: HomeContent = {
       { label: "FAQ", href: "#faq" },
     ],
     phone: { label: "0800 555 20 20", href: "tel:+498005552020" },
-    cta: { label: "Fahrzeug bewerten", href: "#anfrage" },
+    cta: { label: "Anfrage stellen", href: "#anfrage" },
   },
 
   hero: {
     rating: { score: "5,0", stars: 5, count: "Lies unsere 776 Bewertungen", href: "#bewertungen" },
-    // Three 8-second clips (Kling 3.0, 16:9): a drone follows a white Model Y
-    // along an alpine pass, the car stops at a viewpoint and the driver steps
-    // out of the left door, then a low tracking shot on a tree-lined country
-    // road. Phones crop each frame to its `focus`. Plates are blank — a
-    // generated plate cannot carry the Voltio mark reliably.
-    video: [
-      { src: "/assets/video/hero-pass.mp4", poster: "/assets/video/hero-pass.jpg", focus: "50% 60%" },
-      { src: "/assets/video/hero-stop.mp4", poster: "/assets/video/hero-stop.jpg", focus: "72% 55%" },
-      { src: "/assets/video/hero-road.mp4", poster: "/assets/video/hero-road.jpg", focus: "50% 55%" },
-    ],
-    title: "Dein Elektroauto in Ø\u00a05\u00a0Tagen zum Bestpreis verkauft",
+    // The hero photograph. The footage loop from 12 Sep (three clips in
+    // `public/assets/video/`) is still wired in `hero.tsx`: add a `video`
+    // array here and it plays instead of the picture.
+    image: {
+      src: "/assets/images/hero-handshake.jpg",
+      alt: "Verkäufer und Voltio-Ankäufer mit iPad geben sich vor einem weißen Tesla in der Hofeinfahrt die Hand",
+      width: 2400,
+      height: 1350,
+      focus: "70% 50%",
+    },
+    title: "Dein Hybrid & Elektro-Auto in Ø\u00a05\u00a0Tagen zum Bestpreis verkauft",
     bullets: [
       "Wir vergleichen Angebote im gesamten DACH-Raum und garantieren den besten Preis",
       "Von Angebot bis Abholung des Fahrzeugs alles aus einer Hand",
       "Geld nach 5 Tagen auf dem Wunschkonto",
     ],
     cta: { label: "Jetzt Verkauf anfragen", href: "#anfrage" },
-    assurances: ["Kostenlos & unverbindlich", "Keine Nachverhandlung", "Abmeldung inklusive"],
+    assurances: ["Kostenlos & unverbindlich", "Keine Nachverhandlung"],
     trust: [
       { figure: "5,0", label: "776 Bewertungen" },
       { figure: "Ø 5", label: "Tage bis zum Geld auf dem Wunschkonto" },
@@ -288,9 +288,9 @@ export const homeContent: HomeContent = {
     body: "Alles, was Verkäufer uns vor der ersten Anfrage fragen. Deine Frage ist nicht dabei? Ruf uns an, wir antworten sofort.",
     items: [
       {
-        question: "Welche Elektroautos kauft Voltio an?",
+        question: "Welche Fahrzeuge kauft Voltio an?",
         answer:
-          "Alle rein elektrischen Pkw und Transporter ab Erstzulassung 2017, unabhängig von Marke, Laufleistung und Zustand. Plug-in-Hybride kaufen wir nicht an. Ob Kleinwagen, SUV oder Firmenflotte: Trag das Fahrzeug einfach ein, wir melden uns innerhalb von 24 Stunden.",
+          "Alle Elektroautos und Plug-in-Hybride ab Erstzulassung 2017, Pkw wie Transporter, unabhängig von Marke, Laufleistung und Zustand. Ob Kleinwagen, SUV oder Firmenflotte: Trag das Fahrzeug einfach ein, wir melden uns innerhalb von 24 Stunden.",
       },
       {
         question: "Wie wird der Akku bewertet?",

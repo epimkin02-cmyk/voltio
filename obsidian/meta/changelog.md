@@ -1,6 +1,6 @@
 ---
 tags: [meta, changelog]
-updated: 2026-09-12
+updated: 2026-09-14
 ---
 
 # Changelog
@@ -13,6 +13,22 @@ dependency, a new route or section, a convention bent, a bug whose cause is wort
 remembering. Routine commits do not need an entry.
 
 For *why* the conventions are what they are, see [[decisions-log]].
+
+---
+
+## 2026-09-14 — Hero photograph, "Anfrage stellen", Hybrid in the headline
+
+**Changed** (client's list, in order)
+- Header CTA reads "Anfrage stellen".
+- Hero headline: "Dein Hybrid & Elektro-Auto in Ø 5 Tagen zum Bestpreis
+  verkauft". The FAQ answer that excluded plug-in hybrids now includes them,
+  so the page does not contradict its own headline.
+- The third assurance under the hero button ("Abmeldung inklusive") is gone.
+- The hero ground is a photograph again: the seller and the Voltio buyer
+  (iPad in hand) shaking hands in a driveway, a white Tesla beside them
+  (`images/hero-handshake.jpg`, gpt_image_2). `HeroContent.video` is
+  optional; `hero.tsx` still plays the footage loop when scenes are given,
+  and the three clips stay in `public/assets/video/`.
 
 ---
 
