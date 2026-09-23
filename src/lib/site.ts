@@ -10,7 +10,7 @@ export const siteConfig = {
   name: "VOLTIO",
   /** Written from the hero's own promise, for a German search result. */
   description:
-    "Voltio verkauft dein Elektroauto in Ø 5 Tagen zum Bestpreis: Angebote aus dem gesamten DACH-Raum, alles aus einer Hand von Angebot bis Abholung, Geld nach 5 Tagen auf dem Wunschkonto.",
+    "Voltio verkauft dein Elektroauto in Ø 5 Tagen zum Bestpreis: Angebote aus Deutschland, Österreich und der Schweiz, alles aus einer Hand von Angebot bis Abholung, Geld nach 5 Tagen auf dem Wunschkonto.",
   /**
    * Public origin, no trailing slash. `NEXT_PUBLIC_SITE_URL` wins; on Vercel
    * the project's production domain is the fallback, so canonical URLs and

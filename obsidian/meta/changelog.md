@@ -1,6 +1,6 @@
 ---
 tags: [meta, changelog]
-updated: 2026-09-14
+updated: 2026-09-23
 ---
 
 # Changelog
@@ -13,6 +13,21 @@ dependency, a new route or section, a convention bent, a bug whose cause is wort
 remembering. Routine commits do not need an entry.
 
 For *why* the conventions are what they are, see [[decisions-log]].
+
+---
+
+## 2026-09-23 — Client copy corrections
+
+- "DACH-Raum" is gone everywhere (hero bullet, promise card, pain body,
+  best-price headline, comparison row, meta description): it reads
+  "Deutschland, Österreich und der Schweiz".
+- The advantage over the local dealer is Ø 3.800 € (was 1.900 €), in the
+  best-price bullet and the numbers tile.
+- Pickup block: "Auf Wunsch helfen wir vor Ort bei der digitalen Abmeldung
+  des Fahrzeugs." closes the body.
+- Financing is no longer promised as a direct payoff. Payout body, bullet
+  and FAQ answer say Voltio *supports* the seller in settling the credit or
+  leasing contract.
 
 ---
 

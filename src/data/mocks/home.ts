@@ -40,7 +40,7 @@ export const homeContent: HomeContent = {
     },
     title: "Dein Hybrid & Elektro-Auto in Ø\u00a05\u00a0Tagen zum Bestpreis verkauft",
     bullets: [
-      "Wir vergleichen Angebote im gesamten DACH-Raum und garantieren den besten Preis",
+      "Wir vergleichen Angebote in Deutschland, Österreich und der Schweiz und garantieren den besten Preis",
       "Von Angebot bis Abholung des Fahrzeugs alles aus einer Hand",
       "Geld nach 5 Tagen auf dem Wunschkonto",
     ],
@@ -49,7 +49,7 @@ export const homeContent: HomeContent = {
     trust: [
       { figure: "5,0", label: "776 Bewertungen" },
       { figure: "Ø 5", label: "Tage bis zum Geld auf dem Wunschkonto" },
-      { label: "Bestpreis im gesamten DACH-Raum garantiert" },
+      { label: "Bestpreis in Deutschland, Österreich und der Schweiz garantiert" },
     ],
   },
 
@@ -121,7 +121,7 @@ export const homeContent: HomeContent = {
 
   pain: {
     heading: "Privat verkaufen kostet Nerven. Und am Ende meistens Geld.",
-    body: "Wer sein Elektroauto selbst inseriert, kennt das Spiel: Dutzende Nachrichten, Preisdrücker, Probefahrten ohne Ergebnis. Und beim Händler um die Ecke bekommst du ein Angebot, mit dem du nicht zufrieden bist. Voltio macht es anders: Wir holen für dein Fahrzeug Gebote von über 1.200 geprüften Käufern im gesamten DACH-Raum ein und geben dir den besten Preis als festes Angebot.",
+    body: "Wer sein Elektroauto selbst inseriert, kennt das Spiel: Dutzende Nachrichten, Preisdrücker, Probefahrten ohne Ergebnis. Und beim Händler um die Ecke bekommst du ein Angebot, mit dem du nicht zufrieden bist. Voltio macht es anders: Wir holen für dein Fahrzeug Gebote von über 1.200 geprüften Käufern in Deutschland, Österreich und der Schweiz ein und geben dir den besten Preis als festes Angebot.",
     pains: [
       "Inserate, Anfragen und Besichtigungen kosten mehrere Wochen",
       "Händler vor Ort rechnen den Akku pauschal schlecht",
@@ -171,12 +171,12 @@ export const homeContent: HomeContent = {
     {
       intro: "So funktioniert es:",
       eyebrow: "BESTPREIS-GARANTIE",
-      heading: "Wir übernehmen die Vergleicharbeit. Du bekommst das beste Angebot im DACH-Raum",
+      heading: "Wir übernehmen die Vergleicharbeit. Du bekommst das beste Angebot in Deutschland, Österreich und der Schweiz",
       body: "Statt bei vereinzelten Händlern anzufragen greifen wir bei Voltio auf unser Netzwerk aus über 1.200 geprüften Käufern zurück. Wir übernehmen die gesamte Vergleicharbeit und garantieren dir innerhalb von 24 Stunden das beste Angebot am Markt.",
       points: [
         "Angebot innerhalb von 24 Stunden",
         "Festpreis, schriftlich und ohne Nachverhandlung",
-        "Ø 1.900 € über dem besten lokalen Händlerangebot",
+        "Ø 3.800 € über dem besten lokalen Händlerangebot",
       ],
       cta: { label: "Jetzt kostenfreie Anfrage stellen", href: "#anfrage" },
       image: {
@@ -189,7 +189,7 @@ export const homeContent: HomeContent = {
     {
       eyebrow: "ALLES AUS EINER HAND",
       heading: "Wir bewerten dein Fahrzeug und holen es vor deiner Haustüre ab.",
-      body: "Du musst nirgendwo hinfahren und niemanden treffen, den du nicht kennst. Unser Fahrer holt das Fahrzeug bei dir ab, prüft es vor Ort in 20 Minuten und nimmt die Papiere mit. Kaufvertrag und Übergabeprotokoll übernehmen wir.",
+      body: "Du musst nirgendwo hinfahren und niemanden treffen, den du nicht kennst. Unser Fahrer holt das Fahrzeug bei dir ab, prüft es vor Ort in 20 Minuten und nimmt die Papiere mit. Kaufvertrag und Übergabeprotokoll übernehmen wir. Auf Wunsch helfen wir vor Ort bei der digitalen Abmeldung des Fahrzeugs.",
       points: [
         "Kostenlose Abholung in ganz Deutschland",
         "Sichtprüfung vor Ort, kein Werkstatttermin",
@@ -206,10 +206,10 @@ export const homeContent: HomeContent = {
     {
       eyebrow: "SCHNELLE AUSZAHLUNG",
       heading: "In 5 Tagen hast du den Verkaufspreis auf deinem Wunschkonto.",
-      body: "Die Überweisung geht nach der Übergabe raus, auf Wunsch per Echtzeitüberweisung. Im Schnitt vergehen von der Anfrage bis zum Geldeingang fünf Tage. Läuft noch eine Finanzierung, lösen wir sie direkt bei der Bank ab und zahlen dir die Differenz aus.",
+      body: "Die Überweisung geht nach der Übergabe raus, auf Wunsch per Echtzeitüberweisung. Im Schnitt vergehen von der Anfrage bis zum Geldeingang fünf Tage. Läuft noch eine Finanzierung, unterstützen wir dich bei der Ablösung deines Kreditvertrags.",
       points: [
         "Zahlung nach der Übergabe, auf Wunsch in Echtzeit",
-        "Ablösung von Finanzierung oder Leasing",
+        "Unterstützung bei der Ablösung von Finanzierung oder Leasing",
         "Kein Bargeld, keine Vorkasse, keine Wartezeit",
       ],
       cta: { label: "Jetzt kostenfreie Anfrage stellen", href: "#anfrage" },
@@ -228,7 +228,7 @@ export const homeContent: HomeContent = {
     body: "Wir kaufen ausschließlich Hybrid und Elektrofahrzeuge. Deshalb wissen wir, was ein Akku mit 92 % State of Health wert ist, und deshalb kennen unsere Käufer den Unterschied auch.",
     stats: [
       { figure: "776", label: "verkaufte Elektroautos seit 2023" },
-      { figure: "1.900 €", label: "durchschnittlich mehr als beim lokalen Händler" },
+      { figure: "3.800 €", label: "durchschnittlich mehr als beim lokalen Händler" },
       { figure: "24 h", label: "bis zum schriftlichen Angebot" },
       { figure: "98 %", label: "würden Voltio weiterempfehlen" },
     ],
@@ -248,7 +248,7 @@ export const homeContent: HomeContent = {
       "Auktionsplattform",
     ],
     rows: [
-      { label: "Bestpreis aus dem gesamten DACH-Raum", values: [true, false, false, false, false, true] },
+      { label: "Bestpreis aus Deutschland, Österreich und der Schweiz", values: [true, false, false, false, false, true] },
       { label: "Festpreis ohne Nachverhandlung", values: [true, false, false, false, true, false] },
       { label: "Kostenlose Abholung zu Hause", values: [true, false, false, true, false, false] },
       { label: "Akku-Bewertung nach State of Health", values: [true, false, false, false, false, false] },
@@ -299,7 +299,7 @@ export const homeContent: HomeContent = {
       {
         question: "Was passiert, wenn noch eine Finanzierung oder ein Leasing läuft?",
         answer:
-          "Kein Problem. Wir lösen die Restschuld direkt bei deiner Bank oder Leasinggesellschaft ab und überweisen dir die Differenz. Du brauchst nur die Ablösebestätigung, alles Weitere übernehmen wir.",
+          "Kein Problem. Wir unterstützen dich bei der Ablösung deines Kredit- oder Leasingvertrags: Wir sagen dir, welche Unterlagen deine Bank oder Leasinggesellschaft braucht, und begleiten dich Schritt für Schritt bis zur Ablösebestätigung.",
       },
       {
         question: "Ist das Angebot wirklich verbindlich?",
