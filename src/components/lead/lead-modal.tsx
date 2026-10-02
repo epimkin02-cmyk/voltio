@@ -4,6 +4,8 @@ import { animated, useTransition } from "@react-spring/web";
 import { useEffect, useRef } from "react";
 
 import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
+import { funnelEvent } from "@/lib/tracking/funnel-builder";
+import { trackPixel } from "@/lib/tracking/pixel";
 
 import { LeadForm } from "./lead-form";
 import { useLeadModal } from "./lead-modal-store";
@@ -29,6 +31,9 @@ export const LeadModal = ({ content }: { content: LeadFormContent }) => {
     if (!open) return;
     openerRef.current = document.activeElement;
     stopScroll();
+    // Funnel statistics (anonymous) and, with marketing consent, the pixel.
+    funnelEvent("view");
+    trackPixel("AnfrageGestartet");
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeModal();
     };

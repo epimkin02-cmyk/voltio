@@ -89,8 +89,11 @@ Server Components instead (no client request at all).
 
 ## Example
 
-`app/api/contact/route.ts` — a contact/lead endpoint. Runs out of the box
-(logs server-side); set `CONTACT_ENDPOINT` to forward leads upstream.
+The starter's `app/api/contact/route.ts` (shown above) was **removed in this
+project on 2026-10-02**: the lead form stores its submissions in the Funnel
+Builder straight from the browser. That is the one sanctioned exception to
+"the browser only calls same-origin `/api/*`" — see ADR-0049 in
+[[decisions-log]]. Any other third-party call still belongs in a route handler.
 
 ## Related
 

@@ -4,7 +4,7 @@ import { animated, useSpring } from "@react-spring/web";
 import Link from "next/link";
 import { useRef, type MouseEvent, type ReactNode } from "react";
 
-import { useLeadModal } from "@/components/lead/lead-modal-store";
+import { ctaSource, useLeadModal } from "@/components/lead/lead-modal-store";
 
 import { ArrowIcon } from "./icons";
 
@@ -58,7 +58,7 @@ export const ButtonLink = ({
 
   if (variant === "hero") {
     return (
-      <HeroCta href={href} onOpen={openModal} className={className}>
+      <HeroCta href={href} onOpen={() => openModal("hero")} className={className}>
         {children}
       </HeroCta>
     );
@@ -76,7 +76,7 @@ export const ButtonLink = ({
 
   if (href === LEAD_HREF) {
     return (
-      <button type="button" onClick={openModal} className={classes}>
+      <button type="button" onClick={(e) => openModal(ctaSource(e.currentTarget))} className={classes}>
         {inner}
       </button>
     );

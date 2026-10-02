@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { animated, useSpring, useTransition } from "@react-spring/web";
 
+import { META_PIXEL_ID } from "@/data/tracking";
 import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
 
 import { CookieButton } from "./CookieButton";
@@ -34,7 +35,9 @@ const CATEGORIES: Category[] = [
   {
     key: "marketing",
     title: "Marketing",
-    body: "Erlaubt uns, Werbung zu messen und passende Inhalte erneut zu zeigen. Jederzeit widerrufbar.",
+    body: `Erlaubt uns, Werbung zu messen und passende Inhalte erneut zu zeigen. Jederzeit widerrufbar.${
+      META_PIXEL_ID ? " Dienst: Meta Pixel (Meta Platforms Ireland Ltd.)." : ""
+    }`,
   },
 ];
 
@@ -51,17 +54,17 @@ export const CookiePreferencesModal = () => {
   const stopScroll = useScroll((s) => s.stop);
   const startScroll = useScroll((s) => s.start);
 
-  // Pre-fill toggles as ON when no prior decision exists. Once a user has
-  // saved a choice, that choice wins.
-  const [analytics, setAnalytics] = useState<boolean>(consent?.analytics ?? true);
-  const [marketing, setMarketing] = useState<boolean>(consent?.marketing ?? true);
+  // Toggles start OFF when no prior decision exists — a pre-ticked box is not
+  // valid consent (GDPR Art. 4(11), CJEU "Planet49"). A saved choice wins.
+  const [analytics, setAnalytics] = useState<boolean>(consent?.analytics ?? false);
+  const [marketing, setMarketing] = useState<boolean>(consent?.marketing ?? false);
 
   // Re-seed local toggles every time the modal opens so users see their saved
   // state, not whatever was in flight from a previous open.
   useEffect(() => {
     if (!open) return;
-    setAnalytics(consent?.analytics ?? true);
-    setMarketing(consent?.marketing ?? true);
+    setAnalytics(consent?.analytics ?? false);
+    setMarketing(consent?.marketing ?? false);
   }, [open, consent]);
 
   // ESC closes; lock Lenis scroll while open; restore focus to the opener.

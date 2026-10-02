@@ -1,6 +1,6 @@
 ---
 tags: [meta, changelog]
-updated: 2026-09-23
+updated: 2026-10-02
 ---
 
 # Changelog
@@ -15,6 +15,26 @@ remembering. Routine commits do not need an entry.
 For *why* the conventions are what they are, see [[decisions-log]].
 
 ---
+
+## 2026-10-02 — Lead path, consent fix and tracking groundwork for the ad start
+
+- **Leads were going nowhere**: `CONTACT_ENDPOINT` was never set on Vercel, so
+  `/api/contact` only logged. The form now stores every request in the Funnel
+  Builder (project "Voltio", funnel `voltio-ankauf`) straight from the
+  browser; the route and the variable are gone. See ADR-0049.
+- **Cookie dialog**: "Alle akzeptieren" stored `false` for analytics and
+  marketing (starter bug) — it now stores `true`. The settings toggles start
+  off instead of pre-ticked. Every decision fires `voltio:consent` on `window`.
+- **Meta Pixel code is in place but dormant**: set `NEXT_PUBLIC_META_PIXEL_ID`
+  to switch it on. Events: PageView, `AnfrageGestartet` (popup opened), Lead
+  (with an event id shared with the Funnel Builder for the Conversions API).
+- **Attribution**: `utm_*`, `fbclid`, `gclid`, landing URL and referrer are
+  captured in memory on load and saved with the lead, plus the section the
+  popup was opened from (`quelle`).
+- **Privacy notice**: form processor, attribution data and (only while a pixel
+  id is set) Meta Pixel + Conversions API; the stale hero-video sentence is
+  reworded; TMG/TTDSG references updated to DDG/TDDDG. The form's privacy
+  line links to the notice.
 
 ## 2026-09-23 — Client copy corrections
 

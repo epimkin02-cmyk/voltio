@@ -20,7 +20,8 @@ Rules for handling configuration and secrets.
 | Name | Scope | Purpose |
 |------|-------|---------|
 | `NEXT_PUBLIC_SITE_URL` | public | Site origin (no trailing slash). Drives canonical URLs, OG/Twitter tags, `robots.txt`, `sitemap.xml`, JSON-LD. Falls back to `http://localhost:3000` when unset — **set it in production**. See [[seo-metadata]]. |
-| `CONTACT_ENDPOINT` | server-only | Optional upstream the `/api/contact` route forwards leads to (CRM / webhook). When unset, submissions are logged server-side. See [[api-architecture]]. |
+| `NEXT_PUBLIC_META_PIXEL_ID` | public | Meta Pixel (dataset) id, digits only. Unset = no pixel, no Meta section in the privacy notice, no service line in the cookie settings. Even when set the pixel loads only after consent to "Marketing". Read through `src/data/tracking.ts`. |
+| `NEXT_PUBLIC_FUNNEL_BUILDER_URL` | public | Optional override for the Funnel Builder origin the lead form posts to (default `https://funnelbuilder.umsatzpilot.com`). |
 
 Documented in `.env.example` (committed). Validated by `src/env.ts` (zod):
 `publicEnv` for `NEXT_PUBLIC_*` (safe anywhere), `getServerEnv()` for
@@ -29,9 +30,9 @@ through `src/env.ts`, never `process.env` directly.
 
 > [!important] Optional variables must treat `""` as unset
 > `cp .env.example .env` — the documented setup step — leaves declared-but-blank
-> keys (`CONTACT_ENDPOINT=`), which arrive as `""`, **not** `undefined`. A bare
+> keys (`NEXT_PUBLIC_SITE_URL=`), which arrive as `""`, **not** `undefined`. A bare
 > `z.url().optional()` rejects `""` as *"Invalid URL"*, so the copy alone broke
-> `/api/contact`. Every optional variable therefore goes through the
+> the build. Every optional variable therefore goes through the
 > `optionalUrl()` helper in `src/env.ts`, which preprocesses `""` → `undefined`.
 > **Follow this for any new optional variable** — `.optional()` on its own is not
 > enough.

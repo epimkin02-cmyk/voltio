@@ -7,7 +7,10 @@ Ankauf von Elektrofahrzeugen im DACH-Raum. Gebaut auf dem Textura
 - Inhalte: `src/data/mocks/home.ts` (Copy 1:1 aus dem Wireframe, Platzhalter
   mit `TODO(voltio)` markiert)
 - Sektionen: `src/views/home/`
-- Lead-Formular: `src/app/api/contact/route.ts`, leitet an `CONTACT_ENDPOINT` weiter
+- Lead-Formular: speichert im Funnel Builder (Projekt „Voltio“, Funnel `voltio-ankauf`),
+  Client in `src/lib/tracking/funnel-builder.ts`
+- Tracking: `src/data/tracking.ts` (Pixel-ID, Funnel), `src/lib/tracking/` (Pixel nur mit
+  Einwilligung, Kampagnen-Parameter)
 - Design-Zuordnung: `DESIGN-MAP.md`
 
 ```bash

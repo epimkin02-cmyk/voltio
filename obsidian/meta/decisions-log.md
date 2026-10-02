@@ -1,6 +1,6 @@
 ---
 tags: [meta, decision]
-updated: 2026-09-11
+updated: 2026-10-02
 ---
 
 # Decisions Log (ADRs)
@@ -14,6 +14,47 @@ decisions on top, continuing the numbering. Amending an inherited decision is
 fine; write a new ADR that says so rather than editing the old one.
 
 Template: [[templates/adr-note]].
+
+---
+
+## ADR-0049 — Leads go from the browser to the Funnel Builder; the pixel waits for consent
+
+**Date:** 2026-10-02 · **Status:** accepted · narrows hard rule 9 for one endpoint
+
+**Context.** Ads start on 2026-10-16. Until now the form posted to
+`/api/contact`, which forwarded to `CONTACT_ENDPOINT` — a variable that was
+never set on Vercel, so every request ended in a server log line. The agency
+runs its own form backend (Funnel Builder: dashboard, webhooks to Make, Meta
+Conversions API) that its other landing pages already use.
+
+**Decision.**
+1. **The form posts to the Funnel Builder's headless API directly from the
+   browser** (`lib/tracking/funnel-builder.ts`, funnel `voltio-ankauf`).
+   `/api/contact` and `CONTACT_ENDPOINT` are removed. A server-side relay was
+   rejected: the endpoint is public and keyless, so there is no secret to
+   protect, and the Conversions API needs the visitor's own IP and user agent,
+   which a relay would replace with the server's.
+2. **Nothing personal is sent before submit.** No partial saves. The only
+   earlier calls are anonymous counters (popup opened, first field focused).
+3. **Attribution lives in memory**, not in storage: `utm_*` and click ids are
+   read once on load (`lib/tracking/session.ts`) and travel with the lead.
+4. **The Meta Pixel is consent-gated end to end** (`lib/tracking/pixel.ts`):
+   no id configured → nothing exists; id configured → nothing loads until the
+   visitor agrees to "Marketing"; withdrawal stops further events. The Lead
+   event's id is shared with the Funnel Builder so browser and server reports
+   deduplicate.
+5. **The cookie dialog must be honest.** "Alle akzeptieren" stores `true` for
+   both categories (the starter stored `false`, a bug that would have kept the
+   pixel off for every visitor), and the settings toggles start **off** — a
+   pre-ticked box is not consent.
+6. **The privacy notice follows the configuration**: its Meta section renders
+   only while a pixel id is set, and sections number themselves.
+
+**When building.** New form field → add it to `LeadAnswers` *and* to the
+funnel's fields in the Funnel Builder, same id. New third-party browser
+script → gate it on `readConsent()` and `CONSENT_EVENT` like the pixel, and
+name it in the cookie settings and the privacy notice. Any call that needs a
+secret still goes through a route handler.
 
 ---
 

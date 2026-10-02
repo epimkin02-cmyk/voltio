@@ -18,7 +18,15 @@ const DEFAULT_CONSENT: CookieConsent = {
   marketing: false,
 };
 
-const loadConsent = (): CookieConsent | null => {
+/**
+ * Fired on `window` whenever the visitor decides or changes their mind
+ * (`detail` = the new consent). Code outside React — the Meta Pixel — listens
+ * here to load on consent and to stop on withdrawal.
+ */
+export const CONSENT_EVENT = "voltio:consent";
+
+/** The stored decision, or `null` while the visitor has not decided. */
+export const readConsent = (): CookieConsent | null => {
   if (typeof window === "undefined") return null;
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
@@ -35,6 +43,11 @@ const saveConsent = (consent: CookieConsent) => {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
   } catch {
     /* ignore storage failures (private mode, quota) */
+  }
+  try {
+    window.dispatchEvent(new CustomEvent(CONSENT_EVENT, { detail: consent }));
+  } catch {
+    /* no CustomEvent support — consent still applies on the next load */
   }
 };
 
@@ -56,9 +69,9 @@ export const useCookieStore = create<CookieStore>((set) => ({
   consent: null,
   hydrated: false,
   modalOpen: false,
-  hydrate: () => set({ consent: loadConsent(), hydrated: true }),
+  hydrate: () => set({ consent: readConsent(), hydrated: true }),
   acceptAll: () => {
-    const next: CookieConsent = { necessary: true, analytics: false, marketing: false };
+    const next: CookieConsent = { necessary: true, analytics: true, marketing: true };
     saveConsent(next);
     set({ consent: next, modalOpen: false });
   },

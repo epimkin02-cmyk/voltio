@@ -17,6 +17,7 @@ import { getSiteStructuredData } from "@/utils/seo/structured-data";
 
 import { LazyCookie } from "@/components/common/Cookie";
 import { ReducedMotion } from "@/components/common/reduced-motion";
+import { TrackingBoot } from "@/components/common/tracking-boot";
 import { ScrollLayout } from "@/layouts/scroll-layout";
 
 import "@/app/globals.css";
@@ -43,6 +44,7 @@ export default function RootLayout({
         <ScrollLayout>
           <ReducedMotion />
           <LazyCookie />
+          <TrackingBoot />
           {children}
         </ScrollLayout>
       </body>

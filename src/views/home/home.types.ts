@@ -41,7 +41,10 @@ export interface LeadFormContent {
   sending: string;
   success: string;
   error: string;
+  /** Sentence before the link to the privacy notice (no trailing full stop). */
   privacy: string;
+  /** Link text that completes the `privacy` sentence. */
+  privacyLink: string;
   close: string;
 }
 

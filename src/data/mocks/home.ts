@@ -344,7 +344,8 @@ export const homeContent: HomeContent = {
     sending: "Wird gesendet …",
     success: "Danke! Wir melden uns innerhalb von 24 Stunden mit deinem Angebot.",
     error: "Das hat nicht geklappt. Bitte versuche es noch einmal oder ruf uns an.",
-    privacy: "Mit dem Absenden stimmst du der Verarbeitung deiner Daten zur Angebotserstellung zu.",
+    privacy: "Mit dem Absenden stimmst du der Verarbeitung deiner Daten zur Angebotserstellung zu. Mehr dazu in der",
+    privacyLink: "Datenschutzerklärung",
     close: "Schließen",
   },
 

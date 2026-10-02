@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { useCookieStore } from "@/components/common/Cookie/cookieStore";
-import { useLeadModal } from "@/components/lead/lead-modal-store";
+import { ctaSource, useLeadModal } from "@/components/lead/lead-modal-store";
 import { LEAD_HREF } from "@/components/ui/button";
 
 /** The href that opens the cookie preferences instead of navigating. */
@@ -27,9 +27,12 @@ export const SmartLink = ({ href, children, className }: SmartLinkProps) => {
   const openCookies = useCookieStore((s) => s.openModal);
 
   if (href === LEAD_HREF || href === COOKIES_HREF) {
-    const onClick = href === LEAD_HREF ? openLead : openCookies;
     return (
-      <button type="button" onClick={onClick} className={`cursor-pointer text-left ${className ?? ""}`}>
+      <button
+        type="button"
+        onClick={(e) => (href === LEAD_HREF ? openLead(ctaSource(e.currentTarget)) : openCookies())}
+        className={`cursor-pointer text-left ${className ?? ""}`}
+      >
         {children}
       </button>
     );

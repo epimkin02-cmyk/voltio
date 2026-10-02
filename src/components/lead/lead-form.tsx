@@ -1,10 +1,14 @@
 "use client";
 
+import Link from "next/link";
 import { useId, useState, type FormEvent } from "react";
 
 import { ChevronIcon } from "@/components/ui/icons";
 import { OTHER_BRAND, OTHER_MODEL, VEHICLE_BRANDS } from "@/data/vehicles";
-import { apiFetch } from "@/lib/api-client";
+import { funnelStarted, submitLead } from "@/lib/tracking/funnel-builder";
+import { newEventId, trackPixel } from "@/lib/tracking/pixel";
+
+import { useLeadModal } from "./lead-modal-store";
 
 import type { LeadFormContent } from "@/views/home/home.types";
 
@@ -28,8 +32,9 @@ const Select = ({
  * The lead form (wireframe 1:64), shown inside the lead popup. Brand and
  * model are two dependent selects fed by `data/vehicles` — every electric and
  * plug-in hybrid model on the DACH market — with "Andere" on both levels
- * opening a free-text field. It posts to `/api/contact`, which validates
- * and forwards to `CONTACT_ENDPOINT` when that is configured.
+ * opening a free-text field. The request is stored in the Funnel Builder
+ * (`lib/tracking/funnel-builder`), together with the campaign the visitor came
+ * from; with marketing consent the same submit also reports a Meta `Lead`.
  */
 export interface LeadFormProps {
   content: LeadFormContent;
@@ -43,6 +48,7 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
   const [status, setStatus] = useState<Status>("idle");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
+  const source = useLeadModal((s) => s.source);
 
   const field = (name: string) => `${id}-${name}`;
   const models = VEHICLE_BRANDS.find((b) => b.name === brand)?.models ?? [];
@@ -52,17 +58,36 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const form = event.currentTarget;
-    const data = Object.fromEntries(new FormData(form).entries());
-    setStatus("sending");
-    try {
-      await apiFetch("/api/contact", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
+    const data = new FormData(form);
+    const value = (name: string) => String(data.get(name) ?? "").trim();
+    const done = () => {
       setStatus("sent");
       form.reset();
       setBrand("");
       setModel("");
+    };
+    // Honeypot: only bots fill it. Thank them and store nothing.
+    if (value("website")) return done();
+    setStatus("sending");
+    const eventId = newEventId();
+    try {
+      await submitLead(
+        {
+          marke: value("brand"),
+          // The disabled model select is not part of FormData when the brand is "other".
+          modell: otherBrand ? "" : value("model"),
+          fahrzeug_freitext: value("vehicleOther"),
+          erstzulassung: value("year"),
+          kilometerstand: value("mileage"),
+          name: value("name"),
+          email: value("email"),
+          telefon: value("phone"),
+          quelle: source,
+        },
+        eventId,
+      );
+      trackPixel("Lead", eventId);
+      done();
     } catch {
       setStatus("error");
     }
@@ -71,6 +96,7 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
   return (
     <form
       onSubmit={onSubmit}
+      onFocusCapture={funnelStarted}
       className="flex flex-col gap-4"
       aria-labelledby={headingId}
     >
@@ -219,7 +245,18 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
         {status === "sent" && <span className="text-primary-deep">{content.success}</span>}
         {status === "error" && <span className="text-danger">{content.error}</span>}
         {(status === "idle" || status === "sending") && (
-          <span className="text-content-faint">{content.privacy}</span>
+          <span className="text-content-faint">
+            {content.privacy}{" "}
+            <Link
+              href="/datenschutz"
+              target="_blank"
+              rel="noopener"
+              className="underline underline-offset-2 transition duration-[var(--duration-fast)] ease-entrance hover:text-content"
+            >
+              {content.privacyLink}
+            </Link>
+            .
+          </span>
         )}
       </p>
     </form>

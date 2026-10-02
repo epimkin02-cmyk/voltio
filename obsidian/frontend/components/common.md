@@ -85,6 +85,14 @@ Mount it once. Props: `baseWidth` (defaults to the largest breakpoint) and
 > `common/` — see [[decisions-log]] ADR-0008. `styled-components` is **not** a
 > project dependency; the scale-down CSS lives in `globals.css` per [[design-system]].
 
+## TrackingBoot — `tracking-boot.tsx`
+
+Client leaf mounted once in the root layout, renders nothing. On the first
+client render it remembers the campaign parameters the visitor arrived with
+(`lib/tracking/session.ts`, in memory only) and arms the Meta Pixel
+(`lib/tracking/pixel.ts`), which stays dormant until the visitor agrees to
+"Marketing" in the cookie dialog. See ADR-0049 in [[decisions-log]].
+
 ## ReducedMotion — `reduced-motion.tsx`
 
 `<ReducedMotion>` — a client leaf that calls react-spring's `useReducedMotion()`.
