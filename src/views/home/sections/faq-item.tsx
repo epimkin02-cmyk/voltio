@@ -4,6 +4,7 @@ import { animated, useSpring } from "@react-spring/web";
 import { useEffect, useId, useRef, useState } from "react";
 
 import { ChevronIcon } from "@/components/ui/icons";
+import { trackEvent } from "@/lib/tracking/events";
 
 export interface FaqItemProps {
   question: string;
@@ -40,7 +41,10 @@ export const FaqItem = ({ question, answer }: FaqItemProps) => {
           type="button"
           aria-expanded={open}
           aria-controls={`${id}-panel`}
-          onClick={() => setOpen((v) => !v)}
+          onClick={() => {
+            if (!open) trackEvent("faq_geoeffnet", { frage: question });
+            setOpen((v) => !v);
+          }}
           className="flex w-full items-center justify-between gap-6 py-5 text-left font-display text-body-lg font-semibold text-content transition duration-[var(--duration-fast)] ease-entrance hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
         >
           <span>{question}</span>

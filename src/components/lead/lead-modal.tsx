@@ -4,6 +4,7 @@ import { animated, useTransition } from "@react-spring/web";
 import { useEffect, useRef } from "react";
 
 import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
+import { trackEvent } from "@/lib/tracking/events";
 import { funnelEvent } from "@/lib/tracking/funnel-builder";
 import { trackPixel } from "@/lib/tracking/pixel";
 
@@ -22,6 +23,7 @@ const TITLE_ID = "lead-modal-title";
 export const LeadModal = ({ content }: { content: LeadFormContent }) => {
   const open = useLeadModal((s) => s.open);
   const closeModal = useLeadModal((s) => s.closeModal);
+  const source = useLeadModal((s) => s.source);
   const stopScroll = useScroll((s) => s.stop);
   const startScroll = useScroll((s) => s.start);
   const openerRef = useRef<Element | null>(null);
@@ -34,6 +36,7 @@ export const LeadModal = ({ content }: { content: LeadFormContent }) => {
     // Funnel statistics (anonymous) and, with marketing consent, the pixel.
     funnelEvent("view");
     trackPixel("AnfrageGestartet");
+    trackEvent("cta_klick", { quelle: source || "seite" });
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeModal();
     };
@@ -49,7 +52,7 @@ export const LeadModal = ({ content }: { content: LeadFormContent }) => {
       const opener = openerRef.current;
       if (opener instanceof HTMLElement) opener.focus();
     };
-  }, [open, closeModal, stopScroll, startScroll]);
+  }, [open, source, closeModal, stopScroll, startScroll]);
 
   const transitions = useTransition(open, {
     from: { opacity: 0, y: 24, scale: 0.98 },

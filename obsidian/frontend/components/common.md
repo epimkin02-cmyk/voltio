@@ -91,7 +91,12 @@ Client leaf mounted once in the root layout, renders nothing. On the first
 client render it remembers the campaign parameters the visitor arrived with
 (`lib/tracking/session.ts`, in memory only) and arms the Meta Pixel
 (`lib/tracking/pixel.ts`), which stays dormant until the visitor agrees to
-"Marketing" in the cookie dialog. See ADR-0049 in [[decisions-log]].
+"Marketing" in the cookie dialog. It also mounts Vercel Web Analytics with a
+`beforeSend` gate (dropped when "Statistik" is off) and reports the two
+page-level events no component owns: the cookie decision (`einwilligung`) and
+scroll depth (`scrolltiefe` at 50 % and 90 % of the home page). The event
+vocabulary is typed in `lib/tracking/events.ts`; contact links report through
+`ui/tracked-link.tsx`. See ADR-0049 in [[decisions-log]].
 
 ## ReducedMotion — `reduced-motion.tsx`
 

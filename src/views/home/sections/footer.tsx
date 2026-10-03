@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { ButtonLink } from "@/components/ui/button";
 import { SmartLink } from "@/components/ui/smart-link";
+import { TrackedLink } from "@/components/ui/tracked-link";
 import { PhoneIcon, StarIcon } from "@/components/ui/icons";
 import { Logo } from "@/components/ui/logo";
 
@@ -70,13 +71,23 @@ export const SiteFooter = ({ content }: { content: FooterContent }) => (
             <span className="underline underline-offset-4">{content.rating.label}</span>
           </SmartLink>
           <div className="flex flex-col gap-2 pt-2">
-            <a href={content.phone.href} className="flex items-center gap-2 font-display text-body-lg font-semibold hover:text-primary">
+            <TrackedLink
+              art="telefon"
+              ort="footer"
+              href={content.phone.href}
+              className="flex items-center gap-2 font-display text-body-lg font-semibold hover:text-primary"
+            >
               <PhoneIcon className="size-5" />
               {content.phone.label}
-            </a>
-            <a href={content.email.href} className="text-body text-content-inverse-muted hover:text-content-inverse">
+            </TrackedLink>
+            <TrackedLink
+              art="email"
+              ort="footer"
+              href={content.email.href}
+              className="text-body text-content-inverse-muted hover:text-content-inverse"
+            >
               {content.email.label}
-            </a>
+            </TrackedLink>
           </div>
         </div>
 

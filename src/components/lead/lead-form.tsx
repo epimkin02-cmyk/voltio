@@ -5,8 +5,10 @@ import { useId, useState, type FormEvent } from "react";
 
 import { ChevronIcon } from "@/components/ui/icons";
 import { OTHER_BRAND, OTHER_MODEL, VEHICLE_BRANDS } from "@/data/vehicles";
+import { trackEvent, trackOnce } from "@/lib/tracking/events";
 import { funnelStarted, submitLead } from "@/lib/tracking/funnel-builder";
 import { newEventId, trackPixel } from "@/lib/tracking/pixel";
+import { captureAttribution } from "@/lib/tracking/session";
 
 import { useLeadModal } from "./lead-modal-store";
 
@@ -87,8 +89,18 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
         eventId,
       );
       trackPixel("Lead", eventId);
+      const { utm } = captureAttribution();
+      trackEvent("anfrage_gesendet", {
+        quelle: source || "seite",
+        marke: value("brand"),
+        modell: otherBrand ? "" : value("model"),
+        mit_telefon: value("phone") !== "",
+        utm_source: utm.utm_source ?? "",
+        utm_campaign: utm.utm_campaign ?? "",
+      });
       done();
     } catch {
+      trackEvent("anfrage_fehler", { quelle: source || "seite" });
       setStatus("error");
     }
   };
@@ -96,7 +108,10 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
   return (
     <form
       onSubmit={onSubmit}
-      onFocusCapture={funnelStarted}
+      onFocusCapture={() => {
+        funnelStarted();
+        trackOnce("anfrage_begonnen", { quelle: source || "seite" });
+      }}
       className="flex flex-col gap-4"
       aria-labelledby={headingId}
     >

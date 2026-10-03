@@ -1,6 +1,6 @@
 ---
 tags: [meta, changelog]
-updated: 2026-10-02
+updated: 2026-10-03
 ---
 
 # Changelog
@@ -15,6 +15,18 @@ remembering. Routine commits do not need an entry.
 For *why* the conventions are what they are, see [[decisions-log]].
 
 ---
+
+## 2026-10-03 — Vercel Web Analytics with the page's own events
+
+- `@vercel/analytics` mounted in `TrackingBoot`. Cookieless, so it runs on
+  legitimate interest; the "Statistik" toggle is an opt-out enforced in
+  `beforeSend`. Named in the cookie settings and in a new privacy section.
+- Typed event vocabulary in `src/lib/tracking/events.ts`: `cta_klick`,
+  `anfrage_begonnen`, `anfrage_gesendet` (vehicle + campaign, never personal
+  data), `anfrage_fehler`, `kontakt_klick` (phone / e-mail, where), `faq_geoeffnet`,
+  `einwilligung` (consent rate), `scrolltiefe` (50 / 90).
+- `ui/tracked-link.tsx` wraps the `tel:` / `mailto:` links in header, menu and
+  footer.
 
 ## 2026-10-02 — Lead path, consent fix and tracking groundwork for the ad start
 

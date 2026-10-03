@@ -116,6 +116,13 @@ const PRIVACY_SECTIONS: LegalSection[] = [
       "Technisch notwendige Speicherungen nehmen wir auf Grundlage von § 25 Abs. 2 TDDDG vor. Statistik- und Marketing-Dienste setzen wir nur mit deiner Einwilligung ein (§ 25 Abs. 1 TDDDG, Art. 6 Abs. 1 lit. a DSGVO), die du über den Cookie-Hinweis erteilst und jederzeit über „Cookie-Einstellungen“ im Footer widerrufen kannst. Deine Auswahl speichern wir lokal in deinem Browser.",
     ],
   },
+  {
+    heading: "Reichweitenmessung mit Vercel Web Analytics",
+    paragraphs: [
+      "Um zu verstehen, wie diese Seite genutzt wird, zählen wir Seitenaufrufe und einzelne Handlungen (zum Beispiel: Formular geöffnet, Frage aufgeklappt, bis zur Hälfte gescrollt) mit Vercel Web Analytics der Vercel Inc. Dabei werden keine Cookies gesetzt und nichts in deinem Browser gespeichert. Vercel bildet aus IP-Adresse und Browserangaben einen Hashwert, der nach 24 Stunden nicht mehr zuzuordnen ist; die IP-Adresse selbst wird nicht gespeichert. Übermittelt werden Seite, Herkunft, Land, Gerätetyp und Browser.",
+      "Rechtsgrundlage ist unser berechtigtes Interesse, die Seite zu verbessern und unsere Werbung zu bewerten (Art. 6 Abs. 1 lit. f DSGVO). Du kannst der Messung jederzeit widersprechen, indem du unter „Cookie-Einstellungen“ im Footer die Kategorie „Statistik“ ausschaltest; danach wird nichts mehr gezählt.",
+    ],
+  },
   ...(META_PIXEL_ID ? [META_SECTION] : []),
   {
     heading: "Schriften, Bilder und Videos",

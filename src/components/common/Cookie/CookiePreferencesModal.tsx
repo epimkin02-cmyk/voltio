@@ -30,7 +30,7 @@ const CATEGORIES: Category[] = [
   {
     key: "analytics",
     title: "Statistik",
-    body: "Anonyme Nutzungsstatistiken, damit wir sehen, welche Seiten helfen. Es wird kein persönliches Profil erstellt.",
+    body: "Anonyme Nutzungsstatistiken ohne Cookies (Vercel Web Analytics), damit wir sehen, welche Abschnitte helfen. Es wird kein persönliches Profil erstellt. Ausschalten stoppt die Messung sofort.",
   },
   {
     key: "marketing",

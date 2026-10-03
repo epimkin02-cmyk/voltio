@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 
 import { ButtonLink } from "@/components/ui/button";
 import { PhoneIcon } from "@/components/ui/icons";
+import { TrackedLink } from "@/components/ui/tracked-link";
 import { Logo } from "@/components/ui/logo";
 import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
 
@@ -96,7 +97,9 @@ export const SiteHeader = ({ content }: { content: HeaderContent }) => {
         </nav>
 
         <div className="flex items-center gap-3 sm:gap-5">
-          <a
+          <TrackedLink
+            art="telefon"
+            ort="header"
             href={content.phone.href}
             className="group flex items-center gap-2 font-display text-body font-semibold text-content hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
           >
@@ -104,7 +107,7 @@ export const SiteHeader = ({ content }: { content: HeaderContent }) => {
               <PhoneIcon className="size-4" />
             </span>
             <span className="max-md:sr-only">{content.phone.label}</span>
-          </a>
+          </TrackedLink>
           <ButtonLink href={content.cta.href} className="max-sm:hidden">
             {content.cta.label}
           </ButtonLink>
@@ -150,13 +153,15 @@ export const SiteHeader = ({ content }: { content: HeaderContent }) => {
                 ))}
               </ul>
               <div className="flex flex-col gap-3 border-t border-line-soft px-3 pt-4">
-                <a
+                <TrackedLink
+                  art="telefon"
+                  ort="menue"
                   href={content.phone.href}
                   className="flex items-center gap-2 font-display text-body-lg font-semibold text-content hover:text-primary"
                 >
                   <PhoneIcon className="size-5 text-primary" />
                   {content.phone.label}
-                </a>
+                </TrackedLink>
                 <div onClick={() => setOpen(false)}>
                   <ButtonLink href={content.cta.href} className="w-full">
                     {content.cta.label}

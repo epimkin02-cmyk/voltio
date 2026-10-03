@@ -69,6 +69,7 @@ ADR: [[decisions-log]] ADR-0027.
 | `lenis` | `^1.3.26` | Smooth scrolling |
 | `zustand` | `^5.0.15` | Lightweight global state (scroll store) |
 | `resize-observer-polyfill` | `^1.5.1` | ResizeObserver fallback for animation hooks |
+| `@vercel/analytics` | `^2.0.1` | Vercel Web Analytics, cookieless; custom events in `src/lib/tracking/events.ts`, opt-out via the "Statistik" toggle (`beforeSend` in `tracking-boot.tsx`) |
 | `zod` | `^4.4.3` | Schema validation — env (`src/env.ts`) + API payloads. See [[api-architecture]] |
 
 See [[smooth-scroll]] and [[data-flow]].
