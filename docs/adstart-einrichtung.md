@@ -1,12 +1,13 @@
 # Adstart 16.10.2026: was eingerichtet ist und was noch fehlt
 
-Stand 02.10.2026.
+Stand 03.10.2026.
 
 ## Eingerichtet
 
 | Baustein | Wo | Zustand |
 |---|---|---|
 | Leadweg | Funnel Builder, Projekt „Voltio“, Funnel `voltio-ankauf` | live, Testanfrage angekommen |
+| Vercel Web Analytics | Seitenaufrufe plus eigene Ereignisse, ohne Cookies | live, erste Daten am 03.10. angekommen |
 | Kampagnen-Zuordnung | `utm_*`, `fbclid`, Einstiegsseite, auslösender Knopf je Anfrage | live |
 | Cookie-Einwilligung | „Alle akzeptieren“ speichert die Zustimmung, Schalter starten aus | live |
 | Meta Pixel | Code fertig: PageView, AnfrageGestartet, Lead mit Kennung | wartet auf die Pixel-ID |
@@ -15,6 +16,23 @@ Stand 02.10.2026.
 | Make | Ordner „Voltio“, Szenario 9906455, Webhook 4411110 | angelegt, inaktiv |
 | Webhook Funnel Builder → Make | im Projekt „Voltio“ eingetragen | ausgeschaltet |
 | Facebook-Seite | Profilbild, Titelbild, Texte in `docs/facebook-seite/` | bereit zum Hochladen |
+
+## Ereignisse in Vercel Analytics
+
+| Ereignis | Wann | Eigenschaften |
+|---|---|---|
+| `cta_klick` | ein Anfrage-Knopf wurde gedrückt, Popup offen | `quelle` (hero, pain, vorteile, vergleich, faq, anfrage, header, footer …) |
+| `anfrage_begonnen` | erstes Feld im Formular angefasst | `quelle` |
+| `anfrage_gesendet` | Anfrage gespeichert | `quelle`, `marke`, `modell`, `mit_telefon`, `utm_source`, `utm_campaign` |
+| `anfrage_fehler` | Speichern fehlgeschlagen | `quelle` |
+| `kontakt_klick` | Telefon- oder E-Mail-Link getippt | `art` (telefon, email), `ort` (header, menue, footer) |
+| `faq_geoeffnet` | FAQ-Zeile aufgeklappt | `frage` |
+| `einwilligung` | Cookie-Entscheidung | `auswahl` (alle, notwendige, eigene), `statistik`, `marketing` |
+| `scrolltiefe` | Startseite zur Hälfte bzw. fast ganz gelesen | `tiefe` (50, 90) |
+
+Nie personenbezogen: keine Namen, E-Mails oder Telefonnummern in Ereignissen.
+Vercel Analytics läuft ohne Cookies auf berechtigtem Interesse; wer „Statistik“
+im Cookie-Dialog ausschaltet, wird ab dann nicht mehr gezählt.
 
 ## Kennungen
 
