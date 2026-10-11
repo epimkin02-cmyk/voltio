@@ -43,6 +43,8 @@ export interface Events {
 }
 
 export function trackEvent<Name extends keyof Events>(name: Name, props: Events[Name]) {
+  // No events from the CMS live preview (/bearbeiten).
+  if (typeof window !== "undefined" && window.location.pathname.startsWith("/bearbeiten")) return;
   try {
     track(name, props);
   } catch {

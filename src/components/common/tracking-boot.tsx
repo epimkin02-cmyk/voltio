@@ -30,11 +30,14 @@ const DEPTHS = [50, 90] as const;
  */
 export const TrackingBoot = () => {
   const pathname = usePathname();
+  // The CMS live preview is the team editing, not a visitor.
+  const editing = pathname.startsWith("/bearbeiten");
 
   useEffect(() => {
+    if (editing) return;
     captureAttribution();
     startPixel();
-  }, []);
+  }, [editing]);
 
   useEffect(() => {
     const onConsent = (event: Event) => {
@@ -70,5 +73,5 @@ export const TrackingBoot = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, [pathname]);
 
-  return <Analytics beforeSend={beforeSend} />;
+  return editing ? null : <Analytics beforeSend={beforeSend} />;
 };

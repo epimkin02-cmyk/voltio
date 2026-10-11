@@ -61,7 +61,25 @@ const link = z
   .nullish()
   .transform((v) => v ?? { label: "", href: "" });
 
-const imageObject = z.object({ src: str, alt: str, width: num, height: num, focus: optStr });
+/**
+ * Image sizes only set the aspect ratio, and the picker fills in just the file.
+ * A missing size would make next/image throw, so it falls back to a square.
+ */
+const dim = z
+  .number()
+  .nullish()
+  .transform((v) => (v && v > 0 ? v : 1600));
+
+const imageObject = z.object({ src: str, alt: str, width: dim, height: dim, focus: optStr });
+
+/** The hero cannot do without its photograph; an emptied field keeps the original. */
+const HERO_FALLBACK_IMAGE = {
+  src: "/assets/images/hero-handshake.jpg",
+  alt: "Verkäufer und Voltio-Ankäufer mit iPad geben sich vor einem weißen Tesla in der Hofeinfahrt die Hand",
+  width: 2400,
+  height: 1350,
+  focus: "70% 50%",
+};
 
 /** An image that may be left out; dropped when no file is picked. */
 const optImage = imageObject.nullish().transform((v) => (v && v.src ? v : undefined));
@@ -84,7 +102,7 @@ const hero = z.object({
     .transform((v) => v ?? { score: "", stars: 0, count: "", href: "" }),
   image: imageObject
     .nullish()
-    .transform((v) => v ?? { src: "", alt: "", width: 0, height: 0, focus: undefined }),
+    .transform((v) => (v && v.src ? v : HERO_FALLBACK_IMAGE)),
   title: str,
   bullets: strList,
   cta: link,
