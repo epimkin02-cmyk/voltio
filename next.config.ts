@@ -32,6 +32,11 @@ const nextConfig: NextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
+  // TinaCMS: `tinacms build` writes the editor to public/admin/index.html.
+  async rewrites() {
+    return [{ source: "/admin", destination: "/admin/index.html" }];
+  },
+
   // React Compiler (automatic memoisation) is an opt-in performance win.
   // It requires the `babel-plugin-react-compiler` dev dependency and routes
   // the build through Babel — enable once installed:

@@ -23,6 +23,10 @@ import { z } from "zod";
 const optionalUrl = () =>
   z.preprocess((v) => (v === "" ? undefined : v), z.url().optional());
 
+/** A plain string that may be blank or absent. */
+const optionalString = () =>
+  z.preprocess((v) => (v === "" ? undefined : v), z.string().optional());
+
 /** A Meta Pixel (dataset) id is a string of digits; anything else is a typo. */
 const optionalPixelId = () =>
   z.preprocess(
@@ -36,16 +40,22 @@ const publicSchema = z.object({
   NEXT_PUBLIC_META_PIXEL_ID: optionalPixelId(),
   /** Override for the Funnel Builder origin the lead form posts to. */
   NEXT_PUBLIC_FUNNEL_BUILDER_URL: optionalUrl(),
+  /** TinaCloud project id. Unset = the page reads `content/` straight from disk. */
+  NEXT_PUBLIC_TINA_CLIENT_ID: optionalString(),
 });
 
-/** No server-only variables yet — add secrets here, never as `NEXT_PUBLIC_`. */
-const serverSchema = z.object({});
+/** Server-only variables — secrets go here, never as `NEXT_PUBLIC_`. */
+const serverSchema = z.object({
+  /** TinaCloud read-only content token. Pairs with `NEXT_PUBLIC_TINA_CLIENT_ID`. */
+  TINA_TOKEN: optionalString(),
+});
 
 /** Public env — safe to read anywhere (server or client). */
 export const publicEnv = publicSchema.parse({
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   NEXT_PUBLIC_META_PIXEL_ID: process.env.NEXT_PUBLIC_META_PIXEL_ID,
   NEXT_PUBLIC_FUNNEL_BUILDER_URL: process.env.NEXT_PUBLIC_FUNNEL_BUILDER_URL,
+  NEXT_PUBLIC_TINA_CLIENT_ID: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
 });
 
 let cachedServerEnv: z.infer<typeof serverSchema> | undefined;
@@ -55,6 +65,8 @@ let cachedServerEnv: z.infer<typeof serverSchema> | undefined;
  * lazily so the client bundle never evaluates it.
  */
 export function getServerEnv() {
-  cachedServerEnv ??= serverSchema.parse({});
+  cachedServerEnv ??= serverSchema.parse({
+    TINA_TOKEN: process.env.TINA_TOKEN,
+  });
   return cachedServerEnv;
 }

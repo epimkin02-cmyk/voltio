@@ -1,6 +1,6 @@
 ---
 tags: [meta, changelog]
-updated: 2026-10-03
+updated: 2026-10-12
 ---
 
 # Changelog
@@ -15,6 +15,17 @@ remembering. Routine commits do not need an entry.
 For *why* the conventions are what they are, see [[decisions-log]].
 
 ---
+
+## 2026-10-12 — TinaCMS: page copy editable in a visual editor (branch `tina-cms`)
+
+- All copy moved from `src/data/mocks/home.ts` to `content/pages/home.json`,
+  edited at `/admin` with a live preview (`/bearbeiten`, noindex). Saves are Git
+  commits; Vercel redeploys. Middle sections are reorderable blocks; benefit
+  blocks choose image left/right; the unused "Alle Marken" section can be added.
+- Public `/` stays a Server Component with byte-identical markup (HTML diff vs
+  `main`). Legal pages read header/footer/popup from the same document.
+- New deps `tinacms` 3.14.2 and `@tinacms/cli` 4.0.0 (pinned pair). `dev` and
+  `build` scripts now run Tina first. See [[cms-tina]] and ADR-0050.
 
 ## 2026-10-03 — Vercel Web Analytics with the page's own events
 

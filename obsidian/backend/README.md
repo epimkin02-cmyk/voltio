@@ -23,6 +23,7 @@ documented here so every project built from this starter does it the same way.
 | Need | Choice | Note | Added by |
 |------|--------|------|----------|
 | CMS | **Payload**, inside this Next app | [[cms-payload]] | `/cms` |
+| CMS (this project) | **TinaCMS**, Git-backed visual editing — ADR-0050 | [[cms-tina]] | manual |
 | Database | **Supabase** Postgres | [[database-supabase]] | `/db` |
 | File storage | **Supabase Storage** (S3-compatible) | [[cms-payload]] | `/cms` |
 | Auth | **Supabase Auth** — only if real user accounts are needed | [[database-supabase]] | `supabase-auth` skill |
@@ -47,4 +48,4 @@ Also: add deps to [[tech-stack]], record an ADR in [[decisions-log]], update
 
 ## Related
 
-[[api-architecture]] · [[cms-payload]] · [[database-supabase]] · [[system-overview]] · [[tech-stack]] · [[environment-variables]] · [[ship]]
+[[api-architecture]] · [[cms-tina]] · [[cms-payload]] · [[database-supabase]] · [[system-overview]] · [[tech-stack]] · [[environment-variables]] · [[ship]]

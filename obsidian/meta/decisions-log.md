@@ -1,6 +1,6 @@
 ---
 tags: [meta, decision]
-updated: 2026-10-02
+updated: 2026-10-12
 ---
 
 # Decisions Log (ADRs)
@@ -14,6 +14,28 @@ decisions on top, continuing the numbering. Amending an inherited decision is
 fine; write a new ADR that says so rather than editing the old one.
 
 Template: [[templates/adr-note]].
+
+---
+
+## ADR-0050 — TinaCMS for this project's copy, not Payload
+
+**Status:** Accepted · amends ADR-0020 for this project
+
+**Decision.** Voltio's copy is managed in **TinaCMS** (Git-backed, TinaCloud free
+plan), not Payload + Supabase. Content is `content/pages/home.json`; the editor
+lives at `/admin` and previews `/bearbeiten`.
+
+**Why.** The owner wants Webflow-style editing of copy and section order on a
+landing page, at zero running cost, without a database. Tina edits files in the
+repo and commits them, so the Git → Vercel workflow stays the deploy path, and
+the page still builds from disk if Tina is unavailable.
+
+**When building.** The public route stays a Server Component that never imports
+Tina; only the editor preview (`home-live.tsx`) is a client wrapper with
+`useTina`. Schema changes go through `tina/config.ts` **and** the zod parser in
+`src/lib/content/home-page.ts`, then `tina/tina-lock.json` is regenerated and
+committed. Keep `tinacms` and `@tinacms/cli` on a matching release pair. See
+[[cms-tina]].
 
 ---
 

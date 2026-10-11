@@ -11,6 +11,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      // Editor preview and admin of TinaCMS — not content.
+      disallow: ["/bearbeiten", "/admin"],
     },
     sitemap: `${siteConfig.url}/sitemap.xml`,
     host: siteConfig.url,

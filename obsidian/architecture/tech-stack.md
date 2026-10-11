@@ -1,6 +1,6 @@
 ---
 tags: [architecture, stable]
-updated: 2026-05-21
+updated: 2026-10-12
 ---
 
 # Tech Stack
@@ -70,6 +70,8 @@ ADR: [[decisions-log]] ADR-0027.
 | `zustand` | `^5.0.15` | Lightweight global state (scroll store) |
 | `resize-observer-polyfill` | `^1.5.1` | ResizeObserver fallback for animation hooks |
 | `@vercel/analytics` | `^2.0.1` | Vercel Web Analytics, cookieless; custom events in `src/lib/tracking/events.ts`, opt-out via the "Statistik" toggle (`beforeSend` in `tracking-boot.tsx`) |
+| `tinacms` | `3.14.2` | Visual CMS — editor UI + `useTina` bridge; content in `content/pages/`. See [[cms-tina]] |
+| `@tinacms/cli` | `4.0.0` (dev) | Builds the admin and generated client (`tinacms build` / `tinacms dev`); pinned to match `tinacms` |
 | `zod` | `^4.4.3` | Schema validation — env (`src/env.ts`) + API payloads. See [[api-architecture]] |
 
 See [[smooth-scroll]] and [[data-flow]].

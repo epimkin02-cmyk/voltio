@@ -22,6 +22,8 @@ Rules for handling configuration and secrets.
 | `NEXT_PUBLIC_SITE_URL` | public | Site origin (no trailing slash). Drives canonical URLs, OG/Twitter tags, `robots.txt`, `sitemap.xml`, JSON-LD. Falls back to `http://localhost:3000` when unset — **set it in production**. See [[seo-metadata]]. |
 | `NEXT_PUBLIC_META_PIXEL_ID` | public | Meta Pixel (dataset) id, digits only. Unset = no pixel, no Meta section in the privacy notice, no service line in the cookie settings. Even when set the pixel loads only after consent to "Marketing". Read through `src/data/tracking.ts`. |
 | `NEXT_PUBLIC_FUNNEL_BUILDER_URL` | public | Optional override for the Funnel Builder origin the lead form posts to (default `https://funnelbuilder.umsatzpilot.com`). |
+| `NEXT_PUBLIC_TINA_CLIENT_ID` | public | TinaCloud project id. With `TINA_TOKEN` it enables the online editor at `/admin`; unset = local Tina build, page renders from `content/pages/*.json`. See [[cms-tina]]. |
+| `TINA_TOKEN` | server | TinaCloud read-only content token, read via `getServerEnv()`. |
 
 Documented in `.env.example` (committed). Validated by `src/env.ts` (zod):
 `publicEnv` for `NEXT_PUBLIC_*` (safe anywhere), `getServerEnv()` for

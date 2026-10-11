@@ -1,0 +1,94 @@
+{
+  "eyebrow": "ALLE MARKEN",
+  "heading": "Wir kaufen jedes Elektroauto an. Egal, welches Logo vorne drauf ist.",
+  "body": "Vom Tesla bis zum Dacia Spring, vom Firmen-Transporter bis zum Kleinwagen: Wenn es elektrisch fährt, machen wir dir ein Angebot. Das sind die Marken, die wir am häufigsten kaufen.",
+  "brands": [
+    {
+      "name": "Tesla",
+      "slug": "tesla"
+    },
+    {
+      "name": "Mercedes-Benz",
+      "slug": "mercedes"
+    },
+    {
+      "name": "BMW",
+      "slug": "bmw"
+    },
+    {
+      "name": "Audi",
+      "slug": "audi"
+    },
+    {
+      "name": "Volkswagen",
+      "slug": "volkswagen"
+    },
+    {
+      "name": "Hyundai",
+      "slug": "hyundai"
+    },
+    {
+      "name": "Kia",
+      "slug": "kia"
+    },
+    {
+      "name": "BYD",
+      "slug": "byd"
+    },
+    {
+      "name": "Porsche",
+      "slug": "porsche"
+    },
+    {
+      "name": "Polestar",
+      "slug": "polestar"
+    },
+    {
+      "name": "Škoda",
+      "slug": "skoda"
+    },
+    {
+      "name": "Volvo",
+      "slug": "volvo"
+    },
+    {
+      "name": "Renault",
+      "slug": "renault"
+    },
+    {
+      "name": "Nissan",
+      "slug": "nissan"
+    },
+    {
+      "name": "MG",
+      "slug": "mg"
+    },
+    {
+      "name": "Opel",
+      "slug": "opel"
+    },
+    {
+      "name": "Peugeot",
+      "slug": "peugeot"
+    },
+    {
+      "name": "Mini",
+      "slug": "mini"
+    },
+    {
+      "name": "smart",
+      "slug": "smart"
+    },
+    {
+      "name": "Fiat",
+      "slug": "fiat"
+    }
+  ],
+  "more": "… und jede weitere Marke mit Elektroantrieb.",
+  "image": {
+    "src": "/assets/images/ill-savings.jpg",
+    "alt": "",
+    "width": 1200,
+    "height": 797
+  }
+}
