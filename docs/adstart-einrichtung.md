@@ -15,7 +15,8 @@ Stand 19.10.2026.
 | Conversions API | läuft über Leadmetrics, nicht über den Funnel Builder | Meta-Schalter in Leadmetrics noch aus; Lead dort nicht ohne gleiche Ereignis-ID melden, sonst zählt Meta doppelt |
 | Datenschutzerklärung | Formular-Dienstleister, Kampagnen-Angaben; Meta- und Leadmetrics-Abschnitt erscheinen mit ihrer ID | live |
 | Make | Ordner „Voltio“, Szenario 9906455, Webhook 4411110 | angelegt, inaktiv |
-| Webhook Funnel Builder → Make | im Projekt „Voltio“ eingetragen | ausgeschaltet |
+| Webhook Funnel Builder → Make | im Projekt „Voltio“ eingetragen | ausgeschaltet, wird nicht gebraucht |
+| Webhooks Funnel Builder → Leadmetrics, Leadtable, Umsatzpilot-Leadtable | drei Webhooks direkt am Funnel `voltio-ankauf`, jede abgeschlossene Anfrage geht an alle drei; Felder flach als `antwort_marke`, `antwort_modell`, `antwort_erstzulassung`, `antwort_kilometerstand`, dazu `first_name`, `email`, `phone` | aktiv seit 19.10.2026 |
 | Facebook-Seite | Profilbild, Titelbild, Texte in `docs/facebook-seite/` | bereit zum Hochladen |
 
 ## Ereignisse in Vercel Analytics
