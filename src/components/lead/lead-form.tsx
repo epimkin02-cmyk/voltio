@@ -5,17 +5,23 @@ import { useId, useState, type FormEvent } from "react";
 
 import { ChevronIcon } from "@/components/ui/icons";
 import { OTHER_BRAND, OTHER_MODEL, VEHICLE_BRANDS } from "@/data/vehicles";
-import { trackEvent, trackOnce } from "@/lib/tracking/events";
+import { optinDone, optinStep, trackEvent, type OptinStep } from "@/lib/tracking/events";
 import { funnelStarted, submitLead } from "@/lib/tracking/funnel-builder";
 import { attributeLead } from "@/lib/tracking/leadmetrics";
 import { newEventId, trackPixel } from "@/lib/tracking/pixel";
-import { captureAttribution } from "@/lib/tracking/session";
 
 import { useLeadModal } from "./lead-modal-store";
 
 import type { LeadFormContent } from "@/views/home/home.types";
 
 type Status = "idle" | "sending" | "sent" | "error";
+
+/** Form step a field belongs to, for `optin_schritt`: vehicle first, then contact. */
+const CONTACT_FIELDS = new Set(["name", "email", "phone"]);
+const stepOf = (field: string): OptinStep => (CONTACT_FIELDS.has(field) ? 2 : 1);
+
+/** One `optin_fehler { art: "eingabe" }` per rejected send, not one per invalid field. */
+let invalidReported = false;
 
 const FIELD =
   "h-12 w-full rounded-control border border-line bg-surface px-4 text-body text-content placeholder:text-content-faint transition duration-[var(--duration-fast)] ease-entrance hover:border-primary focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/25 disabled:cursor-not-allowed disabled:opacity-60";
@@ -72,6 +78,7 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
     // Honeypot: only bots fill it. Thank them and store nothing.
     if (value("website")) return done();
     setStatus("sending");
+    trackEvent("optin_abgeschickt", {});
     const eventId = newEventId();
     try {
       await submitLead(
@@ -91,18 +98,10 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
       );
       trackPixel("Lead", eventId);
       attributeLead({ email: value("email"), phone: value("phone") });
-      const { utm } = captureAttribution();
-      trackEvent("anfrage_gesendet", {
-        quelle: source || "seite",
-        marke: value("brand"),
-        modell: otherBrand ? "" : value("model"),
-        mit_telefon: value("phone") !== "",
-        utm_source: utm.utm_source ?? "",
-        utm_campaign: utm.utm_campaign ?? "",
-      });
+      optinDone();
       done();
     } catch {
-      trackEvent("anfrage_fehler", { quelle: source || "seite" });
+      trackEvent("optin_fehler", { art: "senden" });
       setStatus("error");
     }
   };
@@ -110,9 +109,17 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
   return (
     <form
       onSubmit={onSubmit}
-      onFocusCapture={() => {
+      onFocusCapture={(e) => {
         funnelStarted();
-        trackOnce("anfrage_begonnen", { quelle: source || "seite" });
+        const field = (e.target as { name?: string }).name;
+        if (field && field !== "website") optinStep(stepOf(field));
+      }}
+      onInvalidCapture={() => {
+        if (invalidReported) return;
+        invalidReported = true;
+        trackEvent("optin_fehler", { art: "eingabe" });
+        // The browser fires `invalid` per field in one go; re-arm for the next attempt.
+        window.setTimeout(() => (invalidReported = false), 0);
       }}
       className="flex flex-col gap-4"
       aria-labelledby={headingId}

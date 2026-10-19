@@ -92,9 +92,11 @@ client render it remembers the campaign parameters the visitor arrived with
 (`lib/tracking/session.ts`, in memory only) and arms the Meta Pixel
 (`lib/tracking/pixel.ts`), which stays dormant until the visitor agrees to
 "Marketing" in the cookie dialog. It also mounts Vercel Web Analytics with a
-`beforeSend` gate (dropped when "Statistik" is off) and reports the two
-page-level events no component owns: the cookie decision (`einwilligung`) and
-scroll depth (`scrolltiefe` at 50 % and 90 % of the home page). The event
+`beforeSend` gate (dropped when "Statistik" is off) and reports the
+page-level events no component owns: the cookie decision (`einwilligung`),
+`section_gesehen` per `main section`, `scroll_tiefe` (25/50/75/100) and
+`verweildauer` (30/60/120/300 visible seconds). It also arms the Leadmetrics
+journey script (`lib/tracking/leadmetrics.ts`), consent-gated like the pixel. The event
 vocabulary is typed in `lib/tracking/events.ts`; contact links report through
 `ui/tracked-link.tsx`. See ADR-0049 in [[decisions-log]].
 

@@ -1,6 +1,6 @@
 # Adstart 16.10.2026: was eingerichtet ist und was noch fehlt
 
-Stand 03.10.2026.
+Stand 19.10.2026.
 
 ## Eingerichtet
 
@@ -11,24 +11,37 @@ Stand 03.10.2026.
 | Kampagnen-Zuordnung | `utm_*`, `fbclid`, Einstiegsseite, auslösender Knopf je Anfrage | live |
 | Cookie-Einwilligung | „Alle akzeptieren“ speichert die Zustimmung, Schalter starten aus | live |
 | Meta Pixel | „Voltio Landingpage“ (ID 1426778795577295), PageView, AnfrageGestartet, Lead mit Kennung | live seit 19.10.2026, feuert erst nach Einwilligung |
-| Conversions API | Funnel Builder meldet Leads serverseitig, nur mit Einwilligung | wartet auf den Zugriffstoken |
-| Datenschutzerklärung | Formular-Dienstleister, Kampagnen-Angaben; Meta-Abschnitt erscheint mit der Pixel-ID | live |
+| Leadmetrics | Journey-Skript (`LEADMETRICS_JOURNEY_ID`), Mehrdomain und Formularerkennung an, lädt erst nach Einwilligung „Marketing“; Lead wird per E-Mail und Telefon zugeordnet | live seit 19.10.2026 |
+| Conversions API | läuft über Leadmetrics, nicht über den Funnel Builder | Meta-Schalter in Leadmetrics noch aus; Lead dort nicht ohne gleiche Ereignis-ID melden, sonst zählt Meta doppelt |
+| Datenschutzerklärung | Formular-Dienstleister, Kampagnen-Angaben; Meta- und Leadmetrics-Abschnitt erscheinen mit ihrer ID | live |
 | Make | Ordner „Voltio“, Szenario 9906455, Webhook 4411110 | angelegt, inaktiv |
 | Webhook Funnel Builder → Make | im Projekt „Voltio“ eingetragen | ausgeschaltet |
 | Facebook-Seite | Profilbild, Titelbild, Texte in `docs/facebook-seite/` | bereit zum Hochladen |
 
 ## Ereignisse in Vercel Analytics
 
-| Ereignis | Wann | Eigenschaften |
+Namen wie auf allen Agentur-Seiten (Revolution Academy, Anwalt Schwartz), damit
+sich die Funnels im Vercel-Dashboard vergleichen lassen. Vercel Pro zeigt je
+Ereignis nur die ersten zwei Eigenschaften, deshalb steht die wichtigste vorn.
+
+| Ereignis | Wann | Eigenschaften (Reihenfolge) |
 |---|---|---|
-| `cta_klick` | ein Anfrage-Knopf wurde gedrückt, Popup offen | `quelle` (hero, pain, vorteile, vergleich, faq, anfrage, header, footer …) |
-| `anfrage_begonnen` | erstes Feld im Formular angefasst | `quelle` |
-| `anfrage_gesendet` | Anfrage gespeichert | `quelle`, `marke`, `modell`, `mit_telefon`, `utm_source`, `utm_campaign` |
-| `anfrage_fehler` | Speichern fehlgeschlagen | `quelle` |
-| `kontakt_klick` | Telefon- oder E-Mail-Link getippt | `art` (telefon, email), `ort` (header, menue, footer) |
+| `section_gesehen` | Section zu 30 % sichtbar, einmal je Besuch | `section` (hero, kategorien, pain, bewertungen, vorteile, zahlen, vergleich, ablauf, faq, anfrage …) |
+| `scroll_tiefe` | Startseite zu 25, 50, 75, 100 % gelesen | `tiefe` |
+| `verweildauer` | 30, 60, 120, 300 s sichtbar auf der Seite | `sekunden` |
 | `faq_geoeffnet` | FAQ-Zeile aufgeklappt | `frage` |
-| `einwilligung` | Cookie-Entscheidung | `auswahl` (alle, notwendige, eigene), `statistik`, `marketing` |
-| `scrolltiefe` | Startseite zur Hälfte bzw. fast ganz gelesen | `tiefe` (50, 90) |
+| `einwilligung` | Cookie-Entscheidung | `wahl` (alle, notwendige, eigene), `marketing` |
+| `kontakt_klick` | Telefon- oder E-Mail-Link getippt | `art` (telefon, email), `ort` (header, menue, footer) |
+| `cta_klick` | Anfrage-Knopf gedrückt | `quelle`, `kanal`, `sekunden`, `scrolltiefe` |
+| `optin_geoeffnet` | Anfrage-Popup offen | `cta_quelle`, `kanal`, utm |
+| `optin_schritt` | erstes Feld angefasst: 1 Fahrzeug, 2 Kontakt | `schritt`, `cta_quelle`, `kanal`, utm |
+| `optin_fehler` | Eingabe ungültig oder Speichern fehlgeschlagen | `art` (eingabe, senden), `cta_quelle`, `kanal`, utm |
+| `optin_abgebrochen` | Popup ohne Absenden geschlossen | `schritt` (0, 1, 2), `cta_quelle`, `kanal`, utm |
+| `optin_abgeschickt` | Absenden gedrückt | `cta_quelle`, `kanal`, utm |
+| `lead` | Anfrage gespeichert | `cta_quelle`, `kanal`, `sekunden`, utm |
+
+`kanal` kommt aus UTM, fbclid und Referrer: Meta Anzeige, Google Anzeige,
+Organisch, Direkt usw.
 
 Nie personenbezogen: keine Namen, E-Mails oder Telefonnummern in Ereignissen.
 Vercel Analytics läuft ohne Cookies auf berechtigtem Interesse; wer „Statistik“

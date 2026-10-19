@@ -4,7 +4,7 @@ import { animated, useTransition } from "@react-spring/web";
 import { useEffect, useRef } from "react";
 
 import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
-import { trackEvent } from "@/lib/tracking/events";
+import { optinClosed, optinOpened, trackEvent } from "@/lib/tracking/events";
 import { funnelEvent } from "@/lib/tracking/funnel-builder";
 import { trackPixel } from "@/lib/tracking/pixel";
 
@@ -37,6 +37,7 @@ export const LeadModal = ({ content }: { content: LeadFormContent }) => {
     funnelEvent("view");
     trackPixel("AnfrageGestartet");
     trackEvent("cta_klick", { quelle: source || "seite" });
+    optinOpened();
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeModal();
     };
@@ -48,6 +49,7 @@ export const LeadModal = ({ content }: { content: LeadFormContent }) => {
     return () => {
       window.removeEventListener("keydown", onKey);
       window.clearTimeout(timer);
+      optinClosed();
       startScroll();
       const opener = openerRef.current;
       if (opener instanceof HTMLElement) opener.focus();

@@ -1,6 +1,6 @@
 ---
 tags: [meta, changelog]
-updated: 2026-10-03
+updated: 2026-10-19
 ---
 
 # Changelog
@@ -13,6 +13,21 @@ dependency, a new route or section, a convention bent, a bug whose cause is wort
 remembering. Routine commits do not need an entry.
 
 For *why* the conventions are what they are, see [[decisions-log]].
+
+---
+
+## 2026-10-19 — Agency event set and Leadmetrics
+
+- Vercel events renamed to the agency standard shared with Revolution Academy
+  and Anwalt Schwartz: `section_gesehen`, `scroll_tiefe`, `verweildauer`,
+  `optin_geoeffnet/_schritt/_fehler/_abgebrochen/_abgeschickt`, `lead`. The
+  old `anfrage_*` and `scrolltiefe` names are gone, so dashboards before and
+  after 19.10. do not line up. Funnel events carry `cta_quelle` and `kanal`
+  first, because Vercel Pro keeps only two properties.
+- `events.ts` creates the `window.va` queue itself so early events survive.
+- Leadmetrics journey script, loaded only after "Marketing" consent; the lead
+  is attributed by email and phone after a successful send. CAPI is meant to
+  run through Leadmetrics, not the Funnel Builder.
 
 ---
 
