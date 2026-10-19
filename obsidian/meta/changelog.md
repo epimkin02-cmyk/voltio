@@ -16,6 +16,16 @@ For *why* the conventions are what they are, see [[decisions-log]].
 
 ---
 
+## 2026-10-19 — Thank-you state in the lead popup
+
+- After a stored request the form gives way to `lead/lead-thanks.tsx` in the
+  same popup: ring and tick draw in, halo and sparks burst, title, text and a
+  close button rise. Springs only, so reduced motion jumps to the end state.
+- Copy split into `successTitle` ("Danke!") and `success`; the words are the
+  ones the inline success line had.
+
+---
+
 ## 2026-10-19 — Agency event set and Leadmetrics
 
 - Vercel events renamed to the agency standard shared with Revolution Academy

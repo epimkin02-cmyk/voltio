@@ -11,6 +11,7 @@ import { attributeLead } from "@/lib/tracking/leadmetrics";
 import { newEventId, trackPixel } from "@/lib/tracking/pixel";
 
 import { useLeadModal } from "./lead-modal-store";
+import { LeadThanks } from "./lead-thanks";
 
 import type { LeadFormContent } from "@/views/home/home.types";
 
@@ -44,6 +45,7 @@ const Select = ({
  * opening a free-text field. The request is stored in the Funnel Builder
  * (`lib/tracking/funnel-builder`), together with the campaign the visitor came
  * from; with marketing consent the same submit also reports a Meta `Lead`.
+ * Once stored, the form gives way to `LeadThanks` in the same popup.
  */
 export interface LeadFormProps {
   content: LeadFormContent;
@@ -58,6 +60,7 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const source = useLeadModal((s) => s.source);
+  const closeModal = useLeadModal((s) => s.closeModal);
 
   const field = (name: string) => `${id}-${name}`;
   const models = VEHICLE_BRANDS.find((b) => b.name === brand)?.models ?? [];
@@ -105,6 +108,18 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
       setStatus("error");
     }
   };
+
+  if (status === "sent") {
+    return (
+      <LeadThanks
+        title={content.successTitle}
+        text={content.success}
+        close={content.close}
+        headingId={headingId}
+        onClose={closeModal}
+      />
+    );
+  }
 
   return (
     <form
@@ -266,7 +281,6 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
       </button>
 
       <p aria-live="polite" className="min-h-5 text-small leading-normal">
-        {status === "sent" && <span className="text-primary-deep">{content.success}</span>}
         {status === "error" && <span className="text-danger">{content.error}</span>}
         {(status === "idle" || status === "sending") && (
           <span className="text-content-faint">

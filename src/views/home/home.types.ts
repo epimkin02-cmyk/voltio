@@ -39,6 +39,8 @@ export interface LeadFormContent {
   };
   submit: string;
   sending: string;
+  /** Heading of the thank-you state that replaces the form after sending. */
+  successTitle: string;
   success: string;
   error: string;
   /** Sentence before the link to the privacy notice (no trailing full stop). */
