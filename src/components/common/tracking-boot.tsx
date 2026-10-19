@@ -7,6 +7,7 @@ import { useEffect } from "react";
 
 import { CONSENT_EVENT, readConsent, type CookieConsent } from "@/components/common/Cookie/cookieStore";
 import { trackEvent, trackOnce } from "@/lib/tracking/events";
+import { startLeadmetrics } from "@/lib/tracking/leadmetrics";
 import { startPixel } from "@/lib/tracking/pixel";
 import { captureAttribution } from "@/lib/tracking/session";
 
@@ -24,8 +25,8 @@ const DEPTHS = [50, 90] as const;
 
 /**
  * Mount once in the root layout. Remembers the campaign parameters the
- * visitor arrived with, arms the Meta Pixel (dormant until "Marketing"
- * consent), mounts Vercel Web Analytics and reports the page-level events
+ * visitor arrived with, arms the Meta Pixel and the Leadmetrics journey
+ * script (both dormant until "Marketing" consent), mounts Vercel Web Analytics and reports the page-level events
  * no component owns: the cookie decision and how far people scroll.
  */
 export const TrackingBoot = () => {
@@ -34,6 +35,7 @@ export const TrackingBoot = () => {
   useEffect(() => {
     captureAttribution();
     startPixel();
+    startLeadmetrics();
   }, []);
 
   useEffect(() => {

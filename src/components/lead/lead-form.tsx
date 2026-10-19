@@ -7,6 +7,7 @@ import { ChevronIcon } from "@/components/ui/icons";
 import { OTHER_BRAND, OTHER_MODEL, VEHICLE_BRANDS } from "@/data/vehicles";
 import { trackEvent, trackOnce } from "@/lib/tracking/events";
 import { funnelStarted, submitLead } from "@/lib/tracking/funnel-builder";
+import { attributeLead } from "@/lib/tracking/leadmetrics";
 import { newEventId, trackPixel } from "@/lib/tracking/pixel";
 import { captureAttribution } from "@/lib/tracking/session";
 
@@ -89,6 +90,7 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
         eventId,
       );
       trackPixel("Lead", eventId);
+      attributeLead({ email: value("email"), phone: value("phone") });
       const { utm } = captureAttribution();
       trackEvent("anfrage_gesendet", {
         quelle: source || "seite",

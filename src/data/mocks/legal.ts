@@ -10,7 +10,7 @@
  * appears only while a pixel id is configured (`data/tracking`), and the
  * sections number themselves.
  */
-import { META_PIXEL_ID } from "@/data/tracking";
+import { LEADMETRICS_JOURNEY_ID, META_PIXEL_ID } from "@/data/tracking";
 
 export interface LegalSection {
   heading: string;
@@ -90,6 +90,15 @@ const META_SECTION: LegalSection = {
   ],
 };
 
+const LEADMETRICS_SECTION: LegalSection = {
+  heading: "Kampagnenauswertung mit Leadmetrics",
+  paragraphs: [
+    "Mit deiner Einwilligung in die Kategorie „Marketing“ nutzen wir Leadmetrics der LeadMetrics GmbH, Wienerbergstraße 11-12, 1100 Wien, Österreich. Das Skript wird erst nach deiner Einwilligung geladen. Es speichert eine Kennung in deinem Browser und erfasst, über welche Anzeige oder welchen Link du gekommen bist (Kampagnen-Angaben und Klick-Kennungen aus dem Link), welche Seiten du aufrufst, die verweisende Seite, deine IP-Adresse sowie Angaben zu Gerät und Browser.",
+    "Schickst du eine Anfrage ab, verknüpfen wir diese Angaben mit deiner Anfrage (Name, E-Mail-Adresse, Telefonnummer, Fahrzeugdaten). So sehen wir, welche Anzeige zu welcher Anfrage und zu welchem Ankauf geführt hat. Leadmetrics kann uns dabei unterstützen, Ergebnisse an Werbeplattformen wie Meta zu melden; dabei werden Kontaktdaten nur als Hashwert übermittelt. Leadmetrics verarbeitet die Daten in unserem Auftrag (Art. 28 DSGVO).",
+    "Rechtsgrundlage ist deine Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG). Du kannst sie jederzeit über „Cookie-Einstellungen“ im Footer widerrufen; danach erfasst das Skript nichts mehr.",
+  ],
+};
+
 const PRIVACY_SECTIONS: LegalSection[] = [
   {
     heading: "Verantwortlicher",
@@ -124,6 +133,7 @@ const PRIVACY_SECTIONS: LegalSection[] = [
     ],
   },
   ...(META_PIXEL_ID ? [META_SECTION] : []),
+  ...(LEADMETRICS_JOURNEY_ID ? [LEADMETRICS_SECTION] : []),
   {
     heading: "Schriften, Bilder und Videos",
     paragraphs: [

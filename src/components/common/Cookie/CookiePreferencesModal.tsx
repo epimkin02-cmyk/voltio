@@ -5,13 +5,19 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { animated, useSpring, useTransition } from "@react-spring/web";
 
-import { META_PIXEL_ID } from "@/data/tracking";
+import { LEADMETRICS_JOURNEY_ID, META_PIXEL_ID } from "@/data/tracking";
 import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
 
 import { CookieButton } from "./CookieButton";
 import { useCookieStore } from "./cookieStore";
 
 type CategoryKey = "necessary" | "analytics" | "marketing";
+
+/** Services behind "Marketing" that are actually switched on. */
+const MARKETING_SERVICES = [
+  META_PIXEL_ID && "Meta Pixel (Meta Platforms Ireland Ltd.)",
+  LEADMETRICS_JOURNEY_ID && "Leadmetrics",
+].filter(Boolean);
 
 interface Category {
   key: CategoryKey;
@@ -36,7 +42,7 @@ const CATEGORIES: Category[] = [
     key: "marketing",
     title: "Marketing",
     body: `Erlaubt uns, Werbung zu messen und passende Inhalte erneut zu zeigen. Jederzeit widerrufbar.${
-      META_PIXEL_ID ? " Dienst: Meta Pixel (Meta Platforms Ireland Ltd.)." : ""
+      MARKETING_SERVICES.length ? ` Dienste: ${MARKETING_SERVICES.join(", ")}.` : ""
     }`,
   },
 ];
