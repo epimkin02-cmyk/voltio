@@ -10,8 +10,8 @@ Stand 03.10.2026.
 | Vercel Web Analytics | Seitenaufrufe plus eigene Ereignisse, ohne Cookies | live, erste Daten am 03.10. angekommen |
 | Kampagnen-Zuordnung | `utm_*`, `fbclid`, Einstiegsseite, auslösender Knopf je Anfrage | live |
 | Cookie-Einwilligung | „Alle akzeptieren“ speichert die Zustimmung, Schalter starten aus | live |
-| Meta Pixel | Code fertig: PageView, AnfrageGestartet, Lead mit Kennung | wartet auf die Pixel-ID |
-| Conversions API | Funnel Builder meldet Leads serverseitig, nur mit Einwilligung | wartet auf Pixel-ID und Token |
+| Meta Pixel | „Voltio Landingpage“ (ID 1426778795577295), PageView, AnfrageGestartet, Lead mit Kennung | live seit 19.10.2026, feuert erst nach Einwilligung |
+| Conversions API | Funnel Builder meldet Leads serverseitig, nur mit Einwilligung | wartet auf den Zugriffstoken |
 | Datenschutzerklärung | Formular-Dienstleister, Kampagnen-Angaben; Meta-Abschnitt erscheint mit der Pixel-ID | live |
 | Make | Ordner „Voltio“, Szenario 9906455, Webhook 4411110 | angelegt, inaktiv |
 | Webhook Funnel Builder → Make | im Projekt „Voltio“ eingetragen | ausgeschaltet |
@@ -42,9 +42,10 @@ im Cookie-Dialog ausschaltet, wird ab dann nicht mehr gezählt.
 
 ## Einschalten, sobald die Angaben da sind
 
-1. **Pixel**: Pixel-ID als `NEXT_PUBLIC_META_PIXEL_ID` im Vercel-Projekt `voltio`
-   setzen (Production) und neu deployen. Danach im Events Manager die Domain der
-   Seite unter „Traffic-Berechtigungen“ zulassen.
+1. **Pixel**: erledigt am 19.10.2026, `NEXT_PUBLIC_META_PIXEL_ID=1426778795577295`
+   im Vercel-Projekt `voltio` (Production und Preview). Offen: im Events Manager
+   `voltiokauft.de` unter „Traffic-Berechtigungen“ zulassen und die Domain im
+   Business-Portfolio verifizieren.
 2. **Conversions API**: Funnel Builder → Projekt „Voltio“ → Einstellungen →
    „Meta Conversions API“: Pixel-ID, Zugriffstoken, zuerst mit Test-Event-Code.
 3. **Make**: im Szenario „Voltio · Anfrage → Leadtable + Leadmetrics“ die Module
