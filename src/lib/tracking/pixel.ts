@@ -11,8 +11,9 @@
  *   Lead              request submitted (standard — campaigns optimise on it)
  *
  * Every Lead carries an `eventID`. The same id travels with the submission to
- * the Funnel Builder, which reports the lead server-side through the
- * Conversions API; Meta merges the two reports by that id.
+ * `/api/lead` and from there to Leadmetrics, which reports the lead
+ * server-side through the Conversions API; Meta merges the two reports by
+ * that id.
  */
 import { CONSENT_EVENT, readConsent, type CookieConsent } from "@/components/common/Cookie/cookieStore";
 import { META_PIXEL_ID } from "@/data/tracking";
@@ -97,9 +98,9 @@ function cookie(name: string): string | null {
 }
 
 /**
- * What the Funnel Builder needs for the Conversions API. Without marketing
- * consent only `consent: false` — the server then reports nothing to Meta and
- * stores no IP. `_fbp` / `_fbc` are set by the pixel itself (`_fbc` only when
+ * What Leadmetrics needs for the Conversions API. Without marketing
+ * consent only `consent: false` — `/api/lead` then forwards no event id, IP
+ * or browser ids. `_fbp` / `_fbc` are set by the pixel itself (`_fbc` only when
  * the visitor arrived through an ad).
  */
 export function trackingPayload(eventId: string) {

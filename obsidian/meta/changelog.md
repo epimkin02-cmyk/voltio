@@ -1,6 +1,6 @@
 ---
 tags: [meta, changelog]
-updated: 2026-10-19
+updated: 2026-10-20
 ---
 
 # Changelog
@@ -15,6 +15,14 @@ remembering. Routine commits do not need an entry.
 For *why* the conventions are what they are, see [[decisions-log]].
 
 ---
+
+## 2026-10-20 — Own lead route instead of the Funnel Builder
+
+New route `app/api/lead/route.ts`; `lib/tracking/funnel-builder.ts` became
+`lib/tracking/lead-api.ts`. Every lead goes as flat fields straight to
+Leadmetrics, Leadtable and the Umsatzpilot Leadtable (three server env vars).
+The anonymous Funnel Builder counters (`view`, `start`) are gone; the Vercel
+events cover the same steps. See [[decisions-log]] ADR-0050.
 
 ## 2026-10-19 — Thank-you state in the lead popup
 

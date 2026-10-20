@@ -34,18 +34,22 @@ const publicSchema = z.object({
   NEXT_PUBLIC_SITE_URL: optionalUrl(),
   /** Meta Pixel id. Unset = no pixel at all. Loads only after marketing consent. */
   NEXT_PUBLIC_META_PIXEL_ID: optionalPixelId(),
-  /** Override for the Funnel Builder origin the lead form posts to. */
-  NEXT_PUBLIC_FUNNEL_BUILDER_URL: optionalUrl(),
 });
 
-/** No server-only variables yet — add secrets here, never as `NEXT_PUBLIC_`. */
-const serverSchema = z.object({});
+/**
+ * Server-only values — never as `NEXT_PUBLIC_`. The three webhook URLs carry
+ * their own access tokens; `app/api/lead` forwards every lead to each one set.
+ */
+const serverSchema = z.object({
+  LEADMETRICS_WEBHOOK_URL: optionalUrl(),
+  LEADTABLE_WEBHOOK_URL: optionalUrl(),
+  UMSATZPILOT_LEADS_WEBHOOK_URL: optionalUrl(),
+});
 
 /** Public env — safe to read anywhere (server or client). */
 export const publicEnv = publicSchema.parse({
   NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
   NEXT_PUBLIC_META_PIXEL_ID: process.env.NEXT_PUBLIC_META_PIXEL_ID,
-  NEXT_PUBLIC_FUNNEL_BUILDER_URL: process.env.NEXT_PUBLIC_FUNNEL_BUILDER_URL,
 });
 
 let cachedServerEnv: z.infer<typeof serverSchema> | undefined;
@@ -55,6 +59,10 @@ let cachedServerEnv: z.infer<typeof serverSchema> | undefined;
  * lazily so the client bundle never evaluates it.
  */
 export function getServerEnv() {
-  cachedServerEnv ??= serverSchema.parse({});
+  cachedServerEnv ??= serverSchema.parse({
+    LEADMETRICS_WEBHOOK_URL: process.env.LEADMETRICS_WEBHOOK_URL,
+    LEADTABLE_WEBHOOK_URL: process.env.LEADTABLE_WEBHOOK_URL,
+    UMSATZPILOT_LEADS_WEBHOOK_URL: process.env.UMSATZPILOT_LEADS_WEBHOOK_URL,
+  });
   return cachedServerEnv;
 }

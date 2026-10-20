@@ -6,17 +6,17 @@ Stand 19.10.2026.
 
 | Baustein | Wo | Zustand |
 |---|---|---|
-| Leadweg | Funnel Builder, Projekt „Voltio“, Funnel `voltio-ankauf` | live, Testanfrage angekommen |
+| Leadweg | eigene Route `/api/lead` der Seite, ohne Funnel Builder; schickt jede Anfrage als flache Felder an Leadmetrics, Leadtable und Umsatzpilot-Leadtable | seit 20.10.2026; braucht die drei Vercel-Variablen `LEADMETRICS_WEBHOOK_URL`, `LEADTABLE_WEBHOOK_URL`, `UMSATZPILOT_LEADS_WEBHOOK_URL` |
 | Vercel Web Analytics | Seitenaufrufe plus eigene Ereignisse, ohne Cookies | live, erste Daten am 03.10. angekommen |
 | Kampagnen-Zuordnung | `utm_*`, `fbclid`, Einstiegsseite, auslösender Knopf je Anfrage | live |
 | Cookie-Einwilligung | „Alle akzeptieren“ speichert die Zustimmung, Schalter starten aus | live |
 | Meta Pixel | „Voltio Landingpage“ (ID 1426778795577295), PageView, AnfrageGestartet, Lead mit Kennung | live seit 19.10.2026, feuert erst nach Einwilligung |
 | Leadmetrics | Journey-Skript (`LEADMETRICS_JOURNEY_ID`), Mehrdomain und Formularerkennung an, lädt erst nach Einwilligung „Marketing“; Lead wird per E-Mail und Telefon zugeordnet | live seit 19.10.2026 |
-| Conversions API | läuft über Leadmetrics, nicht über den Funnel Builder | Meta-Schalter in Leadmetrics noch aus; Lead dort nicht ohne gleiche Ereignis-ID melden, sonst zählt Meta doppelt |
+| Conversions API | läuft über Leadmetrics; `/api/lead` gibt mit Einwilligung `event_id`, `fbp`, `fbc`, `ip`, `user_agent` mit | Meta-Schalter in Leadmetrics noch aus; Lead dort nicht ohne gleiche Ereignis-ID melden, sonst zählt Meta doppelt |
 | Datenschutzerklärung | Formular-Dienstleister, Kampagnen-Angaben; Meta- und Leadmetrics-Abschnitt erscheinen mit ihrer ID | live |
 | Make | Ordner „Voltio“, Szenario 9906455, Webhook 4411110 | angelegt, inaktiv |
 | Webhook Funnel Builder → Make | im Projekt „Voltio“ eingetragen | ausgeschaltet, wird nicht gebraucht |
-| Webhooks Funnel Builder → Leadmetrics, Leadtable, Umsatzpilot-Leadtable | drei Webhooks direkt am Funnel `voltio-ankauf`, jede abgeschlossene Anfrage geht an alle drei; Felder flach als `antwort_marke`, `antwort_modell`, `antwort_erstzulassung`, `antwort_kilometerstand`, dazu `first_name`, `email`, `phone` | aktiv seit 19.10.2026 |
+| Felder an Leadmetrics und Leadtables | immer alle Schlüssel, auch leer: `name`, `first_name`, `last_name`, `email`, `phone` (E.164), `antwort_marke`, `antwort_modell`, `antwort_fahrzeug_freitext`, `antwort_erstzulassung`, `antwort_kilometerstand`, `antwort_quelle`, `fahrzeug`, `zusammenfassung`, `page_url`, `referrer`, `utm_*`, `fbclid`, `gclid`, `event_id`, `eingegangen`, `lead_status` | seit 20.10.2026; die alten Funnel-Builder-Webhooks bekommen nichts mehr |
 | Facebook-Seite | Profilbild, Titelbild, Texte in `docs/facebook-seite/` | bereit zum Hochladen |
 
 ## Ereignisse in Vercel Analytics

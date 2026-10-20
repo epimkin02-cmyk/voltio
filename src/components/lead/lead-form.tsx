@@ -6,7 +6,7 @@ import { useId, useState, type FormEvent } from "react";
 import { ChevronIcon } from "@/components/ui/icons";
 import { OTHER_BRAND, OTHER_MODEL, VEHICLE_BRANDS } from "@/data/vehicles";
 import { optinDone, optinStep, trackEvent, type OptinStep } from "@/lib/tracking/events";
-import { funnelStarted, submitLead } from "@/lib/tracking/funnel-builder";
+import { submitLead } from "@/lib/tracking/lead-api";
 import { attributeLead } from "@/lib/tracking/leadmetrics";
 import { newEventId, trackPixel } from "@/lib/tracking/pixel";
 
@@ -42,9 +42,9 @@ const Select = ({
  * The lead form (wireframe 1:64), shown inside the lead popup. Brand and
  * model are two dependent selects fed by `data/vehicles` — every electric and
  * plug-in hybrid model on the DACH market — with "Andere" on both levels
- * opening a free-text field. The request is stored in the Funnel Builder
- * (`lib/tracking/funnel-builder`), together with the campaign the visitor came
- * from; with marketing consent the same submit also reports a Meta `Lead`.
+ * opening a free-text field. The request goes to the page's own `/api/lead`
+ * (`lib/tracking/lead-api`), together with the campaign the visitor came from,
+ * and from there to Leadmetrics and both Leadtables; with marketing consent the same submit also reports a Meta `Lead`.
  * Once stored, the form gives way to `LeadThanks` in the same popup.
  */
 export interface LeadFormProps {
@@ -125,7 +125,6 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
     <form
       onSubmit={onSubmit}
       onFocusCapture={(e) => {
-        funnelStarted();
         const field = (e.target as { name?: string }).name;
         if (field && field !== "website") optinStep(stepOf(field));
       }}
@@ -147,7 +146,7 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
       </div>
 
       {/* Honeypot — off-screen, skipped by tabbing and screen readers; only
-          bots fill it, and the endpoint drops those submissions quietly. */}
+          bots fill it, and the form drops those submissions quietly. */}
       <input
         type="text"
         name="website"

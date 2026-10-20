@@ -3,8 +3,8 @@
  *
  * Like the Meta Pixel it waits for "Marketing": without it nothing is loaded.
  * The script records the visitor's journey (pages, campaign parameters, click
- * ids) but creates no lead itself. The lead reaches Leadmetrics through the
- * Funnel Builder webhook (via Make); `attributeLead` ties the recorded journey
+ * ids) but creates no lead itself. The lead reaches Leadmetrics through its
+ * webhook, sent by `/api/lead`; `attributeLead` ties the recorded journey
  * to that lead's e-mail and phone right after a successful submission.
  *
  * `data-consent="true"` is required: without it the script starts as

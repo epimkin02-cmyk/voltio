@@ -17,6 +17,29 @@ Template: [[templates/adr-note]].
 
 ---
 
+## ADR-0050 — Leads go through the page's own `/api/lead`, not the Funnel Builder
+
+**Date:** 2026-10-20 · **Status:** accepted · supersedes ADR-0049 point 1
+
+**Context.** The Funnel Builder forwarded leads with a nested payload
+(`antworten`, `fragen`, `meta` objects) and silently held back every request
+from a team address as a test. Leadmetrics showed no leads, and the team could
+not test with their own addresses.
+
+**Decision.** The form posts once, on submit, to `/api/lead`. The route builds
+one flat record of strings (every key always present, answer keys as
+`antwort_<field>`) and sends it in parallel to every configured target:
+`LEADMETRICS_WEBHOOK_URL`, `LEADTABLE_WEBHOOK_URL`,
+`UMSATZPILOT_LEADS_WEBHOOK_URL`. One retry per target; the visitor is thanked
+when at least one accepted. Same-origin check and a per-IP brake guard it.
+Conversions API data (`event_id`, `fbp`, `fbc`, IP, user agent) travels only
+with marketing consent.
+
+**Constrains.** The webhook URLs carry access tokens: server-only env, set on
+Vercel. No partial saves, as before. The Funnel Builder is no longer used.
+
+---
+
 ## ADR-0049 — Leads go from the browser to the Funnel Builder; the pixel waits for consent
 
 **Date:** 2026-10-02 · **Status:** accepted · narrows hard rule 9 for one endpoint

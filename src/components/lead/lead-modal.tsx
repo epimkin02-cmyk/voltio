@@ -5,7 +5,6 @@ import { useEffect, useRef } from "react";
 
 import { useScroll } from "@/hooks/smooth-scroll/use-scroll";
 import { optinClosed, optinOpened, trackEvent } from "@/lib/tracking/events";
-import { funnelEvent } from "@/lib/tracking/funnel-builder";
 import { trackPixel } from "@/lib/tracking/pixel";
 
 import { LeadForm } from "./lead-form";
@@ -33,8 +32,7 @@ export const LeadModal = ({ content }: { content: LeadFormContent }) => {
     if (!open) return;
     openerRef.current = document.activeElement;
     stopScroll();
-    // Funnel statistics (anonymous) and, with marketing consent, the pixel.
-    funnelEvent("view");
+    // With marketing consent the pixel; the Vercel events always (cookieless).
     trackPixel("AnfrageGestartet");
     trackEvent("cta_klick", { quelle: source || "seite" });
     optinOpened();
