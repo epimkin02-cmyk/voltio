@@ -74,7 +74,7 @@ export const Hero = ({ content }: { content: HeroContent }) => (
 
     <div className="relative mx-auto flex w-full max-w-[81.5rem] flex-col px-5 pt-0 pb-10 max-lg:-mt-14 sm:px-8 lg:min-h-[calc(100svh-4rem)] lg:justify-center lg:py-24">
       <div className="flex max-w-[38rem] flex-col gap-6">
-        <Reveal tag="h1" id={TITLE_ID} delay={60} className="text-display-compact font-bold leading-tight tracking-display text-pretty sm:text-display">
+        <Reveal tag="h1" id={TITLE_ID} delay={60} className="text-display-compact font-bold leading-tight tracking-display text-pretty max-[359px]:text-[2rem] sm:text-display">
           {content.title}
         </Reveal>
 

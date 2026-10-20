@@ -38,17 +38,17 @@ export const homeContent: HomeContent = {
       height: 1350,
       focus: "70% 50%",
     },
-    title: "Dein Hybrid & Elektro-Auto in Ø\u00a05\u00a0Tagen zum Bestpreis verkauft",
+    title: "Dein Hybrid & Elektro-Auto in durchschnittlich 5\u00a0Tagen zum Bestpreis verkauft",
     bullets: [
       "Wir vergleichen Angebote in Deutschland, Österreich und der Schweiz und garantieren den besten Preis",
       "Von Angebot bis Abholung des Fahrzeugs alles aus einer Hand",
-      "Geld nach 5 Tagen auf dem Wunschkonto",
+      "Geld nach durchschnittlich 5 Tagen auf dem Wunschkonto",
     ],
     cta: { label: "Jetzt Verkauf anfragen", href: "#anfrage" },
     assurances: ["Kostenlos & unverbindlich", "Keine Nachverhandlung"],
     trust: [
       { figure: "5,0", label: "776 Bewertungen" },
-      { figure: "Ø 5", label: "Tage bis zum Geld auf dem Wunschkonto" },
+      { figure: "Ø 5", label: "Tage bis zum Verkauf" },
       { label: "Bestpreis in Deutschland, Österreich und der Schweiz garantiert" },
     ],
   },
@@ -56,7 +56,7 @@ export const homeContent: HomeContent = {
   stats: [
     { figure: "776+", label: "verkaufte Elektroautos" },
     { figure: "1.200+", label: "Händler & Käufer im Netzwerk" },
-    { figure: "Ø 5 Tage", label: "von der Anfrage bis zur Auszahlung" },
+    { figure: "Ø 5 Tage", label: "von der Anfrage bis zum Verkauf" },
     { figure: "100 %", label: "kostenlos und unverbindlich" },
   ],
 
@@ -205,7 +205,7 @@ export const homeContent: HomeContent = {
     },
     {
       eyebrow: "SCHNELLE AUSZAHLUNG",
-      heading: "In 5 Tagen hast du den Verkaufspreis auf deinem Wunschkonto.",
+      heading: "In durchschnittlich 5 Tagen hast du den Verkaufspreis auf deinem Wunschkonto.",
       body: "Die Überweisung geht nach der Übergabe raus, auf Wunsch per Echtzeitüberweisung. Im Schnitt vergehen von der Anfrage bis zum Geldeingang fünf Tage. Läuft noch eine Finanzierung, unterstützen wir dich bei der Ablösung deines Kreditvertrags.",
       points: [
         "Zahlung nach der Übergabe, auf Wunsch in Echtzeit",
@@ -252,7 +252,7 @@ export const homeContent: HomeContent = {
       { label: "Festpreis ohne Nachverhandlung", values: [true, false, false, false, true, false] },
       { label: "Kostenlose Abholung zu Hause", values: [true, false, false, true, false, false] },
       { label: "Akku-Bewertung nach State of Health", values: [true, false, false, false, false, false] },
-      { label: "Geld in Ø 5 Tagen auf dem Konto", values: [true, true, false, true, false, false] },
+      { label: "Geld in durchschnittlich 5 Tagen auf dem Konto", values: [true, true, false, true, false, false] },
     ],
   },
 
@@ -274,7 +274,7 @@ export const homeContent: HomeContent = {
       },
       {
         title: "Abholung und Auszahlung",
-        duration: "Ø 5 Tage nach Anfrage",
+        duration: "durchschnittlich 5 Tage nach Anfrage",
         body: "Unser Fahrer holt das Auto bei dir ab, prüft es vor Ort und überweist den vereinbarten Betrag noch bei der Übergabe.",
         image: { src: "/assets/images/step-3.jpg", alt: "", width: 1200, height: 797 },
       },
