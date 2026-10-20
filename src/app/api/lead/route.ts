@@ -14,6 +14,10 @@
  * offers the keys of the FIRST record it received. The answer keys keep the
  * `antwort_<field>` names the mappings were built on.
  *
+ * lead-table.com gets the record WITHOUT `first_name` / `last_name`: it glues
+ * `first_name` in front of `name` ("Egor Egor Pimkin"). Leadmetrics needs
+ * them for its Vorname / Nachname fields.
+ *
  * The visitor is thanked as soon as one target accepted the lead; a target
  * that failed (after one retry) is logged with its name and status, never the
  * person's data. No target configured or none reachable: 5xx, the form shows
@@ -32,11 +36,11 @@ const schema = z.object({
     marke: z.string().trim().min(1).max(80),
     modell: text(120),
     fahrzeug_freitext: text(200),
-    erstzulassung: text(10),
-    kilometerstand: text(20),
+    erstzulassung: z.string().trim().min(1).max(40),
+    kilometerstand: z.string().trim().min(1).max(40),
     name: z.string().trim().min(1).max(120),
     email: z.email().max(200),
-    telefon: text(40),
+    telefon: z.string().trim().min(4).max(40),
     quelle: text(60),
   }),
   tracking: z.object({
@@ -119,9 +123,6 @@ function record({ answers: a, tracking: t, attribution: at }: Lead, req: NextReq
     antwort_fahrzeug_freitext: a.fahrzeug_freitext,
     antwort_erstzulassung: a.erstzulassung,
     antwort_kilometerstand: a.kilometerstand,
-    antwort_name: a.name,
-    antwort_email: a.email,
-    antwort_telefon: a.telefon,
     antwort_quelle: a.quelle,
     fahrzeug: vehicle,
     zusammenfassung: summary,
@@ -185,8 +186,14 @@ export const POST = handle(async (req) => {
     throw new ApiError(503, "not_configured", "Lead targets are not configured.");
   }
 
-  const body = JSON.stringify(record(lead, req));
-  const results = await Promise.all(targets.map(([name, url]) => deliver(name, url, body)));
+  const full = record(lead, req);
+  const { first_name: _first, last_name: _last, ...withoutSplitName } = full;
+  const bodies: Record<string, string> = {
+    leadtable: JSON.stringify(withoutSplitName),
+  };
+  const results = await Promise.all(
+    targets.map(([name, url]) => deliver(name, url, bodies[name] ?? JSON.stringify(full))),
+  );
   if (!results.some(Boolean)) throw new ApiError(502, "not_delivered", "No target accepted the lead.");
   return NextResponse.json({ ok: true });
 });

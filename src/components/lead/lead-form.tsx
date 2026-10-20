@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useId, useState, type FormEvent } from "react";
 
 import { ChevronIcon } from "@/components/ui/icons";
-import { OTHER_BRAND, OTHER_MODEL, VEHICLE_BRANDS } from "@/data/vehicles";
+import { MILEAGE_RANGES, OTHER_BRAND, OTHER_MODEL, REGISTRATION_YEARS, VEHICLE_BRANDS } from "@/data/vehicles";
 import { optinDone, optinStep, trackEvent, type OptinStep } from "@/lib/tracking/events";
 import { submitLead } from "@/lib/tracking/lead-api";
 import { attributeLead } from "@/lib/tracking/leadmetrics";
@@ -59,6 +59,8 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
   const [status, setStatus] = useState<Status>("idle");
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
+  const [year, setYear] = useState("");
+  const [mileage, setMileage] = useState("");
   const source = useLeadModal((s) => s.source);
   const closeModal = useLeadModal((s) => s.closeModal);
 
@@ -77,6 +79,8 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
       form.reset();
       setBrand("");
       setModel("");
+      setYear("");
+      setMileage("");
     };
     // Honeypot: only bots fill it. Thank them and store nothing.
     if (value("website")) return done();
@@ -216,24 +220,35 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
         )}
         <label>
           <span className="sr-only">{content.fields.year}</span>
-          <input
-            id={field("year")}
-            name="year"
-            inputMode="numeric"
-            pattern="[0-9]{4}"
-            placeholder={content.fields.year}
-            className={FIELD}
-          />
+          <Select id={field("year")} name="year" required value={year} onChange={(e) => setYear(e.target.value)}>
+            <option value="" disabled>
+              {content.fields.year}
+            </option>
+            {REGISTRATION_YEARS.map((y) => (
+              <option key={y} value={y}>
+                {y}
+              </option>
+            ))}
+          </Select>
         </label>
         <label>
           <span className="sr-only">{content.fields.mileage}</span>
-          <input
+          <Select
             id={field("mileage")}
             name="mileage"
-            inputMode="numeric"
-            placeholder={content.fields.mileage}
-            className={FIELD}
-          />
+            required
+            value={mileage}
+            onChange={(e) => setMileage(e.target.value)}
+          >
+            <option value="" disabled>
+              {content.fields.mileage}
+            </option>
+            {MILEAGE_RANGES.map((m) => (
+              <option key={m} value={m}>
+                {m}
+              </option>
+            ))}
+          </Select>
         </label>
         <label className="sm:col-span-2">
           <span className="sr-only">{content.fields.name}</span>
@@ -264,6 +279,7 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
             id={field("phone")}
             name="phone"
             type="tel"
+            required
             autoComplete="tel"
             placeholder={content.fields.phone}
             className={FIELD}

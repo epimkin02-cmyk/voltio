@@ -24,6 +24,11 @@ Leadmetrics, Leadtable and the Umsatzpilot Leadtable (three server env vars).
 The anonymous Funnel Builder counters (`view`, `start`) are gone; the Vercel
 events cover the same steps. See [[decisions-log]] ADR-0050.
 
+Same day: every form field is required; Erstzulassung and Kilometerstand are
+selects (`REGISTRATION_YEARS`, `MILEAGE_RANGES` in `data/vehicles.ts`).
+lead-table.com gets the record without `first_name` / `last_name`, because it
+prefixes `first_name` to `name`.
+
 ## 2026-10-19 — Thank-you state in the lead popup
 
 - After a stored request the form gives way to `lead/lead-thanks.tsx` in the

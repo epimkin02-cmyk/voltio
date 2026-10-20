@@ -133,3 +133,21 @@ export const VEHICLE_BRANDS: VehicleBrand[] = [
   { name: "Iveco", models: ["eDaily"] },
   { name: "Microlino", models: ["Microlino"] },
 ];
+
+/** First-registration years offered in the form: this year back to 2010, then one bucket. */
+export const OLDER_YEARS = "Vor 2010";
+const thisYear = new Date().getFullYear();
+export const REGISTRATION_YEARS: string[] = [
+  ...Array.from({ length: thisYear - 2010 + 1 }, (_, i) => String(thisYear - i)),
+  OLDER_YEARS,
+];
+
+/** Mileage ranges offered in the form. */
+export const MILEAGE_RANGES: string[] = [
+  "Unter 10.000 km",
+  "10.000 bis 30.000 km",
+  "30.000 bis 60.000 km",
+  "60.000 bis 100.000 km",
+  "100.000 bis 150.000 km",
+  "Über 150.000 km",
+];
