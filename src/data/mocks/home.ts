@@ -7,8 +7,7 @@ import type { HomeContent } from "@/views/home/home.types";
  * Desktop", node 1:651). The wording is real copy written on 2026-09-12 to
  * replace the wireframe's template text. **Every figure, testimonial and
  * guarantee here is invented for the draft** — swap in the real numbers and
- * real customer quotes before launch. The phone number and e-mail are
- * placeholders too.
+ * real customer quotes before launch. Phone and e-mail are real (Egor, 19.11.2026).
  */
 
 const CTA = { label: "Jetzt kostenlos bewerten lassen", href: "#anfrage" };
@@ -22,7 +21,7 @@ export const homeContent: HomeContent = {
       { label: "Ablauf", href: "#ablauf" },
       { label: "FAQ", href: "#faq" },
     ],
-    phone: { label: "0800 555 20 20", href: "tel:+498005552020" },
+    phone: { label: "+49 641 92270420", href: "tel:+4964192270420" },
     cta: { label: "Anfrage stellen", href: "#anfrage" },
   },
 
@@ -355,8 +354,8 @@ export const homeContent: HomeContent = {
     brand: "VOLTIO",
     tagline: "Der Ankaufservice für Elektroautos in Deutschland, Österreich und der Schweiz. Bestpreis, Abholung und Auszahlung aus einer Hand.",
     rating: { score: "5,0", label: "Lies unsere 776 Bewertungen", href: "#bewertungen" },
-    phone: { label: "0800 555 20 20", href: "tel:+498005552020" },
-    email: { label: "hallo@voltio.de", href: "mailto:hallo@voltio.de" },
+    phone: { label: "+49 641 92270420", href: "tel:+4964192270420" },
+    email: { label: "voltiokauftdeinauto@gmail.com", href: "mailto:voltiokauftdeinauto@gmail.com" },
     cta: { label: "Fahrzeug bewerten", href: "#anfrage" },
     columns: [
       {
