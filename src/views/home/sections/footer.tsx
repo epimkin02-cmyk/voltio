@@ -52,7 +52,7 @@ export const SiteFooter = ({ content }: { content: FooterContent }) => (
         <div className="flex flex-col gap-5">
           <Link
             href="/"
-            aria-label={`${content.brand} – Startseite`}
+            aria-label={`${content.brand}, Startseite`}
             className="self-start focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-content-inverse"
           >
             <Logo tone="light" />

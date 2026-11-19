@@ -382,8 +382,8 @@ export const homeContent: HomeContent = {
     hours: {
       title: "Erreichbarkeit",
       rows: [
-        { day: "Mo – Fr", time: "09:00 – 19:00" },
-        { day: "Samstag", time: "10:00 – 16:00" },
+        { day: "Mo bis Fr", time: "09:00 bis 19:00" },
+        { day: "Samstag", time: "10:00 bis 16:00" },
         { day: "Sonntag", time: "geschlossen" },
       ],
     },

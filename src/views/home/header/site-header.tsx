@@ -74,7 +74,7 @@ export const SiteHeader = ({ content }: { content: HeaderContent }) => {
       <div className="mx-auto flex h-16 w-full max-w-[81.5rem] items-center justify-between gap-6 px-5 sm:px-8">
         <Link
           href="/"
-          aria-label={`${content.brand} – Startseite`}
+          aria-label={`${content.brand}, Startseite`}
           className="shrink-0 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
           onClick={() => setOpen(false)}
         >

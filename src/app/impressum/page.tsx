@@ -5,7 +5,7 @@ import { generateMetadata } from "@/utils/seo/generate-page-metadata";
 import { LegalView } from "@/views/legal/legal-view";
 
 export const metadata: Metadata = generateMetadata({
-  title: "Impressum – VOLTIO",
+  title: "Impressum | VOLTIO",
   description: "Anbieterkennzeichnung und Kontaktdaten von VOLTIO.",
   url: "/impressum",
 });
