@@ -345,6 +345,7 @@ export const homeContent: HomeContent = {
     successTitle: "Danke!",
     success: "Wir melden uns innerhalb von 24 Stunden mit deinem Angebot.",
     error: "Das hat nicht geklappt. Bitte versuche es noch einmal oder ruf uns an.",
+    phoneInvalid: "Bitte gib eine gültige Handynummer an, wir melden uns per WhatsApp. Aus Österreich oder der Schweiz bitte mit +43 oder +41.",
     privacy: "Mit dem Absenden stimmst du der Verarbeitung deiner Daten zur Angebotserstellung zu. Mehr dazu in der",
     privacyLink: "Datenschutzerklärung",
     close: "Schließen",

@@ -28,6 +28,7 @@ import { z } from "zod";
 
 import { getServerEnv } from "@/env";
 import { ApiError, handle } from "@/lib/api";
+import { mobileE164 } from "@/lib/phone";
 
 const text = (max: number) => z.string().trim().max(max).optional().default("");
 
@@ -40,7 +41,8 @@ const schema = z.object({
     kilometerstand: z.string().trim().min(1).max(40),
     name: z.string().trim().min(1).max(120),
     email: z.email().max(200),
-    telefon: z.string().trim().min(4).max(40),
+    // A mobile number only: the first message goes out over WhatsApp (Superchat).
+    telefon: z.string().trim().max(40).refine((v) => mobileE164(v) !== null, "invalid_mobile"),
     quelle: text(60),
   }),
   tracking: z.object({
@@ -85,15 +87,6 @@ function tooMany(ip: string): boolean {
   return ++hit.n > 10;
 }
 
-/** Any notation in, E.164 out. No country code: Germany. */
-function e164(raw: string): string {
-  const digits = raw.replace(/[^\d+]/g, "");
-  if (!digits) return "";
-  if (digits.startsWith("+")) return digits;
-  if (digits.startsWith("00")) return `+${digits.slice(2)}`;
-  return `+49${digits.replace(/^0/, "")}`;
-}
-
 // The Meta ad URL parameters (utm_* plus Leadmetrics' lm_*) and click ids.
 const UTM_KEYS = [
   "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "utm_id", "utm_creative",
@@ -122,7 +115,7 @@ function record({ answers: a, tracking: t, attribution: at }: Lead, req: NextReq
     first_name: first,
     last_name: rest.join(" "),
     email: a.email.toLowerCase(),
-    phone: e164(a.telefon),
+    phone: mobileE164(a.telefon) ?? "",
     antwort_marke: a.marke,
     antwort_modell: a.modell,
     antwort_fahrzeug_freitext: a.fahrzeug_freitext,

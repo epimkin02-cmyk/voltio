@@ -43,6 +43,8 @@ export interface LeadFormContent {
   successTitle: string;
   success: string;
   error: string;
+  /** Shown on the phone field when the number is no valid mobile number (the first message goes out over WhatsApp). */
+  phoneInvalid: string;
   /** Sentence before the link to the privacy notice (no trailing full stop). */
   privacy: string;
   /** Link text that completes the `privacy` sentence. */

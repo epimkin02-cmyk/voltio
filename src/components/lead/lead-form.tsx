@@ -6,6 +6,7 @@ import { useId, useState, type FormEvent } from "react";
 import { ChevronIcon } from "@/components/ui/icons";
 import { MILEAGE_RANGES, OTHER_BRAND, OTHER_MODEL, REGISTRATION_YEARS, VEHICLE_BRANDS } from "@/data/vehicles";
 import { optinDone, optinStep, trackEvent, type OptinStep } from "@/lib/tracking/events";
+import { mobileE164 } from "@/lib/phone";
 import { submitLead } from "@/lib/tracking/lead-api";
 import { attributeLead } from "@/lib/tracking/leadmetrics";
 import { newEventId, trackPixel } from "@/lib/tracking/pixel";
@@ -67,6 +68,12 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
   const field = (name: string) => `${id}-${name}`;
   const models = VEHICLE_BRANDS.find((b) => b.name === brand)?.models ?? [];
   const otherBrand = brand === OTHER_BRAND;
+  /** Flags the phone field when it holds no mobile number, so the browser blocks the send and says why. */
+  const checkPhone = (input: HTMLInputElement | null | undefined) => {
+    if (!input) return;
+    const raw = input.value.trim();
+    input.setCustomValidity(raw && !mobileE164(raw) ? content.phoneInvalid : "");
+  };
   const needsFreeText = otherBrand || model === OTHER_MODEL;
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -281,6 +288,8 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
             type="tel"
             required
             autoComplete="tel"
+            inputMode="tel"
+            onChange={(e) => checkPhone(e.currentTarget)}
             placeholder={content.fields.phone}
             className={FIELD}
           />
@@ -289,6 +298,8 @@ export const LeadForm = ({ content, titleId }: LeadFormProps) => {
 
       <button
         type="submit"
+        // Runs before the browser validates, so autofilled numbers get checked too.
+        onClick={(e) => checkPhone(e.currentTarget.form?.elements.namedItem("phone") as HTMLInputElement | null)}
         disabled={status === "sending"}
         className="mt-1 inline-flex h-14 items-center justify-center rounded-control bg-primary px-8 font-display text-body-lg font-semibold text-content-inverse shadow-card transition duration-[var(--duration-normal)] ease-entrance hover:bg-primary-hover hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
