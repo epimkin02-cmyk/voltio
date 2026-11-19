@@ -24,10 +24,12 @@ export interface LegalPage {
   updated: string;
 }
 
-const COMPANY = "[Voltio GmbH]";
-const ADDRESS = "[Straße Hausnummer], [PLZ Ort], Deutschland";
-const EMAIL = "hallo@voltio.de";
-const PHONE = "0800 555 20 20";
+const COMPANY = "BetaGamma LLC";
+/** Postal address as the operator supplied it, one line each. */
+const ADDRESS_LINES = ["30 N Gould St Ste N", "82801 Sheridan, Wyoming", "Vereinigte Staaten von Amerika"];
+const ADDRESS = ADDRESS_LINES.join(", ");
+const EMAIL = "berk@betagamma.de";
+const PHONE = "+49 172 4387614";
 /** The agency operating the form system (Funnel Builder) as a processor. */
 const FORM_PROCESSOR = "[Dienstleister, Straße Hausnummer, PLZ Ort]";
 
@@ -37,7 +39,7 @@ export const impressum: LegalPage = {
   sections: [
     {
       heading: "Angaben gemäß § 5 DDG",
-      paragraphs: [`${COMPANY}`, ADDRESS],
+      paragraphs: [COMPANY, ...ADDRESS_LINES],
     },
     {
       heading: "Vertreten durch",
