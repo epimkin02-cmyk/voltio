@@ -338,7 +338,7 @@ export const homeContent: HomeContent = {
       mileage: "Kilometerstand",
       name: "Name",
       email: "E-Mail",
-      phone: "Telefon",
+      phone: "WhatsApp-Telefonnummer",
     },
     submit: "Angebot anfordern",
     sending: "Wird gesendet …",
