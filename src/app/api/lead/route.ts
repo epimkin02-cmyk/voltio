@@ -94,7 +94,12 @@ function e164(raw: string): string {
   return `+49${digits.replace(/^0/, "")}`;
 }
 
-const UTM_KEYS = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid"];
+// The Meta ad URL parameters (utm_* plus Leadmetrics' lm_*) and click ids.
+const UTM_KEYS = [
+  "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "utm_id", "utm_creative",
+  "lm_plt", "lm_src", "lm_plmnt", "lm_cid", "lm_id",
+  "fbclid", "gclid",
+];
 
 function record({ answers: a, tracking: t, attribution: at }: Lead, req: NextRequest): Record<string, string> {
   const [first = "", ...rest] = a.name.split(/\s+/);

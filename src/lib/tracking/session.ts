@@ -14,7 +14,7 @@ export function sessionId(): string {
 }
 
 export interface Attribution {
-  /** `utm_*` plus the ad platforms' click ids, exactly as they arrived. */
+  /** `utm_*`, Leadmetrics' `lm_*` and the ad platforms' click ids, exactly as they arrived. */
   utm: Record<string, string>;
   /** The first URL of this visit, including its query string. */
   landingUrl: string;
@@ -37,7 +37,7 @@ export function captureAttribution(): Attribution {
   const utm: Record<string, string> = {};
   try {
     new URLSearchParams(window.location.search).forEach((value, key) => {
-      if (key.startsWith("utm_") || CLICK_IDS.includes(key)) utm[key] = value.slice(0, 300);
+      if (key.startsWith("utm_") || key.startsWith("lm_") || CLICK_IDS.includes(key)) utm[key] = value.slice(0, 300);
     });
   } catch {
     /* malformed query string — arrive without attribution */
