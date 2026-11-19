@@ -1,7 +1,6 @@
 /**
- * Legal pages. **Every bracketed value is a placeholder** the operator has to
- * fill before launch — company name, address, register, VAT id, the data
- * protection contact, the agency that runs the form system. The structure
+ * Legal pages. Operator data as supplied by Egor (19.11.2026); representative,
+ * register, VAT id and § 18 MStV were dropped on his request. The structure
  * follows what a German site needs (§ 5 DDG / § 18 MStV for the Impressum,
  * Art. 13 DSGVO for the privacy notice); the wording is a starting point, not
  * legal advice.
@@ -30,8 +29,6 @@ const ADDRESS_LINES = ["30 N Gould St Ste N", "82801 Sheridan, Wyoming", "Verein
 const ADDRESS = ADDRESS_LINES.join(", ");
 const EMAIL = "berk@betagamma.de";
 const PHONE = "+49 172 4387614";
-/** The agency operating the form system (Funnel Builder) as a processor. */
-const FORM_PROCESSOR = "[Dienstleister, Straße Hausnummer, PLZ Ort]";
 
 export const impressum: LegalPage = {
   title: "Impressum",
@@ -42,24 +39,8 @@ export const impressum: LegalPage = {
       paragraphs: [COMPANY, ...ADDRESS_LINES],
     },
     {
-      heading: "Vertreten durch",
-      paragraphs: ["[Vorname Nachname], Geschäftsführung"],
-    },
-    {
       heading: "Kontakt",
       paragraphs: [`Telefon: ${PHONE}`, `E-Mail: ${EMAIL}`],
-    },
-    {
-      heading: "Registereintrag",
-      paragraphs: ["Eintragung im Handelsregister.", "Registergericht: [Amtsgericht Ort]", "Registernummer: [HRB 00000]"],
-    },
-    {
-      heading: "Umsatzsteuer-ID",
-      paragraphs: ["Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz: [DE000000000]"],
-    },
-    {
-      heading: "Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV",
-      paragraphs: ["[Vorname Nachname]", ADDRESS],
     },
     {
       heading: "EU-Streitschlichtung",
@@ -116,7 +97,7 @@ const PRIVACY_SECTIONS: LegalSection[] = [
     heading: "Anfrage zur Fahrzeugbewertung",
     paragraphs: [
       "Wenn du über das Formular eine Bewertung anfragst, verarbeiten wir die von dir angegebenen Daten (Marke und Modell, Erstzulassung, Kilometerstand, Name, E-Mail-Adresse, Telefonnummer), um dir ein Angebot zu erstellen und dich dazu zu kontaktieren. Rechtsgrundlage ist die Durchführung vorvertraglicher Maßnahmen (Art. 6 Abs. 1 lit. b DSGVO).",
-      `Das Formular betreibt in unserem Auftrag ${FORM_PROCESSOR} mit einem eigenen Formularsystem (Auftragsverarbeitung nach Art. 28 DSGVO). Die Anfragen werden in einer Datenbank der Supabase Inc. am Standort Frankfurt am Main gespeichert, die Anwendung läuft bei Vercel. Gespeichert wird erst, wenn du das Formular abschickst.`,
+      `Die Anfragen werden in einer Datenbank der Supabase Inc. am Standort Frankfurt am Main gespeichert, die Anwendung läuft bei Vercel. Gespeichert wird erst, wenn du das Formular abschickst.`,
       "Zusammen mit der Anfrage speichern wir die Adresse der Seite, über die du gekommen bist, die verweisende Seite, Kampagnen-Angaben aus dem Link (zum Beispiel utm_source) und den verwendeten Browser. So sehen wir, über welchen Weg eine Anfrage zustande kam. Zusätzlich zählen wir ohne Personenbezug, wie oft das Formular geöffnet, begonnen und abgeschickt wird. Rechtsgrundlage ist unser berechtigtes Interesse an der Auswertung unserer Werbung (Art. 6 Abs. 1 lit. f DSGVO).",
       "Zur Angebotserstellung geben wir die Fahrzeugdaten an Käufer aus unserem Partnernetzwerk weiter. Deine Kontaktdaten erhalten Partner erst, wenn du ein Angebot annimmst. Die Daten werden gelöscht, sobald sie für den Zweck nicht mehr erforderlich sind und keine gesetzlichen Aufbewahrungspflichten entgegenstehen.",
     ],
